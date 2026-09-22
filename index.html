@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0803">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Para Ailín 🌻">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <title>🌻 Para Ailín Michelle · 21 de Septiembre</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ============================================
+           RESET Y BASE - Compatible iOS + Android
+           ============================================ */
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+        }
+        html {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            height: -webkit-fill-available;
+        }
+        html, body {
+            overscroll-behavior: none;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: 
+                radial-gradient(ellipse at 20% 0%, #3d2f12 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 100%, #2e240f 0%, transparent 55%),
+                linear-gradient(180deg, #1a1307 0%, #0a0803 100%);
+            background-attachment: fixed;
+            color: #fef3c7;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-top: env(safe-area-inset-top);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .serif-font { font-family: 'Playfair Display', Georgia, serif; }
+        .script-font { font-family: 'Dancing Script', cursive; }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ============================================
+           BOTONES / TAP - Mejoras móviles
+           ============================================ */
+        button {
+            -webkit-appearance: none;
+            appearance: none;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        button:focus { outline: none; }
+        button:active { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        /* ============================================
+           FLOATING PARTICLES
+           ============================================ */
+        @keyframes floatParticle {
+            0% { transform: translate3d(0, 110vh, 0) scale(0.6) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.85; }
+            50% { transform: translate3d(30px, 50vh, 0) scale(1) rotate(180deg); opacity: 0.9; }
+            90% { opacity: 0.85; }
+            100% { transform: translate3d(-20px, -15vh, 0) scale(1.3) rotate(360deg); opacity: 0; }
+        }
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            animation: floatParticle linear infinite;
+            will-change: transform, opacity;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+            -webkit-filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+            opacity: 0;
+        }
+
+        /* ============================================
+           PETAL PLUCK (main flower petals)
+           ============================================ */
+        @keyframes pluckPetalFloat {
+            0% { 
+                transform: translate3d(0, 0, 0) rotate(0deg) scale(1); 
+                -webkit-transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+                opacity: 1; 
+            }
+            30% { opacity: 1; }
+            100% { 
+                transform: translate3d(var(--end-x), -120vh, 0) rotate(720deg) scale(0.1); 
+                -webkit-transform: translate3d(var(--end-x), -120vh, 0) rotate(720deg) scale(0.1);
+                opacity: 0; 
+            }
+        }
+        .plucking {
+            animation: pluckPetalFloat 2.2s cubic-bezier(0.35, 0.85, 0.4, 1) forwards;
+            -webkit-animation: pluckPetalFloat 2.2s cubic-bezier(0.35, 0.85, 0.4, 1) forwards;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           CENTER PULSE
+           ============================================ */
+        @keyframes centerPulse {
+            0%, 100% { 
+                transform: scale(1); 
+                -webkit-transform: scale(1);
+                box-shadow: 0 0 25px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.2), inset 0 0 25px rgba(0,0,0,0.6);
+            }
+            50% { 
+                transform: scale(1.04); 
+                -webkit-transform: scale(1.04);
+                box-shadow: 0 0 45px rgba(251, 191, 36, 0.9), 0 0 90px rgba(251, 191, 36, 0.4), inset 0 0 30px rgba(0,0,0,0.7);
+            }
+        }
+        .sunflower-core {
+            animation: centerPulse 3.5s infinite ease-in-out;
+            -webkit-animation: centerPulse 3.5s infinite ease-in-out;
+            will-change: transform, box-shadow;
+            transition: transform 0.15s ease;
+        }
+        .sunflower-core:active { 
+            transform: scale(0.92) !important; 
+            -webkit-transform: scale(0.92) !important;
+        }
+
+        /* ============================================
+           MESSAGE CARD
+           ============================================ */
+        .message-card {
+            transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-transition: -webkit-transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(251, 191, 36, 0.25) inset, 0 0 60px rgba(251, 191, 36, 0.08);
+            will-change: transform;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .shimmer-text {
+            background: linear-gradient(90deg, #fbbf24 0%, #fef3c7 25%, #fbbf24 50%, #fef3c7 75%, #fbbf24 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes msgPop {
+            0% { transform: scale(0.85); opacity: 0.5; }
+            60% { transform: scale(1.03); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .msg-pop { 
+            animation: msgPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); 
+            -webkit-animation: msgPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.75; transform: scale(1.12); }
+        }
+        .sunflower-glow { 
+            animation: glowPulse 4.5s ease-in-out infinite; 
+            -webkit-animation: glowPulse 4.5s ease-in-out infinite;
+        }
+
+        .progress-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: rgba(251, 191, 36, 0.25);
+            transition: all 0.4s ease;
+            -webkit-transition: all 0.4s ease;
+        }
+        .progress-dot.active {
+            background: #fbbf24;
+            box-shadow: 0 0 8px #fbbf24, 0 0 16px rgba(251, 191, 36, 0.6);
+            transform: scale(1.35);
+            -webkit-transform: scale(1.35);
+        }
+
+        .footer-safe { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
+
+        /* ============================================
+           SUNFLOWER PETALS (main flower)
+           ============================================ */
+        .sf-petal {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 44px;
+            height: 96px;
+            margin-left: -22px;
+            margin-top: -48px;
+            border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+            background: radial-gradient(ellipse at 50% 85%, #b45309 0%, #d97706 15%, #f59e0b 45%, #fbbf24 75%, #fef3c7 100%);
+            box-shadow: inset 0 -12px 18px rgba(120, 53, 15, 0.55), inset 0 8px 14px rgba(255, 251, 235, 0.55), 0 4px 12px rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+            transform-origin: center center;
+            -webkit-transform-origin: center center;
+            will-change: transform, filter;
+            transition: filter 0.2s ease;
+            -webkit-transition: -webkit-filter 0.2s ease;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            touch-action: manipulation;
+            filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.35));
+            -webkit-filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.35));
+        }
+        .sf-petal::before {
+            content: '';
+            position: absolute;
+            left: 50%; top: 10%;
+            width: 1.5px; height: 78%;
+            margin-left: -0.75px;
+            background: linear-gradient(to bottom, transparent, rgba(120,53,15,0.4) 30%, rgba(120,53,15,0.45) 70%, transparent);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+        .sf-petal::after {
+            content: '';
+            position: absolute;
+            left: 50%; top: 6%;
+            width: 12px; height: 12px;
+            margin-left: -6px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.85) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        @media (hover: hover) {
+            .sf-petal:hover { 
+                filter: drop-shadow(0 0 14px #fcd34d) brightness(1.1); 
+                -webkit-filter: drop-shadow(0 0 14px #fcd34d) brightness(1.1);
+                z-index: 5; 
+            }
+        }
+        .sf-petal:active { 
+            filter: drop-shadow(0 0 20px #fcd34d) brightness(1.2); 
+            -webkit-filter: drop-shadow(0 0 20px #fcd34d) brightness(1.2);
+        }
+
+        /* ============================================
+           SUNFLOWER CENTER
+           ============================================ */
+        .sf-center {
+            position: relative;
+            width: 108px; height: 108px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #78350f 0%, #451a03 55%, #1c0a02 100%);
+            border: 2.5px solid rgba(180, 83, 9, 0.8);
+            overflow: hidden;
+            box-shadow: 0 0 0 3px rgba(120, 53, 15, 0.5), 0 8px 22px rgba(0,0,0,0.7), inset 0 0 30px rgba(0,0,0,0.85);
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            animation: centerPulse 3.5s infinite ease-in-out;
+            -webkit-animation: centerPulse 3.5s infinite ease-in-out;
+            will-change: transform, box-shadow;
+            transition: transform 0.15s ease;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            touch-action: manipulation;
+        }
+        .sf-center:active { 
+            transform: scale(0.92) !important; 
+            -webkit-transform: scale(0.92) !important;
+        }
+        .sf-center::before {
+            content: '';
+            position: absolute; top: 6px; right: 6px; bottom: 6px; left: 6px;
+            border-radius: 50%;
+            background-image: 
+                radial-gradient(circle at 50% 50%, #292524 1px, transparent 1.8px),
+                radial-gradient(circle at 50% 50%, #1c1917 1px, transparent 1.8px);
+            background-size: 7px 7px, 7px 7px;
+            background-position: 0 0, 3.5px 3.5px;
+            opacity: 0.9;
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 75%);
+            mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 75%);
+            z-index: 1;
+        }
+        .sf-center::after {
+            content: '';
+            position: absolute; top: 14px; right: 14px; bottom: 14px; left: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 35%, rgba(217,119,6,0.35) 0%, transparent 65%);
+            box-shadow: inset 0 0 18px rgba(0,0,0,0.9);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .sf-core-icon {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fef3c7;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 12px rgba(251,191,36,0.6);
+            pointer-events: none;
+            transition: opacity 0.4s, transform 0.4s;
+        }
+
+        .sf-center.heart-mode {
+            animation: heartPulse 1.8s infinite ease-in-out;
+            -webkit-animation: heartPulse 1.8s infinite ease-in-out;
+            background: radial-gradient(circle at 35% 30%, #f43f5e 0%, #be123c 55%, #7f1d1d 100%);
+            border-color: rgba(251, 113, 133, 0.9);
+            box-shadow: 0 0 0 3px rgba(190, 24, 93, 0.6), 0 0 40px rgba(244, 63, 94, 0.8), 0 0 90px rgba(244, 63, 94, 0.4), inset 0 0 40px rgba(0,0,0,0.8);
+        }
+        .sf-center.heart-mode::before {
+            background-image: 
+                radial-gradient(circle at 50% 50%, #7f1d1d 1px, transparent 2px),
+                radial-gradient(circle at 50% 50%, #450a0a 1px, transparent 2px);
+        }
+        .sf-center.heart-mode::after {
+            background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.4) 0%, transparent 65%);
+        }
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); -webkit-transform: scale(1); }
+            50% { transform: scale(1.1); -webkit-transform: scale(1.1); }
+        }
+
+        /* ============================================
+           SPARKLES
+           ============================================ */
+        @keyframes sparkleRise {
+            0% { transform: translate3d(0, 0, 0) scale(0.4); opacity: 0; }
+            15% { opacity: 1; }
+            100% { transform: translate3d(var(--sx), var(--sy), 0) scale(1.4); opacity: 0; }
+        }
+        .sparkle-up {
+            position: fixed;
+            pointer-events: none;
+            font-size: 18px;
+            z-index: 100;
+            animation: sparkleRise 2s ease-out forwards;
+            -webkit-animation: sparkleRise 2s ease-out forwards;
+            will-change: transform, opacity;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        /* ============================================
+           FLOATING HEARTS
+           ============================================ */
+        @keyframes heartFloat {
+            0% { transform: translate3d(0, 0, 0) scale(0.6) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translate3d(0, -60vh, 0) scale(1.2) rotate(20deg); opacity: 0; }
+        }
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            z-index: 100;
+            animation: heartFloat 2.5s ease-out forwards;
+            -webkit-animation: heartFloat 2.5s ease-out forwards;
+            will-change: transform, opacity;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        /* ============================================
+           CONFETTI
+           ============================================ */
+        @keyframes confettiFall {
+            0% { transform: translate3d(0, -10vh, 0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translate3d(0, 110vh, 0) rotate(720deg) scale(0.6); opacity: 0.2; }
+        }
+        .confetti-piece {
+            position: fixed;
+            width: 10px; height: 14px;
+            top: -5vh;
+            pointer-events: none;
+            z-index: 200;
+            animation: confettiFall linear forwards;
+            -webkit-animation: confettiFall linear forwards;
+            will-change: transform, opacity;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        /* ============================================
+           FIREWORK
+           ============================================ */
+        @keyframes fireworkBurst {
+            0% { transform: translate3d(0, 0, 0) scale(0.2); opacity: 1; }
+            100% { transform: translate3d(var(--fx), var(--fy), 0) scale(1.2); opacity: 0; }
+        }
+        .firework-star {
+            position: fixed;
+            pointer-events: none;
+            font-size: 14px;
+            z-index: 250;
+            animation: fireworkBurst 1.4s ease-out forwards;
+            -webkit-animation: fireworkBurst 1.4s ease-out forwards;
+            will-change: transform, opacity;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        /* ============================================
+           MUSIC BUTTON
+           ============================================ */
+        .music-btn {
+            position: fixed;
+            top: calc(env(safe-area-inset-top) + 70px);
+            right: calc(env(safe-area-inset-right) + 12px);
+            z-index: 50;
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(217, 119, 6, 0.95));
+            border: 1.5px solid rgba(254, 243, 199, 0.6);
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.5), 0 0 0 1px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #451a03;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            -webkit-transition: all 0.3s ease;
+            cursor: pointer;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            touch-action: manipulation;
+        }
+        .music-btn:active { 
+            transform: scale(0.9); 
+            -webkit-transform: scale(0.9); 
+        }
+        .music-btn.playing { 
+            animation: musicPulse 1.5s ease-in-out infinite; 
+            -webkit-animation: musicPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(251, 191, 36, 0.5); }
+            50% { box-shadow: 0 4px 30px rgba(251, 191, 36, 0.9), 0 0 40px rgba(251, 191, 36, 0.5); }
+        }
+
+        /* ============================================
+           FINAL LETTER
+           ============================================ */
+        .final-letter-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(10, 8, 3, 0.92);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+            -webkit-transition: opacity 0.8s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .final-letter-overlay.show { opacity: 1; pointer-events: auto; }
+
+        @keyframes letterReveal {
+            0% { transform: scale(0.7) translateY(40px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .letter-content {
+            width: 100%;
+            max-width: 380px;
+            max-height: 85vh;
+            max-height: 85dvh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            background: linear-gradient(160deg, #2b210e 0%, #1a1307 100%);
+            border: 2px solid rgba(251, 191, 36, 0.5);
+            border-radius: 24px;
+            padding: 24px 20px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 80px rgba(251, 191, 36, 0.3), inset 0 0 40px rgba(251, 191, 36, 0.05);
+            animation: letterReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            -webkit-animation: letterReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        .letter-content::-webkit-scrollbar { width: 4px; }
+        .letter-content::-webkit-scrollbar-thumb { background: rgba(251, 191, 36, 0.4); border-radius: 4px; }
+        .letter-content::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            width: 60%; height: 3px;
+            background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+            border-radius: 3px;
+        }
+
+        .heart-icon-big {
+            font-size: 60px;
+            filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.8));
+            -webkit-filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.8));
+            animation: heartPulse 1.8s infinite ease-in-out;
+            -webkit-animation: heartPulse 1.8s infinite ease-in-out;
+        }
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 34px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #fbbf24, #fef3c7, #fbbf24);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+            margin-bottom: 6px;
+            line-height: 1.1;
+        }
+        .letter-text {
+            font-size: 13.5px;
+            line-height: 1.75;
+            color: #fef3c7;
+            text-align: left;
+            padding: 0 4px;
+        }
+        .letter-text p { margin-bottom: 14px; }
+        .letter-text p:first-letter {
+            font-family: 'Dancing Script', cursive;
+            font-size: 26px;
+            color: #fbbf24;
+            float: left;
+            line-height: 0.9;
+            padding-right: 6px;
+            padding-top: 2px;
+        }
+
+        /* ============================================
+           SUNFLOWER EMOJI FIELD
+           ============================================ */
+        #sunflowerField {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+            z-index: 60;
+            overflow: hidden;
+            background: linear-gradient(180deg, #1a1307 0%, #0a0803 100%);
+            transition: opacity 0.8s ease;
+            -webkit-transition: opacity 0.8s ease;
+        }
+        #sunflowerField.cleared {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sunflower-emoji-item {
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+            will-change: transform, opacity;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+            -webkit-filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+            font-size: 32px;
+            line-height: 1;
+        }
+
+        @keyframes emojiSway {
+            0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)); -webkit-transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)); }
+            50% { transform: translate3d(0, -4px, 0) rotate(calc(var(--rot, 0deg) + 6deg)); -webkit-transform: translate3d(0, -4px, 0) rotate(calc(var(--rot, 0deg) + 6deg)); }
+        }
+
+        @keyframes emojiFlyOff {
+            0% {
+                transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)) scale(1);
+                -webkit-transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)) scale(1);
+                opacity: 1;
+            }
+            30% {
+                transform: translate3d(calc(var(--fly-x, 0) * 0.3), calc(var(--fly-y, 0) * 0.3), 0) rotate(calc(var(--rot, 0deg) + 180deg)) scale(1.1);
+                -webkit-transform: translate3d(calc(var(--fly-x, 0) * 0.3), calc(var(--fly-y, 0) * 0.3), 0) rotate(calc(var(--rot, 0deg) + 180deg)) scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate3d(var(--fly-x, 0), var(--fly-y, 0), 0) rotate(calc(var(--rot, 0deg) + 720deg)) scale(0.4);
+                -webkit-transform: translate3d(var(--fly-x, 0), var(--fly-y, 0), 0) rotate(calc(var(--rot, 0deg) + 720deg)) scale(0.4);
+                opacity: 0;
+            }
+        }
+        .sunflower-emoji-item.flying {
+            animation: emojiFlyOff 1.4s cubic-bezier(0.4, 0.6, 0.6, 1) forwards;
+            -webkit-animation: emojiFlyOff 1.4s cubic-bezier(0.4, 0.6, 0.6, 1) forwards;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           SHAKE INDICATOR + COUNTER + WELCOME
+           ============================================ */
+        #shakeIndicator {
+            position: fixed;
+            top: calc(env(safe-area-inset-top) + 60px);
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            z-index: 70;
+            background: rgba(20, 12, 4, 0.85);
+            border: 1.5px solid rgba(251, 191, 36, 0.6);
+            border-radius: 999px;
+            padding: 10px 20px;
+            font-size: 12px;
+            color: #fde68a;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 25px rgba(251, 191, 36, 0.3);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            -webkit-transition: opacity 0.5s ease, -webkit-transform 0.5s ease;
+            animation: indicatorPulse 2s ease-in-out infinite;
+            -webkit-animation: indicatorPulse 2s ease-in-out infinite;
+            white-space: nowrap;
+            max-width: 90vw;
+        }
+        @keyframes indicatorPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); -webkit-transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); -webkit-transform: translateX(-50%) scale(1.05); }
+        }
+        #shakeIndicator.hidden {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+            -webkit-transform: translateX(-50%) translateY(-20px);
+            pointer-events: none;
+        }
+        #shakeIndicator i {
+            animation: phoneShake 1.5s ease-in-out infinite;
+            -webkit-animation: phoneShake 1.5s ease-in-out infinite;
+        }
+        @keyframes phoneShake {
+            0%, 100% { transform: rotate(-15deg); -webkit-transform: rotate(-15deg); }
+            25% { transform: rotate(15deg); -webkit-transform: rotate(15deg); }
+            50% { transform: rotate(-15deg); -webkit-transform: rotate(-15deg); }
+            75% { transform: rotate(15deg); -webkit-transform: rotate(15deg); }
+        }
+
+        #sunflowerCounter {
+            position: fixed;
+            top: calc(env(safe-area-inset-top) + 12px);
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            z-index: 70;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(217, 119, 6, 0.95));
+            border: 1.5px solid rgba(254, 243, 199, 0.6);
+            border-radius: 999px;
+            padding: 7px 16px;
+            font-size: 11px;
+            color: #451a03;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.6), 0 0 20px rgba(251, 191, 36, 0.5);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: opacity 0.4s ease;
+            -webkit-transition: opacity 0.4s ease;
+            white-space: nowrap;
+        }
+        #sunflowerCounter.hidden { opacity: 0; pointer-events: none; }
+
+        #shakeWelcome {
+            position: fixed;
+            top: calc(env(safe-area-inset-top) + 100px);
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            z-index: 70;
+            text-align: center;
+            padding: 0 24px;
+            max-width: 92vw;
+            transition: opacity 0.5s ease;
+            -webkit-transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+        #shakeWelcome.hidden { opacity: 0; }
+        #shakeWelcome h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 34px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #fbbf24, #fef3c7, #fbbf24);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+            line-height: 1.15;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.5));
+            -webkit-filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.5));
+        }
+        #shakeWelcome p {
+            font-size: 13px;
+            color: #fde68a;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+        }
+
+        /* ============================================
+           REVEAL BUTTON
+           ============================================ */
+        #revealBtnContainer {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 65;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            -webkit-transition: opacity 0.8s ease;
+        }
+        #revealBtnContainer.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        @keyframes revealSunflower {
+            0% { transform: scale(0.3) rotate(-180deg); -webkit-transform: scale(0.3) rotate(-180deg); opacity: 0; }
+            60% { transform: scale(1.15) rotate(10deg); -webkit-transform: scale(1.15) rotate(10deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); -webkit-transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .reveal-sunflower-btn {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #78350f 0%, #451a03 55%, #1c0a02 100%);
+            border: 3px solid rgba(251, 191, 36, 0.9);
+            box-shadow: 
+                0 0 0 6px rgba(120, 53, 15, 0.4),
+                0 0 60px rgba(251, 191, 36, 0.8),
+                0 0 120px rgba(251, 191, 36, 0.4),
+                inset 0 0 40px rgba(0,0,0,0.85);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            animation: revealSunflower 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, centerPulse 3s 1s infinite ease-in-out;
+            -webkit-animation: revealSunflower 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, centerPulse 3s 1s infinite ease-in-out;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            touch-action: manipulation;
+        }
+        .reveal-sunflower-btn::before {
+            content: '';
+            position: absolute;
+            top: 8px; right: 8px; bottom: 8px; left: 8px;
+            border-radius: 50%;
+            background-image: 
+                radial-gradient(circle at 50% 50%, #292524 1.2px, transparent 2px),
+                radial-gradient(circle at 50% 50%, #1c1917 1.2px, transparent 2px);
+            background-size: 8px 8px, 8px 8px;
+            background-position: 0 0, 4px 4px;
+            opacity: 0.85;
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 78%);
+            mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 78%);
+        }
+        .reveal-sunflower-btn:active { 
+            transform: scale(0.94) !important; 
+            -webkit-transform: scale(0.94) !important;
+        }
+        .reveal-sunflower-btn .sunflower-emoji {
+            font-size: 62px;
+            filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.9));
+            -webkit-filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.9));
+            position: relative;
+            z-index: 2;
+            animation: emojiSwayBtn 3s ease-in-out infinite;
+            -webkit-animation: emojiSwayBtn 3s ease-in-out infinite;
+        }
+        @keyframes emojiSwayBtn {
+            0%, 100% { transform: rotate(-5deg) scale(1); -webkit-transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.08); -webkit-transform: rotate(5deg) scale(1.08); }
+        }
+        .reveal-sunflower-btn .sunflower-label {
+            position: relative;
+            z-index: 2;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            color: #fef3c7;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 12px rgba(251,191,36,0.8);
+            text-transform: uppercase;
+            margin-top: 6px;
+            animation: labelPulse 2s ease-in-out infinite;
+            -webkit-animation: labelPulse 2s ease-in-out infinite;
+        }
+        @keyframes labelPulse {
+            0%, 100% { opacity: 0.85; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes ringRotate {
+            0% { transform: rotate(0deg); -webkit-transform: rotate(0deg); }
+            100% { transform: rotate(360deg); -webkit-transform: rotate(360deg); }
+        }
+        .reveal-ring {
+            position: absolute;
+            top: -20px; right: -20px; bottom: -20px; left: -20px;
+            border-radius: 50%;
+            border: 2px dashed rgba(251, 191, 36, 0.4);
+            animation: ringRotate 20s linear infinite;
+            -webkit-animation: ringRotate 20s linear infinite;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           MAIN CONTENT HIDDEN
+           ============================================ */
+        #mainContent {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+            -webkit-transition: opacity 0.8s ease;
+        }
+        #mainContent.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ============================================
+           SCREEN SHAKE
+           ============================================ */
+        @keyframes screenShake {
+            0%, 100% { transform: translate3d(0, 0, 0); -webkit-transform: translate3d(0, 0, 0); }
+            20% { transform: translate3d(-3px, 2px, 0); -webkit-transform: translate3d(-3px, 2px, 0); }
+            40% { transform: translate3d(3px, -2px, 0); -webkit-transform: translate3d(3px, -2px, 0); }
+            60% { transform: translate3d(-2px, -3px, 0); -webkit-transform: translate3d(-2px, -3px, 0); }
+            80% { transform: translate3d(2px, 3px, 0); -webkit-transform: translate3d(2px, 3px, 0); }
+        }
+        .shaking {
+            animation: screenShake 0.3s ease-in-out;
+            -webkit-animation: screenShake 0.3s ease-in-out;
+        }
+
+        /* ============================================
+           SHAKE POWER METER
+           ============================================ */
+        #shakePower {
+            position: fixed;
+            bottom: calc(env(safe-area-inset-bottom) + 90px);
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            z-index: 70;
+            width: 200px;
+            height: 6px;
+            background: rgba(251, 191, 36, 0.15);
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            transition: opacity 0.4s ease;
+            -webkit-transition: opacity 0.4s ease;
+        }
+        #shakePower.hidden { opacity: 0; }
+        #shakePowerFill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
+            border-radius: 3px;
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.9);
+            transition: width 0.1s ease;
+            -webkit-transition: width 0.1s ease;
+        }
+
+        /* ============================================
+           BOTÓN DE EMERGENCIA (para navegadores sin motion)
+           ============================================ */
+        #emergencyBtn {
+            position: fixed;
+            bottom: calc(env(safe-area-inset-bottom) + 24px);
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            z-index: 80;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(217, 119, 6, 0.95));
+            color: #451a03;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 12px 24px;
+            border-radius: 999px;
+            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.6), 0 0 0 2px rgba(254, 243, 199, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            -webkit-transition: all 0.3s ease;
+            cursor: pointer;
+            touch-action: manipulation;
+            animation: emergencyPulse 2s ease-in-out infinite;
+            -webkit-animation: emergencyPulse 2s ease-in-out infinite;
+        }
+        @keyframes emergencyPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); -webkit-transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); -webkit-transform: translateX(-50%) scale(1.05); }
+        }
+        #emergencyBtn:active {
+            transform: translateX(-50%) scale(0.95);
+            -webkit-transform: translateX(-50%) scale(0.95);
+        }
+        #emergencyBtn.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           iOS-specific fixes
+           ============================================ */
+        @supports (-webkit-touch-callout: none) {
+            .message-card,
+            .sf-petal,
+            .sf-center,
+            .reveal-sunflower-btn,
+            .letter-content {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+        }
+
+        /* ============================================
+           Small screens (iPhone SE, etc)
+           ============================================ */
+        @media (max-width: 360px) {
+            .sf-petal {
+                width: 36px !important;
+                height: 80px !important;
+                margin-left: -18px !important;
+                margin-top: -40px !important;
+            }
+            .reveal-sunflower-btn {
+                width: 150px;
+                height: 150px;
+            }
+            .reveal-sunflower-btn .sunflower-emoji {
+                font-size: 52px;
+            }
+            #shakeWelcome h1 {
+                font-size: 28px;
+            }
+            .letter-title {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .letter-content {
+                max-height: 90vh;
+                max-height: 90dvh;
+            }
+            #shakeWelcome {
+                top: calc(env(safe-area-inset-top) + 80px);
+            }
+        }
+
+        /* ============================================
+           Large screens
+           ============================================ */
+        @media (min-width: 500px) {
+            .sf-center {
+                width: 120px;
+                height: 120px;
+            }
+            .sf-petal {
+                width: 48px !important;
+                height: 105px !important;
+                margin-left: -24px !important;
+                margin-top: -52.5px !important;
+            }
+        }
+
+        /* ============================================
+           Landscape orientation adjustment
+           ============================================ */
+        @media (orientation: landscape) and (max-height: 500px) {
+            #shakeWelcome {
+                top: calc(env(safe-area-inset-top) + 20px);
+            }
+            #shakeWelcome h1 {
+                font-size: 22px;
+                margin-bottom: 2px;
+            }
+            #shakeWelcome p {
+                font-size: 11px;
+            }
+            #shakeIndicator {
+                top: calc(env(safe-area-inset-top) + 85px);
+                font-size: 10px;
+                padding: 6px 14px;
+            }
+            .reveal-sunflower-btn {
+                width: 130px;
+                height: 130px;
+            }
+            .reveal-sunflower-btn .sunflower-emoji {
+                font-size: 42px;
+            }
+        }
+
+        /* ============================================
+           Android-specific fixes
+           ============================================ */
+        @supports not (-webkit-touch-callout: none) {
+            .sf-petal,
+            .sunflower-core,
+            .reveal-sunflower-btn {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+        }
+
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="no-select">
+
+    <div id="particlesContainer" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <button id="musicBtn" class="music-btn" onclick="toggleMusic()" aria-label="Reproducir música" type="button">
+        <i id="musicIcon" class="fas fa-music"></i>
+    </button>
+
+    <!-- =========================================================
+         SUNFLOWER EMOJI FIELD
+         ========================================================= -->
+    <div id="sunflowerField"></div>
+
+    <div id="sunflowerCounter">
+        <span>🌻</span>
+        <span id="sunflowerCounterText">60 girasoles</span>
+    </div>
+
+    <div id="shakeWelcome">
+        <h1>Para ti, Ailín Michelle</h1>
+        <p>¡Sacude el celular para limpiar la pantalla! 🌻</p>
+    </div>
+
+    <div id="shakeIndicator">
+        <i class="fas fa-mobile-alt"></i>
+        <span>Sacude tu celular</span>
+    </div>
+
+    <div id="shakePower" class="hidden">
+        <div id="shakePowerFill"></div>
+    </div>
+
+    <!-- Botón de emergencia (si no funciona el acelerómetro) -->
+    <button id="emergencyBtn" class="hidden" onclick="emergencyClear()" type="button">
+        <i class="fas fa-hand-pointer"></i>
+        <span>Limpiar con un toque</span>
+    </button>
+
+    <!-- =========================================================
+         REVEAL BUTTON
+         ========================================================= -->
+    <div id="revealBtnContainer">
+        <button id="revealSunflowerBtn" class="reveal-sunflower-btn" onclick="revealSunflower()" type="button">
+            <div class="reveal-ring"></div>
+            <span class="sunflower-emoji">🌻</span>
+            <span class="sunflower-label">Tócame</span>
+        </button>
+    </div>
+
+    <!-- =========================================================
+         MAIN CONTENT
+         ========================================================= -->
+    <div id="mainContent" style="display:flex; flex-direction:column; min-height:100dvh;">
+
+        <header class="relative w-full px-4 py-3 z-30 flex items-center justify-between bg-gradient-to-b from-[#1a1307]/95 to-[#1a1307]/70 backdrop-blur-xl border-b border-yellow-700/30">
+            <div class="flex items-center gap-2.5">
+                <div class="relative">
+                    <span class="text-3xl drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]">🌻</span>
+                    <span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></span>
+                </div>
+                <div>
+                    <h1 class="text-[9px] uppercase tracking-[0.25em] text-yellow-400/90 font-semibold flex items-center gap-1">
+                        <i class="fas fa-calendar-heart text-[8px]"></i> 21 de Septiembre
+                    </h1>
+                    <p class="text-[13px] font-bold text-yellow-50 serif-font leading-tight">Para Ailín Michelle</p>
+                </div>
+            </div>
+            <div class="bg-yellow-950/70 border border-yellow-600/50 px-3 py-1.5 rounded-full text-[10px] text-yellow-200 font-semibold shadow-inner flex items-center gap-1.5 backdrop-blur-sm">
+                <i class="fas fa-spa text-yellow-400 text-[10px]"></i>
+                <span id="petalsRemainingCount">10 pétalos</span>
+            </div>
+        </header>
+
+        <main class="flex-1 flex flex-col items-center justify-center px-4 py-2 z-10 relative w-full max-w-md mx-auto">
+
+            <div id="progressDots" class="flex gap-1.5 mb-3 items-center justify-center"></div>
+
+            <div id="messageBox" class="message-card w-full bg-gradient-to-b from-[#2b210e]/95 to-[#1a1307]/95 border border-yellow-600/40 rounded-3xl p-5 backdrop-blur-md text-center mb-4 relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-48 h-48 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div id="msgEmoji" class="text-5xl mb-1.5 drop-shadow-[0_0_15px_rgba(251,191,36,0.5)] transition-all duration-300">💛</div>
+                <h2 id="msgTitle" class="text-[17px] font-bold text-yellow-300 serif-font mb-2 px-1 leading-snug">Para ti, Ailín Michelle</h2>
+                <p id="msgText" class="text-[13px] text-yellow-100/85 leading-relaxed min-h-[68px] flex items-center justify-center px-1">
+                    Cada pétalo guarda un recuerdo nuestro y una razón por la cual te amo hoy y siempre, mi amor.
+                </p>
+                <div class="mt-3 pt-3 border-t border-yellow-800/40 flex justify-center items-center gap-2 text-[10px] text-yellow-400/90">
+                    <i class="fas fa-heart text-amber-500"></i>
+                    <span class="uppercase tracking-wider font-semibold">Nuestros Recuerdos</span>
+                    <span class="text-yellow-700">•</span>
+                    <span id="progressText" class="font-medium">0 / 10</span>
+                </div>
+            </div>
+
+            <div class="relative flex items-center justify-center my-1" style="width: 320px; height: 320px;">
+                <div class="sunflower-glow absolute rounded-full bg-yellow-500/25 blur-3xl pointer-events-none" style="width: 260px; height: 260px; top: 30px; left: 30px;"></div>
+                <div class="absolute rounded-full bg-amber-600/15 blur-3xl pointer-events-none" style="width: 320px; height: 320px; top: 0; left: 0;"></div>
+
+                <div id="petalsRing" class="absolute inset-0 flex items-center justify-center" style="transform: scale(0.95);"></div>
+
+                <button id="sunflowerCore" onclick="tapCore()" class="sf-center" aria-label="Centro del girasol" type="button">
+                    <div class="sf-core-icon" id="coreIcon">
+                        <span class="text-[26px] drop-shadow-md" style="filter: drop-shadow(0 0 6px rgba(251,191,36,0.8));">🌻</span>
+                        <span class="text-[8px] uppercase font-bold tracking-widest mt-0.5 opacity-95">Tócame</span>
+                    </div>
+                </button>
+            </div>
+
+            <p class="text-yellow-500/70 italic mt-2 text-center script-font" style="font-size: 17px;">
+                "Cada pétalo es un recuerdo nuestro, Ailín"
+            </p>
+        </main>
+
+        <footer class="relative w-full px-4 pt-3 pb-3 z-30 flex flex-col items-center gap-2 bg-gradient-to-t from-[#0a0803] to-transparent footer-safe">
+            <button onclick="resetSunflower()" class="w-full max-w-xs bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-yellow-950 font-bold text-[13px] py-3.5 px-6 rounded-2xl shadow-[0_10px_30px_-5px_rgba(251,191,36,0.5)] transition-all duration-150 active:scale-[0.97] flex items-center justify-center gap-2.5 border border-yellow-300/40" type="button">
+                <i class="fas fa-rotate-right"></i>
+                <span>Hacer florecer de nuevo</span>
+            </button>
+            <p class="text-[10px] text-yellow-500/70 text-center flex items-center gap-1.5">
+                <i class="fas fa-heart text-red-400/80 animate-pulse"></i>
+                Creado con todo mi amor para Ailín Michelle Concepción Collado
+            </p>
+        </footer>
+    </div>
+
+    <!-- Final Letter -->
+    <div id="finalLetter" class="final-letter-overlay" onclick="closeLetter(event)">
+        <div class="letter-content" onclick="event.stopPropagation()">
+            <div class="heart-icon-big">💖</div>
+            <h2 class="letter-title">Ailín Michelle</h2>
+            <div class="letter-text">
+                <p>Mi amor, has descubierto cada uno de mis sentimientos escondidos en estos pétalos. Cada uno era un pequeño pedacito de todo lo que siento por ti, pero la verdad es que ningún pétalo alcanza para describir lo que provocas en mí.</p>
+                <p>Desde el día en que te conocí, mi vida cambió de color. Me regalaste una razón para sonreír cada mañana, un motivo para querer ser mejor, y un lugar seguro donde mi corazón por fin descansa. Eres mi persona favorita, mi casualidad más bonita, mi sueño hecho realidad.</p>
+                <p>Ailín, cada momento contigo se vuelve un tesoro: tus risas, tus abrazos, tu forma de mirarme, todo en ti es perfecto. Eres la mujer más hermosa que estos ojos han visto, y no me refiero solo a lo físico, sino a esa alma tan llena de luz que tienes.</p>
+                <p>Hoy, 21 de septiembre, quiero recordarte algo: te amo con cada fibra de mi ser, y quiero seguir regalándote flores amarillas toda la vida. Quiero caminar contigo en cada estación, quiero celebrar cada logro a tu lado, y quiero que sepas que siempre, siempre, voy a elegirte a ti.</p>
+                <p>Eres mi Ailín, mi Michelle, mi Concepción, mi Collado entero, mi todo. Mi persona favorita en este mundo y en cualquier otro.</p>
+                <p style="text-align: center; font-family: 'Dancing Script', cursive; font-size: 24px; color: #fbbf24; margin-top: 20px;">Te amo infinitamente, Ailín 🌻💛</p>
+                <p style="text-align: center; font-size: 11px; color: #fbbf24; opacity: 0.7; margin-top: 10px;">— Tuyo, siempre</p>
+            </div>
+            <button onclick="closeLetter()" class="mt-5 px-6 py-2.5 bg-gradient-to-r from-yellow-500 to-amber-600 text-yellow-950 font-bold text-sm rounded-xl shadow-lg active:scale-95 transition-transform" type="button">
+                <i class="fas fa-heart mr-1.5"></i> Volver al jardín
+            </button>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=romantic-piano-114069.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // ==========================================
+        //  DETECCIÓN DE PLATAFORMA
+        // ==========================================
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isAndroid = /Android/.test(navigator.userAgent);
+        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        // ==========================================
+        //  MENSAJES PARA AILÍN MICHELLE
+        // ==========================================
+        const messagesData = [
+            { emoji: "🌻", title: "El día que conocí a Ailín", text: "Ese momento en que nuestros ojos se cruzaron por primera vez, supe que algo especial comenzaba. Mi corazón latió diferente desde entonces. Fue el inicio de todo lo bonito, mi Ailín." },
+            { emoji: "💛", title: "Nuestra primera cita", text: "Los nervios, las risas, las miradas cómplices... Todo fue perfecto porque estabas tú, Michelle. Ese día entendí que quería pasar el resto de mis días a tu lado." },
+            { emoji: "🌼", title: "El día que fuimos a Samaná", text: "El mar, el sol, tu sonrisa iluminando todo. Ese viaje se quedó grabado en mi alma para siempre. Cada ola me recordaba lo mucho que te amo, Ailín." },
+            { emoji: "✨", title: "Nuestro primer 'te amo'", text: "Cuando te lo dije por primera vez, mi corazón temblaba. Y cuando me lo respondiste, supe que era el hombre más afortunado del mundo. Gracias por amarme así, Michelle." },
+            { emoji: "🏵️", title: "Aquella noche de estrellas", text: "Recostados mirando el cielo, hablando de nuestros sueños. En ese momento supe que contigo hasta el silencio es hermoso, y que mi futuro siempre te incluye, Ailín." },
+            { emoji: "💖", title: "Cuando me cuidaste", text: "En esos días difíciles, tu mano nunca soltó la mía. Tu ternura me sanó más que cualquier medicina. Eres mi refugio, mi paz, mi todo, Michelle." },
+            { emoji: "🌸", title: "Nuestras risas sin razón", text: "Esas noches de llamadas eternas riéndonos por cualquier tontería. Contigo hasta lo más simple se vuelve un recuerdo inolvidable. Amo nuestra complicidad, Ailín." },
+            { emoji: "🌻", title: "La primera vez que te vi sonreír", text: "Ninguna flor en este jardín es tan hermosa como tú cuando ríes. Esa sonrisa se volvió mi motivación diaria, mi razón para querer verte feliz siempre, Michelle." },
+            { emoji: "🌟", title: "Cada abrazo tuyo", text: "En tus brazos encontré el lugar donde no existen los miedos. Cada abrazo tuyo me recuerda que estamos juntos en esto, y que juntos somos invencibles, Ailín." },
+            { emoji: "💛", title: "Nuestro futuro juntos", text: "Cada día que pasa, sueño más con todo lo que nos espera: viajes, risas, una casa, una familia. Te amo hoy en este día de las flores amarillas y por toda la eternidad, Ailín Michelle Concepción Collado." }
+        ];
+
+        let availableMessages = [...messagesData];
+        let totalDiscovered = 0;
+        const totalPetals = 10;
+        let flowerCompleted = false;
+
+        // ==========================================
+        //  SUNFLOWER EMOJI FIELD
+        // ==========================================
+        let TOTAL_SUNFLOWERS = 60;
+        let sunflowersRemaining = TOTAL_SUNFLOWERS;
+        let sunflowerElements = [];
+
+        function initSunflowerField() {
+            const field = document.getElementById('sunflowerField');
+            field.innerHTML = '';
+            sunflowerElements = [];
+
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+
+            // En pantallas pequeñas menos girasoles
+            if (vw < 360) TOTAL_SUNFLOWERS = 45;
+            else if (vw < 400) TOTAL_SUNFLOWERS = 55;
+            else TOTAL_SUNFLOWERS = 70;
+            
+            sunflowersRemaining = TOTAL_SUNFLOWERS;
+
+            const cols = Math.max(6, Math.floor(vw / 48));
+            const rows = Math.ceil(TOTAL_SUNFLOWERS / cols);
+            const cellW = vw / cols;
+            const cellH = vh / rows;
+
+            let placed = 0;
+            for (let r = 0; r < rows && placed < TOTAL_SUNFLOWERS; r++) {
+                for (let c = 0; c < cols && placed < TOTAL_SUNFLOWERS; c++) {
+                    const jitterX = (Math.random() - 0.5) * cellW * 0.5;
+                    const jitterY = (Math.random() - 0.5) * cellH * 0.5;
+
+                    const x = c * cellW + cellW / 2 + jitterX;
+                    const y = r * cellH + cellH / 2 + jitterY;
+
+                    const item = document.createElement('div');
+                    item.className = 'sunflower-emoji-item';
+                    const rot = Math.random() * 60 - 30;
+                    const scale = 0.7 + Math.random() * 0.6;
+                    item.style.left = (x - 20) + 'px';
+                    item.style.top = (y - 20) + 'px';
+                    item.style.setProperty('--rot', rot + 'deg');
+                    item.style.transform = `rotate(${rot}deg) scale(${scale})`;
+                    item.style.animation = `emojiSway ${2.5 + Math.random() * 2}s ease-in-out infinite`;
+                    item.style.animationDelay = (Math.random() * 2) + 's';
+                    item.style.fontSize = (26 + Math.random() * 18) + 'px';
+                    item.innerText = '🌻';
+
+                    field.appendChild(item);
+                    sunflowerElements.push(item);
+                    placed++;
+                }
+            }
+
+            updateSunflowerCounter();
+        }
+
+        function updateSunflowerCounter() {
+            const counter = document.getElementById('sunflowerCounter');
+            const text = document.getElementById('sunflowerCounterText');
+            if (sunflowersRemaining > 0) {
+                text.innerText = sunflowersRemaining === 1 ? '1 girasol' : `${sunflowersRemaining} girasoles`;
+                counter.classList.remove('hidden');
+            } else {
+                counter.classList.add('hidden');
+            }
+        }
+
+        function shakeOffSunflowers(intensity = 3) {
+            const toRemove = Math.min(Math.floor(intensity) + 1, sunflowersRemaining);
+            for (let i = 0; i < toRemove; i++) {
+                const available = sunflowerElements.filter(el => !el.classList.contains('flying') && el.style.display !== 'none');
+                if (available.length === 0) break;
+                
+                const el = available[Math.floor(Math.random() * available.length)];
+                flyOffSunflower(el);
+            }
+            updateSunflowerCounter();
+
+            if (sunflowersRemaining <= 0) {
+                setTimeout(revealSunflowerButton, 900);
+            }
+        }
+
+        function flyOffSunflower(el) {
+            if (el.classList.contains('flying')) return;
+            
+            const angle = Math.random() * 360;
+            const distance = 300 + Math.random() * 500;
+            const rad = angle * Math.PI / 180;
+            const flyX = Math.cos(rad) * distance;
+            const flyY = Math.sin(rad) * distance + 200;
+
+            el.style.setProperty('--fly-x', flyX + 'px');
+            el.style.setProperty('--fly-y', flyY + 'px');
+            el.style.animation = 'none';
+            void el.offsetWidth;
+            el.classList.add('flying');
+
+            sunflowersRemaining--;
+
+            setTimeout(() => {
+                el.style.display = 'none';
+            }, 1500);
+        }
+
+        function revealSunflowerButton() {
+            document.getElementById('shakeWelcome').classList.add('hidden');
+            document.getElementById('shakeIndicator').classList.add('hidden');
+            document.getElementById('shakePower').classList.add('hidden');
+            document.getElementById('emergencyBtn').classList.add('hidden');
+            document.getElementById('sunflowerField').classList.add('cleared');
+            document.getElementById('revealBtnContainer').classList.add('show');
+
+            if (navigator.vibrate) navigator.vibrate([20, 60, 20]);
+        }
+
+        // ==========================================
+        //  SHAKE DETECTION
+        // ==========================================
+        let lastShakeTime = 0;
+        let shakeThreshold = 15;
+        let shakeCooldown = 350;
+        let shakePowerLevel = 0;
+        let shakeDecayTimer = null;
+        let motionEnabled = false;
+
+        function handleMotion(event) {
+            const acc = event.accelerationIncludingGravity || event.acceleration;
+            if (!acc) return;
+
+            const x = acc.x || 0;
+            const y = acc.y || 0;
+            const z = acc.z || 0;
+            
+            const magnitude = Math.sqrt(x * x + y * y + z * z);
+            const delta = Math.abs(magnitude - 9.8);
+
+            const now = Date.now();
+            if (delta > shakeThreshold && (now - lastShakeTime) > shakeCooldown) {
+                lastShakeTime = now;
+                
+                const intensity = Math.min(delta / 15, 4);
+                shakeOffSunflowers(intensity);
+                
+                document.body.classList.add('shaking');
+                setTimeout(() => document.body.classList.remove('shaking'), 300);
+
+                if (navigator.vibrate) navigator.vibrate(25);
+
+                shakePowerLevel = Math.min(shakePowerLevel + intensity * 15, 100);
+                updateShakePower();
+            }
+        }
+
+        function updateShakePower() {
+            const powerEl = document.getElementById('shakePower');
+            const fill = document.getElementById('shakePowerFill');
+            
+            if (sunflowersRemaining <= 0) {
+                powerEl.classList.add('hidden');
+                return;
+            }
+
+            powerEl.classList.remove('hidden');
+            fill.style.width = shakePowerLevel + '%';
+
+            clearTimeout(shakeDecayTimer);
+            shakeDecayTimer = setTimeout(() => {
+                shakePowerLevel = Math.max(0, shakePowerLevel - 15);
+                fill.style.width = shakePowerLevel + '%';
+                if (shakePowerLevel > 0) updateShakePower();
+            }, 400);
+        }
+
+        function requestMotionPermission() {
+            // iOS 13+ requiere permiso explícito
+            if (typeof DeviceMotionEvent !== 'undefined' && 
+                typeof DeviceMotionEvent.requestPermission === 'function') {
+                DeviceMotionEvent.requestPermission()
+                    .then(response => {
+                        if (response === 'granted') {
+                            window.addEventListener('devicemotion', handleMotion);
+                            motionEnabled = true;
+                            showMotionGranted();
+                        } else {
+                            enableFallbackShake('Permiso denegado');
+                        }
+                    })
+                    .catch(err => {
+                        enableFallbackShake('Error de permiso');
+                    });
+            } else if (window.DeviceMotionEvent) {
+                // Android / navegadores compatibles
+                window.addEventListener('devicemotion', handleMotion);
+                motionEnabled = true;
+                
+                // Verificar si realmente funciona después de 2 segundos
+                setTimeout(() => {
+                    if (!motionEnabled) enableFallbackShake();
+                }, 2000);
+            } else {
+                // Navegador sin soporte
+                enableFallbackShake('Sin soporte');
+            }
+        }
+
+        function showMotionGranted() {
+            const indicator = document.getElementById('shakeIndicator');
+            indicator.innerHTML = '<i class="fas fa-check-circle" style="animation:none;color:#4ade80"></i><span>¡Sacude fuerte tu celular!</span>';
+            setTimeout(() => {
+                if (sunflowersRemaining > 0) {
+                    indicator.innerHTML = '<i class="fas fa-mobile-alt"></i><span>Sacude tu celular</span>';
+                }
+            }, 2000);
+        }
+
+        function enableFallbackShake(reason) {
+            motionEnabled = false;
+            const indicator = document.getElementById('shakeIndicator');
+            indicator.innerHTML = '<i class="fas fa-hand-pointer" style="animation:none"></i><span>Usa el botón de abajo 👇</span>';
+            
+            // Mostrar botón de emergencia
+            document.getElementById('emergencyBtn').classList.remove('hidden');
+            
+            // Detectar toques en los girasoles para volarlos individualmente
+            document.getElementById('sunflowerField').addEventListener('touchstart', handleFieldTap, { passive: false });
+            document.getElementById('sunflowerField').addEventListener('click', handleFieldTap, { passive: false });
+        }
+
+        function handleFieldTap(e) {
+            if (sunflowersRemaining <= 0) return;
+            if (e.type === 'touchstart') e.preventDefault();
+            
+            const target = e.target;
+            if (!target.classList || !target.classList.contains('sunflower-emoji-item')) return;
+            if (target.classList.contains('flying') || target.style.display === 'none') return;
+
+            // Volamos este girasol y algunos cercanos
+            const rect = target.getBoundingClientRect();
+            const tapX = rect.left + rect.width / 2;
+            const tapY = rect.top + rect.height / 2;
+            
+            const nearby = sunflowerElements.filter(el => {
+                if (el.classList.contains('flying') || el.style.display === 'none') return false;
+                const r = el.getBoundingClientRect();
+                const dx = (r.left + r.width/2) - tapX;
+                const dy = (r.top + r.height/2) - tapY;
+                return Math.sqrt(dx*dx + dy*dy) < 100;
+            });
+            
+            nearby.slice(0, 5).forEach(el => flyOffSunflower(el));
+            updateSunflowerCounter();
+            
+            if (navigator.vibrate) navigator.vibrate(15);
+            
+            if (sunflowersRemaining <= 0) {
+                setTimeout(revealSunflowerButton, 900);
+            }
+        }
+
+        function emergencyClear() {
+            // Elimina todos los girasoles de golpe
+            sunflowerElements.forEach(el => {
+                if (!el.classList.contains('flying') && el.style.display !== 'none') {
+                    flyOffSunflower(el);
+                }
+            });
+            updateSunflowerCounter();
+            if (navigator.vibrate) navigator.vibrate([20, 30, 20, 30, 50]);
+        }
+
+        // ==========================================
+        //  REVEAL SUNFLOWER
+        // ==========================================
+        function revealSunflower() {
+            const btnContainer = document.getElementById('revealBtnContainer');
+            const mainContent = document.getElementById('mainContent');
+            
+            const btn = document.getElementById('revealSunflowerBtn');
+            btn.style.transition = 'transform 0.5s cubic-bezier(0.5, -0.5, 0.5, 1.5), opacity 0.5s';
+            btn.style.transform = 'scale(1.8) rotate(180deg)';
+            btn.style.opacity = '0';
+
+            if (navigator.vibrate) navigator.vibrate([30, 40, 30, 40, 80]);
+
+            setTimeout(() => {
+                btnContainer.classList.remove('show');
+                btnContainer.style.display = 'none';
+                mainContent.classList.add('show');
+                launchCelebration();
+            }, 500);
+        }
+
+        // ==========================================
+        //  FLOATING PARTICLES
+        // ==========================================
+        function initParticles() {
+            const container = document.getElementById('particlesContainer');
+            const symbols = ['🌻', '🌼', '✨', '💛', '🌸', '🏵️', '✨'];
+            const count = isIOS ? 18 : 22;
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.fontSize = (Math.random() * 16 + 10) + 'px';
+                p.style.animationDuration = (Math.random() * 9 + 7) + 's';
+                p.style.animationDelay = (Math.random() * 8) + 's';
+                container.appendChild(p);
+            }
+        }
+
+        // ==========================================
+        //  PROGRESS DOTS
+        // ==========================================
+        function renderProgressDots() {
+            const dotsContainer = document.getElementById('progressDots');
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalPetals; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'progress-dot';
+                if (i < totalDiscovered) dot.classList.add('active');
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // ==========================================
+        //  SUNFLOWER PETALS
+        // ==========================================
+        function renderPetals() {
+            const ring = document.getElementById('petalsRing');
+            ring.innerHTML = '';
+
+            const TOTAL = totalPetals;
+            const radius = 78;
+
+            for (let i = 0; i < TOTAL; i++) {
+                const angle = (i * 360) / TOTAL;
+                const sizeVar = 1 + (Math.sin(i * 1.7) * 0.06);
+                const angleVar = Math.sin(i * 2.3) * 3;
+                const radialVar = Math.cos(i * 1.9) * 4;
+
+                const petalWidth = 44 * sizeVar;
+                const petalHeight = 96 * sizeVar;
+                const petalRadius = radius + radialVar;
+
+                const petal = document.createElement('div');
+                petal.className = 'sf-petal';
+                petal.dataset.index = i;
+                petal.dataset.angle = angle;
+                petal.style.width = petalWidth + 'px';
+                petal.style.height = petalHeight + 'px';
+                petal.style.marginLeft = (-petalWidth / 2) + 'px';
+                petal.style.marginTop = (-petalHeight / 2) + 'px';
+                petal.style.transformOrigin = 'center center';
+                petal.style.transform = `rotate(${angle + angleVar}deg) translateY(-${petalRadius}px)`;
+                petal.style.zIndex = (i % 2 === 0) ? 10 : 9;
+
+                let handled = false;
+                const handleTap = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (handled) return;
+                    handled = true;
+                    setTimeout(() => { handled = false; }, 400);
+                    pluckPetal(petal, angle, e);
+                };
+                petal.addEventListener('click', handleTap);
+                petal.addEventListener('touchstart', handleTap, { passive: false });
+
+                ring.appendChild(petal);
+            }
+        }
+
+        // ==========================================
+        //  SPARKLES
+        // ==========================================
+        function spawnFloatingSparkle(x, y) {
+            const symbols = ['✨', '💛', '💖', '🌟', '💫', '🌸'];
+            const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle-up';
+            sparkle.innerText = symbol;
+            sparkle.style.left = (x - 10) + 'px';
+            sparkle.style.top = (y - 10) + 'px';
+            sparkle.style.setProperty('--sx', (Math.random() * 80 - 40) + 'px');
+            sparkle.style.setProperty('--sy', (-200 - Math.random() * 200) + 'px');
+            sparkle.style.fontSize = (16 + Math.random() * 12) + 'px';
+            sparkle.style.filter = 'drop-shadow(0 0 10px rgba(251, 191, 36, 0.9))';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 2200);
+        }
+
+        function spawnFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerText = ['💛', '💖', '❤️', '💕', '🌻'][Math.floor(Math.random() * 5)];
+            heart.style.left = (Math.random() * 80 + 10) + 'vw';
+            heart.style.bottom = '10vh';
+            heart.style.filter = 'drop-shadow(0 0 12px rgba(244, 63, 94, 0.8))';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 2600);
+        }
+
+        // ==========================================
+        //  CELEBRATION
+        // ==========================================
+        function launchCelebration() {
+            const colors = ['#fbbf24', '#fcd34d', '#f59e0b', '#fef3c7', '#fde68a', '#f97316'];
+            const confettiCount = isIOS ? 60 : 80;
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const piece = document.createElement('div');
+                    piece.className = 'confetti-piece';
+                    piece.style.left = Math.random() * 100 + 'vw';
+                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.animationDuration = (2.5 + Math.random() * 2.5) + 's';
+                    piece.style.animationDelay = (Math.random() * 1.5) + 's';
+                    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                    piece.style.boxShadow = '0 0 8px rgba(251, 191, 36, 0.6)';
+                    document.body.appendChild(piece);
+                    setTimeout(() => piece.remove(), 6000);
+                }, i * 40);
+            }
+
+            const burstPositions = [
+                { x: 20, y: 25 }, { x: 80, y: 30 }, { x: 50, y: 20 },
+                { x: 15, y: 55 }, { x: 85, y: 60 }, { x: 50, y: 40 }
+            ];
+            burstPositions.forEach((pos, idx) => {
+                setTimeout(() => {
+                    fireworkBurst(window.innerWidth * pos.x / 100, window.innerHeight * pos.y / 100);
+                }, idx * 400);
+            });
+
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => spawnFloatingHeart(), i * 200);
+            }
+        }
+
+        function fireworkBurst(cx, cy) {
+            const starCount = 12;
+            const symbols = ['⭐', '✨', '🌟', '💫', '💛', '💖'];
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'firework-star';
+                star.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                star.style.left = cx + 'px';
+                star.style.top = cy + 'px';
+                const angle = (i * 360) / starCount + Math.random() * 15;
+                const distance = 80 + Math.random() * 90;
+                const rad = angle * Math.PI / 180;
+                star.style.setProperty('--fx', Math.cos(rad) * distance + 'px');
+                star.style.setProperty('--fy', Math.sin(rad) * distance + 'px');
+                star.style.fontSize = (12 + Math.random() * 10) + 'px';
+                star.style.filter = 'drop-shadow(0 0 8px rgba(251, 191, 36, 0.9))';
+                document.body.appendChild(star);
+                setTimeout(() => star.remove(), 1500);
+            }
+        }
+
+        // ==========================================
+        //  PLUCK SUNFLOWER PETAL
+        // ==========================================
+        function pluckPetal(petalElement, angle, event) {
+            if (petalElement.classList.contains('plucking') || petalElement.style.display === 'none') return;
+            if (flowerCompleted) return;
+
+            if (availableMessages.length === 0) {
+                availableMessages = [...messagesData];
+            }
+            const randomIndex = Math.floor(Math.random() * availableMessages.length);
+            const msg = availableMessages.splice(randomIndex, 1)[0];
+
+            const box = document.getElementById('messageBox');
+            const emojiEl = document.getElementById('msgEmoji');
+            const titleEl = document.getElementById('msgTitle');
+            const textEl = document.getElementById('msgText');
+
+            box.style.transform = "scale(0.96)";
+            setTimeout(() => {
+                emojiEl.innerText = msg.emoji;
+                titleEl.innerText = msg.title;
+                textEl.innerText = msg.text;
+                box.style.transform = "scale(1)";
+                titleEl.classList.remove('msg-pop');
+                textEl.classList.remove('msg-pop');
+                void titleEl.offsetWidth;
+                titleEl.classList.add('msg-pop');
+                textEl.classList.add('msg-pop');
+            }, 130);
+
+            totalDiscovered++;
+            document.getElementById('progressText').innerText = `${totalDiscovered} / ${totalPetals}`;
+            const remaining = totalPetals - totalDiscovered;
+            document.getElementById('petalsRemainingCount').innerText = remaining === 1 ? '1 pétalo' : `${remaining} pétalos`;
+            renderProgressDots();
+
+            const rect = petalElement.getBoundingClientRect();
+            spawnFloatingSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+            const rad = (angle - 90) * (Math.PI / 180);
+            const distance = 100 + Math.random() * 80;
+            const endX = Math.cos(rad) * distance;
+            petalElement.style.setProperty('--end-x', `${endX}px`);
+            petalElement.classList.add('plucking');
+            
+            setTimeout(() => { petalElement.style.display = 'none'; }, 2200);
+
+            if (totalDiscovered % 2 === 0) {
+                setTimeout(() => spawnFloatingHeart(), 300);
+            }
+
+            if (navigator.vibrate) navigator.vibrate(15);
+
+            if (totalDiscovered === totalPetals) {
+                flowerCompleted = true;
+                setTimeout(() => onFlowerComplete(), 800);
+            }
+        }
+
+        // ==========================================
+        //  FLOWER COMPLETE
+        // ==========================================
+        function onFlowerComplete() {
+            const core = document.getElementById('sunflowerCore');
+            const coreIcon = document.getElementById('coreIcon');
+            core.classList.add('heart-mode');
+            coreIcon.innerHTML = `
+                <span class="text-[30px]" style="filter: drop-shadow(0 0 12px rgba(255,255,255,0.9));">💖</span>
+                <span class="text-[8px] uppercase font-bold tracking-widest mt-0.5 opacity-95">Ailín</span>
+            `;
+
+            document.getElementById('msgEmoji').innerText = "💖";
+            document.getElementById('msgTitle').innerText = "¡Ailín, has descubierto todo mi amor!";
+            document.getElementById('msgText').innerText = "Cada pétalo era un recuerdo, pero mi amor por ti es infinito. Feliz 21 de septiembre, mi Ailín Michelle. Te amo más allá de las flores. 🌻💛";
+
+            launchCelebration();
+
+            setTimeout(() => {
+                document.getElementById('finalLetter').classList.add('show');
+                if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
+            }, 3000);
+        }
+
+        function closeLetter(event) {
+            if (event) event.stopPropagation();
+            document.getElementById('finalLetter').classList.remove('show');
+        }
+
+        function tapCore() {
+            if (flowerCompleted) {
+                document.getElementById('finalLetter').classList.add('show');
+                return;
+            }
+            const box = document.getElementById('messageBox');
+            box.style.transform = "scale(1.03)";
+            setTimeout(() => { box.style.transform = "scale(1)"; }, 200);
+            
+            document.getElementById('msgEmoji').innerText = "🌻";
+            document.getElementById('msgTitle').innerText = "¡Feliz 21 de Septiembre, Ailín!";
+            document.getElementById('msgText').innerText = "Toca cada uno de los pétalos alrededor para descubrir todos nuestros recuerdos, mi amor. 💛";
+
+            if (navigator.vibrate) navigator.vibrate(20);
+        }
+
+        // ==========================================
+        //  RESET
+        // ==========================================
+        function resetSunflower() {
+            totalDiscovered = 0;
+            flowerCompleted = false;
+            availableMessages = [...messagesData];
+            document.getElementById('progressText').innerText = `0 / ${totalPetals}`;
+            document.getElementById('petalsRemainingCount').innerText = `${totalPetals} pétalos`;
+            document.getElementById('msgEmoji').innerText = "💛";
+            document.getElementById('msgTitle').innerText = "Para ti, Ailín Michelle";
+            document.getElementById('msgText').innerText = "Toca cualquier pétalo del girasol para revelar un recuerdo nuestro.";
+            renderPetals();
+            renderProgressDots();
+
+            const core = document.getElementById('sunflowerCore');
+            const coreIcon = document.getElementById('coreIcon');
+            core.classList.remove('heart-mode');
+            coreIcon.innerHTML = `
+                <span class="text-[26px] drop-shadow-md" style="filter: drop-shadow(0 0 6px rgba(251,191,36,0.8));">🌻</span>
+                <span class="text-[8px] uppercase font-bold tracking-widest mt-0.5 opacity-95">Tócame</span>
+            `;
+
+            document.getElementById('sunflowerField').classList.remove('cleared');
+            document.getElementById('shakeWelcome').classList.remove('hidden');
+            document.getElementById('shakeIndicator').classList.remove('hidden');
+            document.getElementById('revealBtnContainer').classList.remove('show');
+            document.getElementById('revealBtnContainer').style.display = 'flex';
+            document.getElementById('mainContent').classList.remove('show');
+            document.getElementById('sunflowerCounter').classList.remove('hidden');
+            document.getElementById('emergencyBtn').classList.add('hidden');
+            
+            const btn = document.getElementById('revealSunflowerBtn');
+            btn.style.transition = '';
+            btn.style.transform = '';
+            btn.style.opacity = '';
+
+            shakePowerLevel = 0;
+            document.getElementById('shakePowerFill').style.width = '0%';
+
+            // Re-detectar motion
+            if (motionEnabled) {
+                document.getElementById('shakeIndicator').innerHTML = '<i class="fas fa-mobile-alt"></i><span>Sacude tu celular</span>';
+            } else {
+                document.getElementById('shakeIndicator').innerHTML = '<i class="fas fa-hand-pointer" style="animation:none"></i><span>Usa el botón de abajo 👇</span>';
+                document.getElementById('emergencyBtn').classList.remove('hidden');
+            }
+
+            initSunflowerField();
+
+            core.style.transform = 'scale(1.1)';
+            setTimeout(() => { core.style.transform = ''; }, 250);
+
+            if (navigator.vibrate) navigator.vibrate([10, 30, 10]);
+        }
+
+        // ==========================================
+        //  MUSIC
+        // ==========================================
+        let musicPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.35;
+
+        function toggleMusic() {
+            const btn = document.getElementById('musicBtn');
+            const icon = document.getElementById('musicIcon');
+            
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicPlaying = false;
+                btn.classList.remove('playing');
+                icon.className = 'fas fa-music';
+                icon.style.opacity = '0.7';
+            } else {
+                const playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        musicPlaying = true;
+                        btn.classList.add('playing');
+                        icon.className = 'fas fa-pause';
+                        icon.style.opacity = '1';
+                    }).catch(err => {
+                        icon.className = 'fas fa-volume-xmark';
+                        setTimeout(() => { icon.className = 'fas fa-music'; }, 1500);
+                    });
+                }
+            }
+        }
+
+        // ==========================================
+        //  INIT
+        // ==========================================
+        window.addEventListener('load', () => {
+            initParticles();
+            initSunflowerField();
+            renderPetals();
+            renderProgressDots();
+
+            const box = document.getElementById('messageBox');
+            box.style.transform = 'scale(0.96)';
+            setTimeout(() => { box.style.transform = 'scale(1)'; }, 250);
+
+            // Detectar permiso de movimiento después de un momento
+            setTimeout(requestMotionPermission, 800);
+
+            // Fallback: si después de 3s no hay motion y el usuario no ha tocado nada
+            setTimeout(() => {
+                if (!motionEnabled && sunflowersRemaining === TOTAL_SUNFLOWERS) {
+                    enableFallbackShake('Timeout');
+                }
+            }, 3000);
+        });
+
+        // Prevenir scroll bounce en iOS y Android
+        document.body.addEventListener('touchmove', (e) => {
+            const target = e.target;
+            if (target.closest('button') || 
+                target.closest('.sf-petal') || 
+                target.closest('.letter-content') ||
+                target.closest('.sunflower-emoji-item') ||
+                target.closest('#finalLetter')) {
+                return;
+            }
+            e.preventDefault();
+        }, { passive: false });
+
+        // Prevenir double-tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, { passive: false });
+
+        // Prevenir menú contextual
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Prevenir gestos iOS (pinch zoom, etc)
+        document.addEventListener('gesturestart', (e) => e.preventDefault());
+        document.addEventListener('gesturechange', (e) => e.preventDefault());
+        document.addEventListener('gestureend', (e) => e.preventDefault());
+
+        // Prevenir arrastre de imágenes
+        document.addEventListener('dragstart', (e) => e.preventDefault());
+    </script>
+</body>
+</html>
