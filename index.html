@@ -8,12 +8,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Para Ailín 🌻">
-    <title>🌻Para Ailín Michelle · 21 de Septiembre</title>
+    <title>🌻 Para Ailín Michelle · 21 de Septiembre</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== RESET & BASE ===== */
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
@@ -27,7 +26,6 @@
         }
         html, body {
             overscroll-behavior: none;
-            -webkit-overflow-scrolling: touch;
             width: 100%;
             overflow: hidden;
             margin: 0;
@@ -35,7 +33,7 @@
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: 
+            background:
                 radial-gradient(ellipse at 20% 0%, #3d2f12 0%, transparent 55%),
                 radial-gradient(ellipse at 80% 100%, #2e240f 0%, transparent 55%),
                 linear-gradient(180deg, #1a1307 0%, #0a0803 100%);
@@ -46,7 +44,6 @@
             min-height: 100dvh;
             display: flex;
             flex-direction: column;
-            position: relative;
             padding-bottom: env(safe-area-inset-bottom);
             padding-top: env(safe-area-inset-top);
             -webkit-font-smoothing: antialiased;
@@ -84,7 +81,7 @@
             align-items: center;
             justify-content: center;
             padding: 30px 24px;
-            background: 
+            background:
                 radial-gradient(ellipse at 50% 30%, #3d2f12 0%, transparent 60%),
                 linear-gradient(180deg, #1a1307 0%, #0a0803 100%);
             text-align: center;
@@ -146,7 +143,7 @@
             50% { box-shadow: 0 15px 50px rgba(251, 191, 36, 0.9), 0 0 0 6px rgba(254, 243, 199, 0.15); }
         }
 
-        /* ===== FLOATING PARTICLES ===== */
+        /* ===== PARTICLES ===== */
         @keyframes floatParticle {
             0% { transform: translate3d(0, 110vh, 0) scale(0.6) rotate(0deg); opacity: 0; }
             10% { opacity: 0.85; }
@@ -170,7 +167,7 @@
             z-index: 60;
             overflow: hidden;
             background: linear-gradient(180deg, #1a1307 0%, #0a0803 100%);
-            transition: opacity 0.8s ease;
+            transition: opacity 0.6s ease;
             touch-action: none;
             cursor: grab;
         }
@@ -184,15 +181,11 @@
             pointer-events: none;
             user-select: none;
             -webkit-user-select: none;
-            will-change: transform, opacity, left, top;
+            will-change: left, top, opacity;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
             font-size: 32px;
             line-height: 1;
             transition: opacity 0.3s ease;
-        }
-        @keyframes emojiSway {
-            0%, 100% { transform: rotate(var(--rot, 0deg)); }
-            50% { transform: rotate(calc(var(--rot, 0deg) + 5deg)); }
         }
         @keyframes fadeOff {
             0% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); }
@@ -219,7 +212,7 @@
             100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8); }
         }
 
-        /* ===== UI INDICATORS ===== */
+        /* ===== INDICATORS ===== */
         #shakeIndicator {
             position: fixed;
             top: calc(env(safe-area-inset-top) + 60px);
@@ -242,6 +235,7 @@
             animation: indicatorPulse 2s ease-in-out infinite;
             white-space: nowrap;
             max-width: 90vw;
+            transition: opacity 0.4s ease;
         }
         @keyframes indicatorPulse {
             0%, 100% { transform: translateX(-50%) scale(1); }
@@ -272,6 +266,7 @@
             gap: 6px;
             box-shadow: 0 6px 25px rgba(0,0,0,0.6), 0 0 20px rgba(251, 191, 36, 0.5);
             white-space: nowrap;
+            transition: opacity 0.4s ease;
         }
         #sunflowerCounter.hidden { opacity: 0; pointer-events: none; }
 
@@ -285,6 +280,7 @@
             padding: 0 24px;
             max-width: 92vw;
             pointer-events: none;
+            transition: opacity 0.4s ease;
         }
         #shakeWelcome.hidden { opacity: 0; }
         #shakeWelcome h1 {
@@ -306,19 +302,33 @@
         #revealBtnContainer {
             position: fixed;
             inset: 0;
-            z-index: 65;
-            display: flex;
+            z-index: 100;
+            display: none;
             align-items: center;
             justify-content: center;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.8s ease;
         }
-        #revealBtnContainer.show { opacity: 1; pointer-events: auto; }
+        #revealBtnContainer.show {
+            display: flex;
+            opacity: 1;
+            pointer-events: auto;
+        }
         @keyframes revealSunflower {
             0% { transform: scale(0.3) rotate(-180deg); opacity: 0; }
             60% { transform: scale(1.15) rotate(10deg); opacity: 1; }
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        @keyframes centerPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 25px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.2), inset 0 0 25px rgba(0,0,0,0.6);
+            }
+            50% {
+                transform: scale(1.04);
+                box-shadow: 0 0 45px rgba(251, 191, 36, 0.9), 0 0 90px rgba(251, 191, 36, 0.4), inset 0 0 30px rgba(0,0,0,0.7);
+            }
         }
         .reveal-sunflower-btn {
             width: 180px;
@@ -326,7 +336,7 @@
             border-radius: 50%;
             background: radial-gradient(circle at 35% 30%, #78350f 0%, #451a03 55%, #1c0a02 100%);
             border: 3px solid rgba(251, 191, 36, 0.9);
-            box-shadow: 
+            box-shadow:
                 0 0 0 6px rgba(120, 53, 15, 0.4),
                 0 0 60px rgba(251, 191, 36, 0.8),
                 0 0 120px rgba(251, 191, 36, 0.4),
@@ -346,7 +356,7 @@
             position: absolute;
             inset: 8px;
             border-radius: 50%;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 50% 50%, #292524 1.2px, transparent 2px),
                 radial-gradient(circle at 50% 50%, #1c1917 1.2px, transparent 2px);
             background-size: 8px 8px, 8px 8px;
@@ -396,10 +406,14 @@
             pointer-events: none;
         }
 
+        /* ===== MAIN CONTENT ===== */
         #mainContent {
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.8s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100dvh;
         }
         #mainContent.show {
             opacity: 1;
@@ -449,6 +463,15 @@
             pointer-events: none;
         }
         .sf-petal:active { filter: drop-shadow(0 0 20px #fcd34d) brightness(1.2); }
+        @keyframes pluckPetalFloat {
+            0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 1; }
+            30% { opacity: 1; }
+            100% { transform: translate3d(var(--end-x), -120vh, 0) rotate(720deg) scale(0.1); opacity: 0; }
+        }
+        .plucking {
+            animation: pluckPetalFloat 2.2s cubic-bezier(0.35, 0.85, 0.4, 1) forwards;
+            pointer-events: none;
+        }
 
         /* ===== SUNFLOWER CENTER ===== */
         .sf-center {
@@ -475,7 +498,7 @@
             position: absolute;
             inset: 6px;
             border-radius: 50%;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 50% 50%, #292524 1px, transparent 1.8px),
                 radial-gradient(circle at 50% 50%, #1c1917 1px, transparent 1.8px);
             background-size: 7px 7px, 7px 7px;
@@ -514,23 +537,13 @@
             box-shadow: 0 0 0 3px rgba(190, 24, 93, 0.6), 0 0 40px rgba(244, 63, 94, 0.8), 0 0 90px rgba(244, 63, 94, 0.4), inset 0 0 40px rgba(0,0,0,0.8);
         }
         .sf-center.heart-mode::before {
-            background-image: 
+            background-image:
                 radial-gradient(circle at 50% 50%, #7f1d1d 1px, transparent 2px),
                 radial-gradient(circle at 50% 50%, #450a0a 1px, transparent 2px);
         }
         @keyframes heartPulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
-        }
-        @keyframes centerPulse {
-            0%, 100% { 
-                transform: scale(1); 
-                box-shadow: 0 0 25px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.2), inset 0 0 25px rgba(0,0,0,0.6);
-            }
-            50% { 
-                transform: scale(1.04); 
-                box-shadow: 0 0 45px rgba(251, 191, 36, 0.9), 0 0 90px rgba(251, 191, 36, 0.4), inset 0 0 30px rgba(0,0,0,0.7);
-            }
         }
 
         /* ===== MESSAGE CARD ===== */
@@ -542,14 +555,6 @@
         @keyframes shimmer {
             0% { background-position: -200% center; }
             100% { background-position: 200% center; }
-        }
-        .shimmer-text {
-            background: linear-gradient(90deg, #fbbf24 0%, #fef3c7 25%, #fbbf24 50%, #fef3c7 75%, #fbbf24 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 4s linear infinite;
         }
         @keyframes msgPop {
             0% { transform: scale(0.85); opacity: 0.5; }
@@ -575,7 +580,7 @@
             transform: scale(1.35);
         }
 
-        /* ===== SPARKLES / HEARTS / CONFETTI / FIREWORKS ===== */
+        /* ===== EFFECTS ===== */
         @keyframes sparkleRise {
             0% { transform: translate3d(0, 0, 0) scale(0.4); opacity: 0; }
             15% { opacity: 1; }
@@ -795,7 +800,7 @@
         <i id="musicIcon" class="fas fa-music"></i>
     </button>
 
-    <!-- SUNFLOWER EMOJI FIELD -->
+    <!-- SUNFLOWER FIELD -->
     <div id="sunflowerField"></div>
 
     <div id="sunflowerCounter">
@@ -805,6 +810,11 @@
 
     <div id="shakeWelcome">
         <h1>Para ti, Ailín Michelle</h1>
+    </div>
+
+    <div id="shakeIndicator">
+        <i class="fas fa-hand-pointer"></i>
+        <span>Desliza para apartar los girasoles</span>
     </div>
 
     <!-- REVEAL BUTTON -->
@@ -817,7 +827,7 @@
     </div>
 
     <!-- MAIN CONTENT -->
-    <div id="mainContent" style="display:flex; flex-direction:column; min-height:100dvh;">
+    <div id="mainContent">
 
         <header class="relative w-full px-4 py-3 z-30 flex items-center justify-between bg-gradient-to-b from-[#1a1307]/95 to-[#1a1307]/70 backdrop-blur-xl border-b border-yellow-700/30">
             <div class="flex items-center gap-2.5">
@@ -845,7 +855,7 @@
             <div id="messageBox" class="message-card w-full bg-gradient-to-b from-[#2b210e]/95 to-[#1a1307]/95 border border-yellow-600/40 rounded-3xl p-5 backdrop-blur-md text-center mb-4 relative overflow-hidden">
                 <div class="absolute -top-20 -right-20 w-48 h-48 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
-                
+
                 <div id="msgEmoji" class="text-5xl mb-1.5 drop-shadow-[0_0_15px_rgba(251,191,36,0.5)] transition-all duration-300">💛</div>
                 <h2 id="msgTitle" class="text-[17px] font-bold text-yellow-300 serif-font mb-2 px-1 leading-snug">Para ti, Ailín Michelle</h2>
                 <p id="msgText" class="text-[13px] text-yellow-100/85 leading-relaxed min-h-[68px] flex items-center justify-center px-1">
@@ -915,6 +925,8 @@
     </audio>
 
     <script>
+        'use strict';
+
         // ==========================================
         //  DATOS
         // ==========================================
@@ -932,24 +944,26 @@
         ];
 
         // ==========================================
-        //  VARIABLES DE ESTADO
+        //  ESTADO
         // ==========================================
         let availableMessages = [...messagesData];
         let totalDiscovered = 0;
         const totalPetals = 10;
         let flowerCompleted = false;
+
         let TOTAL_SUNFLOWERS = 60;
-        let sunflowersRemaining = TOTAL_SUNFLOWERS;
+        let sunflowersRemaining = 0;
         let sunflowerElements = [];
         let isDragging = false;
         let activePointerId = null;
-        let lastPointerX = 0;
-        let lastPointerY = 0;
         let lastTrailTime = 0;
         let lastPositionUpdate = 0;
+
         let musicPlaying = false;
 
-        // Cache DOM elements
+        // ==========================================
+        //  DOM CACHE
+        // ==========================================
         const $ = (id) => document.getElementById(id);
         const startScreen = $('startScreen');
         const sunflowerField = $('sunflowerField');
@@ -976,7 +990,7 @@
         const musicIcon = $('musicIcon');
 
         // ==========================================
-        //  INICIO DE LA EXPERIENCIA
+        //  START
         // ==========================================
         function startExperience() {
             tryPlayMusic();
@@ -1014,11 +1028,10 @@
             const vw = window.innerWidth;
             const vh = window.innerHeight;
 
-            // Ajustar cantidad según tamaño
             if (vw < 360) TOTAL_SUNFLOWERS = 50;
             else if (vw < 400) TOTAL_SUNFLOWERS = 60;
             else TOTAL_SUNFLOWERS = 75;
-            
+
             sunflowersRemaining = TOTAL_SUNFLOWERS;
 
             const cols = Math.max(6, Math.floor(vw / 46));
@@ -1026,8 +1039,9 @@
             const cellW = vw / cols;
             const cellH = vh / rows;
 
-            let placed = 0;
             const fragment = document.createDocumentFragment();
+            let placed = 0;
+
             for (let r = 0; r < rows && placed < TOTAL_SUNFLOWERS; r++) {
                 for (let c = 0; c < cols && placed < TOTAL_SUNFLOWERS; c++) {
                     const jitterX = (Math.random() - 0.5) * cellW * 0.5;
@@ -1046,9 +1060,7 @@
                     item.style.setProperty('--rot', rot + 'deg');
                     item.style.transform = `rotate(${rot}deg) scale(${scale})`;
                     item.style.fontSize = fontSize + 'px';
-                    item.innerText = '🌻';
-                    item.style.animation = `emojiSway ${3 + Math.random() * 2}s ease-in-out infinite`;
-                    item.style.animationDelay = (Math.random() * 2) + 's';
+                    item.textContent = '🌻';
 
                     item._currentX = x - fontSize / 2;
                     item._currentY = y - fontSize / 2;
@@ -1065,7 +1077,7 @@
 
         function updateSunflowerCounter() {
             if (sunflowersRemaining > 0) {
-                sunflowerCounterText.innerText = sunflowersRemaining === 1 ? '1 girasol' : `${sunflowersRemaining} girasoles`;
+                sunflowerCounterText.textContent = sunflowersRemaining === 1 ? '1 girasol' : `${sunflowersRemaining} girasoles`;
                 sunflowerCounter.classList.remove('hidden');
             } else {
                 sunflowerCounter.classList.add('hidden');
@@ -1073,43 +1085,36 @@
         }
 
         // ==========================================
-        //  DRAG INTERACTION
+        //  DRAG
         // ==========================================
         function setupDragInteraction() {
-            // Pointer events (unified touch/mouse)
             sunflowerField.addEventListener('pointerdown', onPointerDown, { passive: false });
             sunflowerField.addEventListener('pointermove', onPointerMove, { passive: false });
             sunflowerField.addEventListener('pointerup', onPointerUp, { passive: false });
             sunflowerField.addEventListener('pointercancel', onPointerUp, { passive: false });
-            sunflowerField.addEventListener('lostpointercapture', onPointerUp, { passive: false });
         }
 
         function onPointerDown(e) {
             if (sunflowersRemaining <= 0) return;
             isDragging = true;
             activePointerId = e.pointerId;
-            lastPointerX = e.clientX;
-            lastPointerY = e.clientY;
-            sunflowerField.setPointerCapture(e.pointerId);
+            try { sunflowerField.setPointerCapture(e.pointerId); } catch (err) {}
             e.preventDefault();
         }
 
         function onPointerMove(e) {
             if (!isDragging || e.pointerId !== activePointerId) return;
             if (sunflowersRemaining <= 0) return;
-            
+
             const x = e.clientX;
             const y = e.clientY;
             pushSunflowers(x, y);
-            
+
             const now = Date.now();
             if (now - lastTrailTime > 40) {
                 createFingerTrail(x, y);
                 lastTrailTime = now;
             }
-            
-            lastPointerX = x;
-            lastPointerY = y;
             e.preventDefault();
         }
 
@@ -1117,9 +1122,7 @@
             if (e.pointerId === activePointerId) {
                 isDragging = false;
                 activePointerId = null;
-                try {
-                    sunflowerField.releasePointerCapture(e.pointerId);
-                } catch (err) {}
+                try { sunflowerField.releasePointerCapture(e.pointerId); } catch (err) {}
             }
         }
 
@@ -1131,6 +1134,8 @@
         const THROTTLE_MS = 16;
 
         function pushSunflowers(fingerX, fingerY) {
+            if (sunflowersRemaining <= 0) return;
+
             const now = performance.now();
             if (now - lastPositionUpdate < THROTTLE_MS) return;
             lastPositionUpdate = now;
@@ -1138,9 +1143,9 @@
             const vw = window.innerWidth;
             const vh = window.innerHeight;
 
-            for (let i = 0; i < sunflowerElements.length; i++) {
+            for (let i = sunflowerElements.length - 1; i >= 0; i--) {
                 const el = sunflowerElements[i];
-                if (el.classList.contains('fading') || el.style.display === 'none') continue;
+                if (!el || el.classList.contains('fading')) continue;
 
                 const elX = el._currentX + el._size / 2;
                 const elY = el._currentY + el._size / 2;
@@ -1155,14 +1160,14 @@
                     const nx = dx / dist;
                     const ny = dy / dist;
 
-                    let newX = el._currentX + nx * force;
-                    let newY = el._currentY + ny * force;
+                    const newX = el._currentX + nx * force;
+                    const newY = el._currentY + ny * force;
 
                     const centerX = newX + el._size / 2;
                     const centerY = newY + el._size / 2;
 
-                    if (centerX < -el._size * 0.5 || centerX > vw + el._size * 0.5 ||
-                        centerY < -el._size * 0.5 || centerY > vh + el._size * 0.5) {
+                    if (centerX < -el._size || centerX > vw + el._size ||
+                        centerY < -el._size || centerY > vh + el._size) {
                         removeSunflower(el);
                         continue;
                     }
@@ -1178,26 +1183,30 @@
         function removeSunflower(el) {
             if (el.classList.contains('fading')) return;
             el.classList.add('fading');
-            el.style.pointerEvents = 'none';
+
+            const idx = sunflowerElements.indexOf(el);
+            if (idx > -1) sunflowerElements.splice(idx, 1);
+
             sunflowersRemaining--;
             updateSunflowerCounter();
 
             const rect = el.getBoundingClientRect();
             spawnFloatingSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
-            if (navigator.vibrate) {
-                try { navigator.vibrate(10); } catch(e) {}
-            }
+            if (navigator.vibrate) { try { navigator.vibrate(10); } catch(e) {} }
 
             setTimeout(() => { el.style.display = 'none'; }, 400);
 
             if (sunflowersRemaining <= 0) {
-                setTimeout(revealSunflowerButton, 700);
+                isDragging = false;
+                activePointerId = null;
+                sunflowerField.style.pointerEvents = 'none';
+                setTimeout(revealSunflowerButton, 600);
             }
         }
 
         // ==========================================
-        //  FINGER TRAIL
+        //  TRAIL
         // ==========================================
         function createFingerTrail(x, y) {
             const trail = document.createElement('div');
@@ -1214,29 +1223,50 @@
         function revealSunflowerButton() {
             shakeWelcome.classList.add('hidden');
             shakeIndicator.classList.add('hidden');
+            sunflowerCounter.classList.add('hidden');
             sunflowerField.classList.add('cleared');
+
+            // Reset del botón
+            revealSunflowerBtn.style.transition = '';
+            revealSunflowerBtn.style.transform = '';
+            revealSunflowerBtn.style.opacity = '';
+            revealSunflowerBtn.dataset.revealed = 'false';
+
+            // Mostrar contenedor
             revealBtnContainer.classList.add('show');
 
             if (navigator.vibrate) { try { navigator.vibrate([20, 60, 20]); } catch(e) {} }
         }
 
         function revealSunflower() {
-            revealSunflowerBtn.style.transition = 'transform 0.5s cubic-bezier(0.5, -0.5, 0.5, 1.5), opacity 0.5s';
-            revealSunflowerBtn.style.transform = 'scale(1.8) rotate(180deg)';
-            revealSunflowerBtn.style.opacity = '0';
+            if (revealSunflowerBtn.dataset.revealed === 'true') return;
+            revealSunflowerBtn.dataset.revealed = 'true';
 
             if (navigator.vibrate) { try { navigator.vibrate([30, 40, 30, 40, 80]); } catch(e) {} }
+
+            revealSunflowerBtn.style.transition = 'transform 0.6s cubic-bezier(0.5, -0.5, 0.5, 1.5), opacity 0.5s';
+            revealSunflowerBtn.style.transform = 'scale(0.3) rotate(180deg)';
+            revealSunflowerBtn.style.opacity = '0';
+            revealBtnContainer.style.opacity = '0';
+            revealBtnContainer.style.pointerEvents = 'none';
 
             setTimeout(() => {
                 revealBtnContainer.classList.remove('show');
                 revealBtnContainer.style.display = 'none';
+                sunflowerField.style.display = 'none';
+
+                // ⚡ Renderizar pétalos AHORA que mainContent es visible
+                renderPetals();
+                renderProgressDots();
+
                 mainContent.classList.add('show');
-                launchCelebration();
-            }, 500);
+
+                setTimeout(launchCelebration, 300);
+            }, 600);
         }
 
         // ==========================================
-        //  PARTÍCULAS FLOTANTES
+        //  PARTÍCULAS
         // ==========================================
         function initParticles() {
             const container = $('particlesContainer');
@@ -1245,7 +1275,7 @@
             for (let i = 0; i < 18; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
-                p.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.fontSize = (Math.random() * 16 + 10) + 'px';
                 p.style.animationDuration = (Math.random() * 9 + 7) + 's';
@@ -1293,6 +1323,7 @@
                 petal.className = 'sf-petal';
                 petal.dataset.index = i;
                 petal.dataset.angle = angle;
+                petal.dataset.plucked = 'false';
                 petal.style.width = petalWidth + 'px';
                 petal.style.height = petalHeight + 'px';
                 petal.style.marginLeft = (-petalWidth / 2) + 'px';
@@ -1301,13 +1332,11 @@
                 petal.style.transform = `rotate(${angle + angleVar}deg) translateY(-${petalRadius}px)`;
                 petal.style.zIndex = (i % 2 === 0) ? 10 : 9;
 
-                let handled = false;
                 const handleTap = (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    if (handled) return;
-                    handled = true;
-                    setTimeout(() => { handled = false; }, 400);
+                    if (petal.dataset.plucked === 'true') return;
+                    petal.dataset.plucked = 'true';
                     pluckPetal(petal, angle);
                 };
                 petal.addEventListener('click', handleTap);
@@ -1319,14 +1348,14 @@
         }
 
         // ==========================================
-        //  SPARKLES / HEARTS
+        //  EFECTOS
         // ==========================================
         function spawnFloatingSparkle(x, y) {
             const symbols = ['✨', '💛', '💖', '🌟', '💫', '🌸'];
             const symbol = symbols[Math.floor(Math.random() * symbols.length)];
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle-up';
-            sparkle.innerText = symbol;
+            sparkle.textContent = symbol;
             sparkle.style.left = (x - 10) + 'px';
             sparkle.style.top = (y - 10) + 'px';
             sparkle.style.setProperty('--sx', (Math.random() * 80 - 40) + 'px');
@@ -1340,7 +1369,7 @@
         function spawnFloatingHeart() {
             const heart = document.createElement('div');
             heart.className = 'floating-heart';
-            heart.innerText = ['💛', '💖', '❤️', '💕', '🌻'][Math.floor(Math.random() * 5)];
+            heart.textContent = ['💛', '💖', '❤️', '💕', '🌻'][Math.floor(Math.random() * 5)];
             heart.style.left = (Math.random() * 80 + 10) + 'vw';
             heart.style.bottom = '10vh';
             heart.style.filter = 'drop-shadow(0 0 12px rgba(244, 63, 94, 0.8))';
@@ -1389,7 +1418,7 @@
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'firework-star';
-                star.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                star.textContent = symbols[Math.floor(Math.random() * symbols.length)];
                 star.style.left = cx + 'px';
                 star.style.top = cy + 'px';
                 const angle = (i * 360) / starCount + Math.random() * 15;
@@ -1408,7 +1437,6 @@
         //  PLUCK PETAL
         // ==========================================
         function pluckPetal(petalElement, angle) {
-            if (petalElement.classList.contains('plucking') || petalElement.style.display === 'none') return;
             if (flowerCompleted) return;
 
             if (availableMessages.length === 0) {
@@ -1419,9 +1447,9 @@
 
             messageBox.style.transform = "scale(0.96)";
             setTimeout(() => {
-                msgEmoji.innerText = msg.emoji;
-                msgTitle.innerText = msg.title;
-                msgText.innerText = msg.text;
+                msgEmoji.textContent = msg.emoji;
+                msgTitle.textContent = msg.title;
+                msgText.textContent = msg.text;
                 messageBox.style.transform = "scale(1)";
                 msgTitle.classList.remove('msg-pop');
                 msgText.classList.remove('msg-pop');
@@ -1431,9 +1459,9 @@
             }, 130);
 
             totalDiscovered++;
-            progressText.innerText = `${totalDiscovered} / ${totalPetals}`;
+            progressText.textContent = `${totalDiscovered} / ${totalPetals}`;
             const remaining = totalPetals - totalDiscovered;
-            petalsRemainingCount.innerText = remaining === 1 ? '1 pétalo' : `${remaining} pétalos`;
+            petalsRemainingCount.textContent = remaining === 1 ? '1 pétalo' : `${remaining} pétalos`;
             renderProgressDots();
 
             const rect = petalElement.getBoundingClientRect();
@@ -1444,7 +1472,7 @@
             const endX = Math.cos(rad) * distance;
             petalElement.style.setProperty('--end-x', `${endX}px`);
             petalElement.classList.add('plucking');
-            
+
             setTimeout(() => { petalElement.style.display = 'none'; }, 2200);
 
             if (totalDiscovered % 2 === 0) {
@@ -1455,7 +1483,7 @@
 
             if (totalDiscovered === totalPetals) {
                 flowerCompleted = true;
-                setTimeout(() => onFlowerComplete(), 800);
+                setTimeout(onFlowerComplete, 800);
             }
         }
 
@@ -1466,9 +1494,9 @@
                 <span class="text-[8px] uppercase font-bold tracking-widest mt-0.5 opacity-95">Ailín</span>
             `;
 
-            msgEmoji.innerText = "💖";
-            msgTitle.innerText = "¡Ailín, has descubierto todo mi amor!";
-            msgText.innerText = "Cada pétalo era un recuerdo, pero mi amor por ti es infinito. Feliz 21 de septiembre, mi Ailín Michelle. Te amo más allá de las flores. 🌻💛";
+            msgEmoji.textContent = "💖";
+            msgTitle.textContent = "¡Ailín, has descubierto todo mi amor!";
+            msgText.textContent = "Cada pétalo era un recuerdo, pero mi amor por ti es infinito. Feliz 21 de septiembre, mi Ailín Michelle. Te amo más allá de las flores. 🌻💛";
 
             launchCelebration();
 
@@ -1489,10 +1517,10 @@
             }
             messageBox.style.transform = "scale(1.03)";
             setTimeout(() => { messageBox.style.transform = "scale(1)"; }, 200);
-            
-            msgEmoji.innerText = "🌻";
-            msgTitle.innerText = "¡Feliz 21 de Septiembre, Ailín!";
-            msgText.innerText = "Toca cada uno de los pétalos alrededor para descubrir todos nuestros recuerdos, mi amor. 💛";
+
+            msgEmoji.textContent = "🌻";
+            msgTitle.textContent = "¡Feliz 21 de Septiembre, Ailín!";
+            msgText.textContent = "Toca cada uno de los pétalos alrededor para descubrir todos nuestros recuerdos, mi amor. 💛";
 
             if (navigator.vibrate) { try { navigator.vibrate(20); } catch(e) {} }
         }
@@ -1504,13 +1532,11 @@
             totalDiscovered = 0;
             flowerCompleted = false;
             availableMessages = [...messagesData];
-            progressText.innerText = `0 / ${totalPetals}`;
-            petalsRemainingCount.innerText = `${totalPetals} pétalos`;
-            msgEmoji.innerText = "💛";
-            msgTitle.innerText = "Para ti, Ailín Michelle";
-            msgText.innerText = "Toca cualquier pétalo del girasol para revelar un recuerdo nuestro.";
-            renderPetals();
-            renderProgressDots();
+            progressText.textContent = `0 / ${totalPetals}`;
+            petalsRemainingCount.textContent = `${totalPetals} pétalos`;
+            msgEmoji.textContent = "💛";
+            msgTitle.textContent = "Para ti, Ailín Michelle";
+            msgText.textContent = "Toca cualquier pétalo del girasol para revelar un recuerdo nuestro.";
 
             sunflowerCore.classList.remove('heart-mode');
             coreIcon.innerHTML = `
@@ -1518,22 +1544,35 @@
                 <span class="text-[8px] uppercase font-bold tracking-widest mt-0.5 opacity-95">Tócame</span>
             `;
 
+            // Reset del campo
             sunflowerField.classList.remove('cleared');
-            shakeWelcome.classList.remove('hidden');
-            shakeIndicator.classList.remove('hidden');
+            sunflowerField.style.display = '';
+            sunflowerField.style.pointerEvents = '';
+
+            // Reset del botón reveal
             revealBtnContainer.classList.remove('show');
-            revealBtnContainer.style.display = 'flex';
-            mainContent.classList.remove('show');
-            sunflowerCounter.classList.remove('hidden');
-            
+            revealBtnContainer.style.display = 'none';
+            revealBtnContainer.style.opacity = '';
+            revealBtnContainer.style.pointerEvents = '';
+
             revealSunflowerBtn.style.transition = '';
             revealSunflowerBtn.style.transform = '';
             revealSunflowerBtn.style.opacity = '';
+            revealSunflowerBtn.dataset.revealed = 'false';
+
+            // Reset UI
+            shakeWelcome.classList.remove('hidden');
+            shakeIndicator.classList.remove('hidden');
+            sunflowerCounter.classList.remove('hidden');
+            mainContent.classList.remove('show');
 
             isDragging = false;
             activePointerId = null;
+            lastPositionUpdate = 0;
 
             initSunflowerField();
+            renderPetals();
+            renderProgressDots();
 
             sunflowerCore.style.transform = 'scale(1.1)';
             setTimeout(() => { sunflowerCore.style.transform = ''; }, 250);
@@ -1579,11 +1618,11 @@
             if (e.target === finalLetter) closeLetter();
         });
 
-        // Prevenir gestos no deseados
+        // Prevenir gestos
         document.body.addEventListener('touchmove', (e) => {
             const target = e.target;
-            if (target.closest('button') || 
-                target.closest('.sf-petal') || 
+            if (target.closest('button') ||
+                target.closest('.sf-petal') ||
                 target.closest('.letter-content') ||
                 target.closest('#finalLetter')) {
                 return;
