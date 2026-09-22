@@ -13,9 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ===== RESET & BASE ===== */
         * {
             box-sizing: border-box;
-            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color: transparent;
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
         }
@@ -29,6 +30,8 @@
             -webkit-overflow-scrolling: touch;
             width: 100%;
             overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -38,8 +41,6 @@
                 linear-gradient(180deg, #1a1307 0%, #0a0803 100%);
             background-attachment: fixed;
             color: #fef3c7;
-            margin: 0;
-            padding: 0;
             min-height: 100vh;
             min-height: -webkit-fill-available;
             min-height: 100dvh;
@@ -50,19 +51,14 @@
             padding-top: env(safe-area-inset-top);
             -webkit-font-smoothing: antialiased;
         }
-
-        .serif-font { font-family: 'Playfair Display', Georgia, serif; }
-        .script-font { font-family: 'Dancing Script', cursive; }
-
         body::after {
             content: '';
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            inset: 0;
             background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
             pointer-events: none;
             z-index: 1;
         }
-
         button {
             -webkit-appearance: none;
             appearance: none;
@@ -75,6 +71,8 @@
             user-select: none;
         }
         button:focus { outline: none; }
+        .serif-font { font-family: 'Playfair Display', Georgia, serif; }
+        .script-font { font-family: 'Dancing Script', cursive; }
 
         /* ===== START SCREEN ===== */
         #startScreen {
@@ -96,7 +94,7 @@
             opacity: 0;
             pointer-events: none;
         }
-        #startScreen .start-icon {
+        .start-icon {
             font-size: 90px;
             margin-bottom: 20px;
             filter: drop-shadow(0 0 30px rgba(251, 191, 36, 0.7));
@@ -122,17 +120,9 @@
         #startScreen p {
             font-size: 14px;
             color: #fde68a;
-            margin-bottom: 8px;
+            margin-bottom: 30px;
             max-width: 320px;
             line-height: 1.6;
-        }
-        #startScreen .info {
-            font-size: 12px;
-            color: #fbbf24;
-            opacity: 0.75;
-            margin-bottom: 30px;
-            max-width: 300px;
-            line-height: 1.5;
         }
         #startBtn {
             background: linear-gradient(135deg, #fbbf24, #d97706);
@@ -173,341 +163,11 @@
             opacity: 0;
         }
 
-        /* ===== PETAL PLUCK ===== */
-        @keyframes pluckPetalFloat {
-            0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 1; }
-            30% { opacity: 1; }
-            100% { transform: translate3d(var(--end-x), -120vh, 0) rotate(720deg) scale(0.1); opacity: 0; }
-        }
-        .plucking {
-            animation: pluckPetalFloat 2.2s cubic-bezier(0.35, 0.85, 0.4, 1) forwards;
-            pointer-events: none;
-        }
-
-        /* ===== CENTER PULSE ===== */
-        @keyframes centerPulse {
-            0%, 100% { 
-                transform: scale(1); 
-                box-shadow: 0 0 25px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.2), inset 0 0 25px rgba(0,0,0,0.6);
-            }
-            50% { 
-                transform: scale(1.04); 
-                box-shadow: 0 0 45px rgba(251, 191, 36, 0.9), 0 0 90px rgba(251, 191, 36, 0.4), inset 0 0 30px rgba(0,0,0,0.7);
-            }
-        }
-        .sunflower-core {
-            animation: centerPulse 3.5s infinite ease-in-out;
-            will-change: transform, box-shadow;
-            transition: transform 0.15s ease;
-        }
-        .sunflower-core:active { transform: scale(0.92) !important; }
-
-        .message-card {
-            transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(251, 191, 36, 0.25) inset, 0 0 60px rgba(251, 191, 36, 0.08);
-            will-change: transform;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        .shimmer-text {
-            background: linear-gradient(90deg, #fbbf24 0%, #fef3c7 25%, #fbbf24 50%, #fef3c7 75%, #fbbf24 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 4s linear infinite;
-        }
-
-        @keyframes msgPop {
-            0% { transform: scale(0.85); opacity: 0.5; }
-            60% { transform: scale(1.03); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .msg-pop { animation: msgPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.75; transform: scale(1.12); }
-        }
-        .sunflower-glow { animation: glowPulse 4.5s ease-in-out infinite; }
-
-        .progress-dot {
-            width: 6px; height: 6px; border-radius: 50%;
-            background: rgba(251, 191, 36, 0.25);
-            transition: all 0.4s ease;
-        }
-        .progress-dot.active {
-            background: #fbbf24;
-            box-shadow: 0 0 8px #fbbf24, 0 0 16px rgba(251, 191, 36, 0.6);
-            transform: scale(1.35);
-        }
-
-        .no-select {
-            -webkit-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
-        }
-        .footer-safe { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
-
-        /* ===== SUNFLOWER PETALS ===== */
-        .sf-petal {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 44px;
-            height: 96px;
-            margin-left: -22px;
-            margin-top: -48px;
-            border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
-            background: radial-gradient(ellipse at 50% 85%, #b45309 0%, #d97706 15%, #f59e0b 45%, #fbbf24 75%, #fef3c7 100%);
-            box-shadow: inset 0 -12px 18px rgba(120, 53, 15, 0.55), inset 0 8px 14px rgba(255, 251, 235, 0.55), 0 4px 12px rgba(0, 0, 0, 0.35);
-            cursor: pointer;
-            transform-origin: center center;
-            will-change: transform, filter;
-            transition: filter 0.2s ease;
-            filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.35));
-        }
-        .sf-petal::before {
-            content: '';
-            position: absolute;
-            left: 50%; top: 10%;
-            width: 1.5px; height: 78%;
-            margin-left: -0.75px;
-            background: linear-gradient(to bottom, transparent, rgba(120,53,15,0.4) 30%, rgba(120,53,15,0.45) 70%, transparent);
-            border-radius: 2px;
-            pointer-events: none;
-        }
-        .sf-petal::after {
-            content: '';
-            position: absolute;
-            left: 50%; top: 6%;
-            width: 12px; height: 12px;
-            margin-left: -6px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.85) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .sf-petal:active { filter: drop-shadow(0 0 20px #fcd34d) brightness(1.2); }
-
-        /* ===== SUNFLOWER CENTER ===== */
-        .sf-center {
-            position: relative;
-            width: 108px; height: 108px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 30%, #78350f 0%, #451a03 55%, #1c0a02 100%);
-            border: 2.5px solid rgba(180, 83, 9, 0.8);
-            overflow: hidden;
-            box-shadow: 0 0 0 3px rgba(120, 53, 15, 0.5), 0 8px 22px rgba(0,0,0,0.7), inset 0 0 30px rgba(0,0,0,0.85);
-            z-index: 20;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            animation: centerPulse 3.5s infinite ease-in-out;
-            will-change: transform, box-shadow;
-            transition: transform 0.15s ease;
-        }
-        .sf-center:active { transform: scale(0.92) !important; }
-        .sf-center::before {
-            content: '';
-            position: absolute; top: 6px; right: 6px; bottom: 6px; left: 6px;
-            border-radius: 50%;
-            background-image: 
-                radial-gradient(circle at 50% 50%, #292524 1px, transparent 1.8px),
-                radial-gradient(circle at 50% 50%, #1c1917 1px, transparent 1.8px);
-            background-size: 7px 7px, 7px 7px;
-            background-position: 0 0, 3.5px 3.5px;
-            opacity: 0.9;
-            -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 75%);
-            mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 75%);
-            z-index: 1;
-        }
-        .sf-center::after {
-            content: '';
-            position: absolute; top: 14px; right: 14px; bottom: 14px; left: 14px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 40% 35%, rgba(217,119,6,0.35) 0%, transparent 65%);
-            box-shadow: inset 0 0 18px rgba(0,0,0,0.9);
-            z-index: 2;
-            pointer-events: none;
-        }
-        .sf-core-icon {
-            position: relative;
-            z-index: 5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #fef3c7;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 12px rgba(251,191,36,0.6);
-            pointer-events: none;
-            transition: opacity 0.4s, transform 0.4s;
-        }
-        .sf-center.heart-mode {
-            animation: heartPulse 1.8s infinite ease-in-out;
-            background: radial-gradient(circle at 35% 30%, #f43f5e 0%, #be123c 55%, #7f1d1d 100%);
-            border-color: rgba(251, 113, 133, 0.9);
-            box-shadow: 0 0 0 3px rgba(190, 24, 93, 0.6), 0 0 40px rgba(244, 63, 94, 0.8), 0 0 90px rgba(244, 63, 94, 0.4), inset 0 0 40px rgba(0,0,0,0.8);
-        }
-        .sf-center.heart-mode::before {
-            background-image: 
-                radial-gradient(circle at 50% 50%, #7f1d1d 1px, transparent 2px),
-                radial-gradient(circle at 50% 50%, #450a0a 1px, transparent 2px);
-        }
-        @keyframes heartPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* ===== SPARKLES / HEARTS / CONFETTI / FIREWORKS ===== */
-        @keyframes sparkleRise {
-            0% { transform: translate3d(0, 0, 0) scale(0.4); opacity: 0; }
-            15% { opacity: 1; }
-            100% { transform: translate3d(var(--sx), var(--sy), 0) scale(1.4); opacity: 0; }
-        }
-        .sparkle-up {
-            position: fixed; pointer-events: none; font-size: 18px; z-index: 100;
-            animation: sparkleRise 2s ease-out forwards;
-        }
-        @keyframes heartFloat {
-            0% { transform: translate3d(0, 0, 0) scale(0.6) rotate(0deg); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: translate3d(0, -60vh, 0) scale(1.2) rotate(20deg); opacity: 0; }
-        }
-        .floating-heart {
-            position: fixed; pointer-events: none; font-size: 20px; z-index: 100;
-            animation: heartFloat 2.5s ease-out forwards;
-        }
-        @keyframes confettiFall {
-            0% { transform: translate3d(0, -10vh, 0) rotate(0deg) scale(1); opacity: 1; }
-            100% { transform: translate3d(0, 110vh, 0) rotate(720deg) scale(0.6); opacity: 0.2; }
-        }
-        .confetti-piece {
-            position: fixed; width: 10px; height: 14px; top: -5vh;
-            pointer-events: none; z-index: 200;
-            animation: confettiFall linear forwards;
-        }
-        @keyframes fireworkBurst {
-            0% { transform: translate3d(0, 0, 0) scale(0.2); opacity: 1; }
-            100% { transform: translate3d(var(--fx), var(--fy), 0) scale(1.2); opacity: 0; }
-        }
-        .firework-star {
-            position: fixed; pointer-events: none; font-size: 14px; z-index: 250;
-            animation: fireworkBurst 1.4s ease-out forwards;
-        }
-
-        /* ===== MUSIC BUTTON ===== */
-        .music-btn {
-            position: fixed;
-            top: calc(env(safe-area-inset-top) + 70px);
-            right: calc(env(safe-area-inset-right) + 12px);
-            z-index: 50;
-            width: 42px; height: 42px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(217, 119, 6, 0.95));
-            border: 1.5px solid rgba(254, 243, 199, 0.6);
-            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.5), 0 0 0 1px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #451a03;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-        }
-        .music-btn:active { transform: scale(0.9); }
-        .music-btn.playing { animation: musicPulse 1.5s ease-in-out infinite; }
-        @keyframes musicPulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(251, 191, 36, 0.5); }
-            50% { box-shadow: 0 4px 30px rgba(251, 191, 36, 0.9), 0 0 40px rgba(251, 191, 36, 0.5); }
-        }
-
-        /* ===== FINAL LETTER ===== */
-        .final-letter-overlay {
-            position: fixed; inset: 0; z-index: 300;
-            display: flex; align-items: center; justify-content: center;
-            padding: 20px;
-            background: rgba(10, 8, 3, 0.92);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.8s ease;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        .final-letter-overlay.show { opacity: 1; pointer-events: auto; }
-        @keyframes letterReveal {
-            0% { transform: scale(0.7) translateY(40px); opacity: 0; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
-        }
-        .letter-content {
-            width: 100%; max-width: 380px;
-            max-height: 85vh; max-height: 85dvh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            background: linear-gradient(160deg, #2b210e 0%, #1a1307 100%);
-            border: 2px solid rgba(251, 191, 36, 0.5);
-            border-radius: 24px;
-            padding: 24px 20px;
-            text-align: center;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 80px rgba(251, 191, 36, 0.3), inset 0 0 40px rgba(251, 191, 36, 0.05);
-            animation: letterReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-        }
-        .letter-content::before {
-            content: '';
-            position: absolute; top: -2px; left: 50%;
-            transform: translateX(-50%);
-            width: 60%; height: 3px;
-            background: linear-gradient(90deg, transparent, #fbbf24, transparent);
-            border-radius: 3px;
-        }
-        .heart-icon-big {
-            font-size: 60px;
-            filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.8));
-            animation: heartPulse 1.8s infinite ease-in-out;
-        }
-        .letter-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 34px;
-            font-weight: 700;
-            background: linear-gradient(90deg, #fbbf24, #fef3c7, #fbbf24);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 3s linear infinite;
-            margin-bottom: 6px;
-            line-height: 1.1;
-        }
-        .letter-text {
-            font-size: 13.5px;
-            line-height: 1.75;
-            color: #fef3c7;
-            text-align: left;
-            padding: 0 4px;
-        }
-        .letter-text p { margin-bottom: 14px; }
-        .letter-text p:first-letter {
-            font-family: 'Dancing Script', cursive;
-            font-size: 26px;
-            color: #fbbf24;
-            float: left;
-            line-height: 0.9;
-            padding-right: 6px;
-            padding-top: 2px;
-        }
-
-        /* ============================================================
-           🌻 SUNFLOWER EMOJI FIELD — draggable with finger
-           ============================================================ */
+        /* ===== SUNFLOWER FIELD ===== */
         #sunflowerField {
-            position: fixed; inset: 0; z-index: 60;
+            position: fixed;
+            inset: 0;
+            z-index: 60;
             overflow: hidden;
             background: linear-gradient(180deg, #1a1307 0%, #0a0803 100%);
             transition: opacity 0.8s ease;
@@ -519,7 +179,6 @@
             opacity: 0;
             pointer-events: none;
         }
-
         .sunflower-emoji-item {
             position: absolute;
             pointer-events: none;
@@ -531,14 +190,10 @@
             line-height: 1;
             transition: opacity 0.3s ease;
         }
-
-        /* Idle sway animation */
         @keyframes emojiSway {
             0%, 100% { transform: rotate(var(--rot, 0deg)); }
             50% { transform: rotate(calc(var(--rot, 0deg) + 5deg)); }
         }
-
-        /* Fade out when pushed off screen */
         @keyframes fadeOff {
             0% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); }
             100% { opacity: 0; transform: scale(0.3) rotate(calc(var(--rot, 0deg) + 180deg)); }
@@ -550,7 +205,8 @@
         /* ===== FINGER TRAIL ===== */
         .finger-trail {
             position: fixed;
-            width: 60px; height: 60px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(251, 191, 36, 0.5) 0%, rgba(251, 191, 36, 0.15) 40%, transparent 70%);
             pointer-events: none;
@@ -563,7 +219,7 @@
             100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8); }
         }
 
-        /* ===== SHAKE UI ===== */
+        /* ===== UI INDICATORS ===== */
         #shakeIndicator {
             position: fixed;
             top: calc(env(safe-area-inset-top) + 60px);
@@ -592,9 +248,7 @@
             50% { transform: translateX(-50%) scale(1.05); }
         }
         #shakeIndicator.hidden { opacity: 0; pointer-events: none; }
-        #shakeIndicator i { 
-            animation: swipeHand 1.5s ease-in-out infinite;
-        }
+        #shakeIndicator i { animation: swipeHand 1.5s ease-in-out infinite; }
         @keyframes swipeHand {
             0%, 100% { transform: translateX(-4px) rotate(-15deg); }
             50% { transform: translateX(4px) rotate(15deg); }
@@ -647,17 +301,17 @@
             margin-bottom: 6px;
             filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.5));
         }
-        #shakeWelcome p {
-            font-size: 12px;
-            color: #fde68a;
-            font-weight: 500;
-        }
 
         /* ===== REVEAL BUTTON ===== */
         #revealBtnContainer {
-            position: fixed; inset: 0; z-index: 65;
-            display: flex; align-items: center; justify-content: center;
-            pointer-events: none; opacity: 0;
+            position: fixed;
+            inset: 0;
+            z-index: 65;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0;
             transition: opacity 0.8s ease;
         }
         #revealBtnContainer.show { opacity: 1; pointer-events: auto; }
@@ -667,7 +321,8 @@
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
         .reveal-sunflower-btn {
-            width: 180px; height: 180px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 30%, #78350f 0%, #451a03 55%, #1c0a02 100%);
             border: 3px solid rgba(251, 191, 36, 0.9);
@@ -676,8 +331,10 @@
                 0 0 60px rgba(251, 191, 36, 0.8),
                 0 0 120px rgba(251, 191, 36, 0.4),
                 inset 0 0 40px rgba(0,0,0,0.85);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             animation: revealSunflower 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, centerPulse 3s 1s infinite ease-in-out;
             position: relative;
@@ -686,7 +343,8 @@
         }
         .reveal-sunflower-btn::before {
             content: '';
-            position: absolute; top: 8px; right: 8px; bottom: 8px; left: 8px;
+            position: absolute;
+            inset: 8px;
             border-radius: 50%;
             background-image: 
                 radial-gradient(circle at 50% 50%, #292524 1.2px, transparent 2px),
@@ -701,7 +359,8 @@
         .reveal-sunflower-btn .sunflower-emoji {
             font-size: 62px;
             filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.9));
-            position: relative; z-index: 2;
+            position: relative;
+            z-index: 2;
             animation: emojiSwayBtn 3s ease-in-out infinite;
         }
         @keyframes emojiSwayBtn {
@@ -709,7 +368,8 @@
             50% { transform: rotate(5deg) scale(1.08); }
         }
         .reveal-sunflower-btn .sunflower-label {
-            position: relative; z-index: 2;
+            position: relative;
+            z-index: 2;
             font-size: 11px;
             font-weight: 800;
             letter-spacing: 0.15em;
@@ -728,7 +388,8 @@
             100% { transform: rotate(360deg); }
         }
         .reveal-ring {
-            position: absolute; top: -20px; right: -20px; bottom: -20px; left: -20px;
+            position: absolute;
+            inset: -20px;
             border-radius: 50%;
             border: 2px dashed rgba(251, 191, 36, 0.4);
             animation: ringRotate 20s linear infinite;
@@ -745,21 +406,348 @@
             pointer-events: auto;
         }
 
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
-        @media (max-width: 360px) {
-            .sf-petal {
-                width: 36px !important;
-                height: 80px !important;
-                margin-left: -18px !important;
-                margin-top: -40px !important;
+        /* ===== SUNFLOWER PETALS ===== */
+        .sf-petal {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 44px;
+            height: 96px;
+            margin-left: -22px;
+            margin-top: -48px;
+            border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+            background: radial-gradient(ellipse at 50% 85%, #b45309 0%, #d97706 15%, #f59e0b 45%, #fbbf24 75%, #fef3c7 100%);
+            box-shadow: inset 0 -12px 18px rgba(120, 53, 15, 0.55), inset 0 8px 14px rgba(255, 251, 235, 0.55), 0 4px 12px rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+            transform-origin: center center;
+            will-change: transform, filter;
+            transition: filter 0.2s ease;
+            filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.35));
+        }
+        .sf-petal::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 10%;
+            width: 1.5px;
+            height: 78%;
+            margin-left: -0.75px;
+            background: linear-gradient(to bottom, transparent, rgba(120,53,15,0.4) 30%, rgba(120,53,15,0.45) 70%, transparent);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+        .sf-petal::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 6%;
+            width: 12px;
+            height: 12px;
+            margin-left: -6px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.85) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .sf-petal:active { filter: drop-shadow(0 0 20px #fcd34d) brightness(1.2); }
+
+        /* ===== SUNFLOWER CENTER ===== */
+        .sf-center {
+            position: relative;
+            width: 108px;
+            height: 108px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #78350f 0%, #451a03 55%, #1c0a02 100%);
+            border: 2.5px solid rgba(180, 83, 9, 0.8);
+            overflow: hidden;
+            box-shadow: 0 0 0 3px rgba(120, 53, 15, 0.5), 0 8px 22px rgba(0,0,0,0.7), inset 0 0 30px rgba(0,0,0,0.85);
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            animation: centerPulse 3.5s infinite ease-in-out;
+            will-change: transform, box-shadow;
+            transition: transform 0.15s ease;
+        }
+        .sf-center:active { transform: scale(0.92) !important; }
+        .sf-center::before {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border-radius: 50%;
+            background-image: 
+                radial-gradient(circle at 50% 50%, #292524 1px, transparent 1.8px),
+                radial-gradient(circle at 50% 50%, #1c1917 1px, transparent 1.8px);
+            background-size: 7px 7px, 7px 7px;
+            background-position: 0 0, 3.5px 3.5px;
+            opacity: 0.9;
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 75%);
+            mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 75%);
+            z-index: 1;
+        }
+        .sf-center::after {
+            content: '';
+            position: absolute;
+            inset: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 35%, rgba(217,119,6,0.35) 0%, transparent 65%);
+            box-shadow: inset 0 0 18px rgba(0,0,0,0.9);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .sf-core-icon {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fef3c7;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 12px rgba(251,191,36,0.6);
+            pointer-events: none;
+            transition: opacity 0.4s, transform 0.4s;
+        }
+        .sf-center.heart-mode {
+            animation: heartPulse 1.8s infinite ease-in-out;
+            background: radial-gradient(circle at 35% 30%, #f43f5e 0%, #be123c 55%, #7f1d1d 100%);
+            border-color: rgba(251, 113, 133, 0.9);
+            box-shadow: 0 0 0 3px rgba(190, 24, 93, 0.6), 0 0 40px rgba(244, 63, 94, 0.8), 0 0 90px rgba(244, 63, 94, 0.4), inset 0 0 40px rgba(0,0,0,0.8);
+        }
+        .sf-center.heart-mode::before {
+            background-image: 
+                radial-gradient(circle at 50% 50%, #7f1d1d 1px, transparent 2px),
+                radial-gradient(circle at 50% 50%, #450a0a 1px, transparent 2px);
+        }
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes centerPulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 25px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.2), inset 0 0 25px rgba(0,0,0,0.6);
             }
+            50% { 
+                transform: scale(1.04); 
+                box-shadow: 0 0 45px rgba(251, 191, 36, 0.9), 0 0 90px rgba(251, 191, 36, 0.4), inset 0 0 30px rgba(0,0,0,0.7);
+            }
+        }
+
+        /* ===== MESSAGE CARD ===== */
+        .message-card {
+            transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(251, 191, 36, 0.25) inset, 0 0 60px rgba(251, 191, 36, 0.08);
+            will-change: transform;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .shimmer-text {
+            background: linear-gradient(90deg, #fbbf24 0%, #fef3c7 25%, #fbbf24 50%, #fef3c7 75%, #fbbf24 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes msgPop {
+            0% { transform: scale(0.85); opacity: 0.5; }
+            60% { transform: scale(1.03); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .msg-pop { animation: msgPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.75; transform: scale(1.12); }
+        }
+        .sunflower-glow { animation: glowPulse 4.5s ease-in-out infinite; }
+        .progress-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(251, 191, 36, 0.25);
+            transition: all 0.4s ease;
+        }
+        .progress-dot.active {
+            background: #fbbf24;
+            box-shadow: 0 0 8px #fbbf24, 0 0 16px rgba(251, 191, 36, 0.6);
+            transform: scale(1.35);
+        }
+
+        /* ===== SPARKLES / HEARTS / CONFETTI / FIREWORKS ===== */
+        @keyframes sparkleRise {
+            0% { transform: translate3d(0, 0, 0) scale(0.4); opacity: 0; }
+            15% { opacity: 1; }
+            100% { transform: translate3d(var(--sx), var(--sy), 0) scale(1.4); opacity: 0; }
+        }
+        .sparkle-up {
+            position: fixed;
+            pointer-events: none;
+            font-size: 18px;
+            z-index: 100;
+            animation: sparkleRise 2s ease-out forwards;
+        }
+        @keyframes heartFloat {
+            0% { transform: translate3d(0, 0, 0) scale(0.6) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translate3d(0, -60vh, 0) scale(1.2) rotate(20deg); opacity: 0; }
+        }
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            z-index: 100;
+            animation: heartFloat 2.5s ease-out forwards;
+        }
+        @keyframes confettiFall {
+            0% { transform: translate3d(0, -10vh, 0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translate3d(0, 110vh, 0) rotate(720deg) scale(0.6); opacity: 0.2; }
+        }
+        .confetti-piece {
+            position: fixed;
+            width: 10px;
+            height: 14px;
+            top: -5vh;
+            pointer-events: none;
+            z-index: 200;
+            animation: confettiFall linear forwards;
+        }
+        @keyframes fireworkBurst {
+            0% { transform: translate3d(0, 0, 0) scale(0.2); opacity: 1; }
+            100% { transform: translate3d(var(--fx), var(--fy), 0) scale(1.2); opacity: 0; }
+        }
+        .firework-star {
+            position: fixed;
+            pointer-events: none;
+            font-size: 14px;
+            z-index: 250;
+            animation: fireworkBurst 1.4s ease-out forwards;
+        }
+
+        /* ===== MUSIC BUTTON ===== */
+        .music-btn {
+            position: fixed;
+            top: calc(env(safe-area-inset-top) + 70px);
+            right: calc(env(safe-area-inset-right) + 12px);
+            z-index: 50;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(217, 119, 6, 0.95));
+            border: 1.5px solid rgba(254, 243, 199, 0.6);
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.5), 0 0 0 1px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #451a03;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+        .music-btn:active { transform: scale(0.9); }
+        .music-btn.playing { animation: musicPulse 1.5s ease-in-out infinite; }
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(251, 191, 36, 0.5); }
+            50% { box-shadow: 0 4px 30px rgba(251, 191, 36, 0.9), 0 0 40px rgba(251, 191, 36, 0.5); }
+        }
+
+        /* ===== FINAL LETTER ===== */
+        .final-letter-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(10, 8, 3, 0.92);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .final-letter-overlay.show { opacity: 1; pointer-events: auto; }
+        @keyframes letterReveal {
+            0% { transform: scale(0.7) translateY(40px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .letter-content {
+            width: 100%;
+            max-width: 380px;
+            max-height: 85vh;
+            max-height: 85dvh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            background: linear-gradient(160deg, #2b210e 0%, #1a1307 100%);
+            border: 2px solid rgba(251, 191, 36, 0.5);
+            border-radius: 24px;
+            padding: 24px 20px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 80px rgba(251, 191, 36, 0.3), inset 0 0 40px rgba(251, 191, 36, 0.05);
+            animation: letterReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        .letter-content::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+            border-radius: 3px;
+        }
+        .heart-icon-big {
+            font-size: 60px;
+            filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.8));
+            animation: heartPulse 1.8s infinite ease-in-out;
+        }
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 34px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #fbbf24, #fef3c7, #fbbf24);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+            margin-bottom: 6px;
+            line-height: 1.1;
+        }
+        .letter-text {
+            font-size: 13.5px;
+            line-height: 1.75;
+            color: #fef3c7;
+            text-align: left;
+            padding: 0 4px;
+        }
+        .letter-text p { margin-bottom: 14px; }
+        .letter-text p:first-letter {
+            font-family: 'Dancing Script', cursive;
+            font-size: 26px;
+            color: #fbbf24;
+            float: left;
+            line-height: 0.9;
+            padding-right: 6px;
+            padding-top: 2px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 360px) {
+            .sf-petal { width: 36px !important; height: 80px !important; margin-left: -18px !important; margin-top: -40px !important; }
             .reveal-sunflower-btn { width: 150px; height: 150px; }
             .reveal-sunflower-btn .sunflower-emoji { font-size: 52px; }
             #shakeWelcome h1 { font-size: 26px; }
             #startScreen h1 { font-size: 30px; }
-            #startScreen .start-icon { font-size: 70px; }
+            .start-icon { font-size: 70px; }
             .letter-title { font-size: 28px; }
         }
         @media (max-height: 700px) {
@@ -769,7 +757,6 @@
         @media (orientation: landscape) and (max-height: 500px) {
             #shakeWelcome { top: calc(env(safe-area-inset-top) + 20px); }
             #shakeWelcome h1 { font-size: 22px; }
-            #shakeWelcome p { font-size: 11px; }
             #shakeIndicator { top: calc(env(safe-area-inset-top) + 85px); font-size: 10px; padding: 6px 14px; }
             .reveal-sunflower-btn { width: 130px; height: 130px; }
             .reveal-sunflower-btn .sunflower-emoji { font-size: 42px; }
@@ -781,6 +768,12 @@
                 transition-duration: 0.01ms !important;
             }
         }
+        .no-select {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+        .footer-safe { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
     </style>
 </head>
 <body class="no-select">
@@ -790,7 +783,7 @@
         <div class="start-icon">🌻</div>
         <h1>Para ti, Ailín Michelle Concepcion Collado</h1>
         <p>Tengo una sorpresa especial para ti en este 21 de septiembre 💛</p>
-        <button id="startBtn" onclick="startExperience()" type="button">
+        <button id="startBtn" type="button">
             <i class="fas fa-play"></i>
             <span>Comenzar</span>
         </button>
@@ -798,7 +791,7 @@
 
     <div id="particlesContainer" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
 
-    <button id="musicBtn" class="music-btn" onclick="toggleMusic()" aria-label="Reproducir música" type="button">
+    <button id="musicBtn" class="music-btn" aria-label="Reproducir música" type="button">
         <i id="musicIcon" class="fas fa-music"></i>
     </button>
 
@@ -814,10 +807,9 @@
         <h1>Para ti, Ailín Michelle</h1>
     </div>
 
-
     <!-- REVEAL BUTTON -->
     <div id="revealBtnContainer">
-        <button id="revealSunflowerBtn" class="reveal-sunflower-btn" onclick="revealSunflower()" type="button">
+        <button id="revealSunflowerBtn" class="reveal-sunflower-btn" type="button">
             <div class="reveal-ring"></div>
             <span class="sunflower-emoji">🌻</span>
             <span class="sunflower-label">Tócame</span>
@@ -873,7 +865,7 @@
 
                 <div id="petalsRing" class="absolute inset-0 flex items-center justify-center" style="transform: scale(0.95);"></div>
 
-                <button id="sunflowerCore" onclick="tapCore()" class="sf-center" aria-label="Centro del girasol" type="button">
+                <button id="sunflowerCore" class="sf-center" aria-label="Centro del girasol" type="button">
                     <div class="sf-core-icon" id="coreIcon">
                         <span class="text-[26px] drop-shadow-md" style="filter: drop-shadow(0 0 6px rgba(251,191,36,0.8));">🌻</span>
                         <span class="text-[8px] uppercase font-bold tracking-widest mt-0.5 opacity-95">Tócame</span>
@@ -887,7 +879,7 @@
         </main>
 
         <footer class="relative w-full px-4 pt-3 pb-3 z-30 flex flex-col items-center gap-2 bg-gradient-to-t from-[#0a0803] to-transparent footer-safe">
-            <button onclick="resetSunflower()" class="w-full max-w-xs bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-yellow-950 font-bold text-[13px] py-3.5 px-6 rounded-2xl shadow-[0_10px_30px_-5px_rgba(251,191,36,0.5)] transition-all duration-150 active:scale-[0.97] flex items-center justify-center gap-2.5 border border-yellow-300/40" type="button">
+            <button id="resetBtn" class="w-full max-w-xs bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-yellow-950 font-bold text-[13px] py-3.5 px-6 rounded-2xl shadow-[0_10px_30px_-5px_rgba(251,191,36,0.5)] transition-all duration-150 active:scale-[0.97] flex items-center justify-center gap-2.5 border border-yellow-300/40" type="button">
                 <i class="fas fa-rotate-right"></i>
                 <span>Hacer florecer de nuevo</span>
             </button>
@@ -899,8 +891,8 @@
     </div>
 
     <!-- FINAL LETTER -->
-    <div id="finalLetter" class="final-letter-overlay" onclick="closeLetter(event)">
-        <div class="letter-content" onclick="event.stopPropagation()">
+    <div id="finalLetter" class="final-letter-overlay">
+        <div class="letter-content">
             <div class="heart-icon-big">💖</div>
             <h2 class="letter-title">Ailín Michelle</h2>
             <div class="letter-text">
@@ -912,7 +904,7 @@
                 <p style="text-align: center; font-family: 'Dancing Script', cursive; font-size: 24px; color: #fbbf24; margin-top: 20px;">Te amo infinitamente, Ailín 🌻💛</p>
                 <p style="text-align: center; font-size: 11px; color: #fbbf24; opacity: 0.7; margin-top: 10px;">— Tuyo, siempre</p>
             </div>
-            <button onclick="closeLetter()" class="mt-5 px-6 py-2.5 bg-gradient-to-r from-yellow-500 to-amber-600 text-yellow-950 font-bold text-sm rounded-xl shadow-lg active:scale-95 transition-transform" type="button">
+            <button id="closeLetterBtn" class="mt-5 px-6 py-2.5 bg-gradient-to-r from-yellow-500 to-amber-600 text-yellow-950 font-bold text-sm rounded-xl shadow-lg active:scale-95 transition-transform" type="button">
                 <i class="fas fa-heart mr-1.5"></i> Volver al jardín
             </button>
         </div>
@@ -939,57 +931,75 @@
             { emoji: "💛", title: "Nuestro futuro juntos", text: "Cada día que pasa, sueño más con todo lo que nos espera: viajes, risas, una casa, una familia. Te amo hoy en este día de las flores amarillas y por toda la eternidad, Ailín Michelle Concepción Collado." }
         ];
 
+        // ==========================================
+        //  VARIABLES DE ESTADO
+        // ==========================================
         let availableMessages = [...messagesData];
         let totalDiscovered = 0;
         const totalPetals = 10;
         let flowerCompleted = false;
-
-        // ==========================================
-        //  VARIABLES DE ESTADO
-        // ==========================================
         let TOTAL_SUNFLOWERS = 60;
         let sunflowersRemaining = TOTAL_SUNFLOWERS;
         let sunflowerElements = [];
         let isDragging = false;
+        let activePointerId = null;
         let lastPointerX = 0;
         let lastPointerY = 0;
         let lastTrailTime = 0;
-        let activePointerId = null;
         let lastPositionUpdate = 0;
+        let musicPlaying = false;
+
+        // Cache DOM elements
+        const $ = (id) => document.getElementById(id);
+        const startScreen = $('startScreen');
+        const sunflowerField = $('sunflowerField');
+        const sunflowerCounter = $('sunflowerCounter');
+        const sunflowerCounterText = $('sunflowerCounterText');
+        const shakeWelcome = $('shakeWelcome');
+        const shakeIndicator = $('shakeIndicator');
+        const revealBtnContainer = $('revealBtnContainer');
+        const revealSunflowerBtn = $('revealSunflowerBtn');
+        const mainContent = $('mainContent');
+        const messageBox = $('messageBox');
+        const msgEmoji = $('msgEmoji');
+        const msgTitle = $('msgTitle');
+        const msgText = $('msgText');
+        const progressText = $('progressText');
+        const petalsRemainingCount = $('petalsRemainingCount');
+        const progressDots = $('progressDots');
+        const petalsRing = $('petalsRing');
+        const sunflowerCore = $('sunflowerCore');
+        const coreIcon = $('coreIcon');
+        const finalLetter = $('finalLetter');
+        const bgMusic = $('bgMusic');
+        const musicBtn = $('musicBtn');
+        const musicIcon = $('musicIcon');
 
         // ==========================================
         //  INICIO DE LA EXPERIENCIA
         // ==========================================
         function startExperience() {
-            const startScreen = document.getElementById('startScreen');
             tryPlayMusic();
-
+            startScreen.classList.add('hide');
             setTimeout(() => {
-                startScreen.classList.add('hide');
-                setTimeout(() => {
-                    startScreen.style.display = 'none';
-                    initSunflowerField();
-                    setupDragInteraction();
-                }, 400);
-            }, 200);
+                startScreen.style.display = 'none';
+                initSunflowerField();
+                setupDragInteraction();
+            }, 400);
         }
 
         function tryPlayMusic() {
-            const bgMusic = document.getElementById('bgMusic');
-            const btn = document.getElementById('musicBtn');
-            const icon = document.getElementById('musicIcon');
             bgMusic.volume = 0.35;
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     musicPlaying = true;
-                    btn.classList.add('playing');
-                    icon.className = 'fas fa-pause';
-                    icon.style.opacity = '1';
+                    musicBtn.classList.add('playing');
+                    musicIcon.className = 'fas fa-pause';
                 }).catch(() => {
                     musicPlaying = false;
-                    btn.classList.remove('playing');
-                    icon.className = 'fas fa-music';
+                    musicBtn.classList.remove('playing');
+                    musicIcon.className = 'fas fa-music';
                 });
             }
         }
@@ -998,8 +1008,7 @@
         //  CAMPO DE GIRASOLES
         // ==========================================
         function initSunflowerField() {
-            const field = document.getElementById('sunflowerField');
-            field.innerHTML = '';
+            sunflowerField.innerHTML = '';
             sunflowerElements = [];
 
             const vw = window.innerWidth;
@@ -1018,11 +1027,11 @@
             const cellH = vh / rows;
 
             let placed = 0;
+            const fragment = document.createDocumentFragment();
             for (let r = 0; r < rows && placed < TOTAL_SUNFLOWERS; r++) {
                 for (let c = 0; c < cols && placed < TOTAL_SUNFLOWERS; c++) {
                     const jitterX = (Math.random() - 0.5) * cellW * 0.5;
                     const jitterY = (Math.random() - 0.5) * cellH * 0.5;
-
                     const x = c * cellW + cellW / 2 + jitterX;
                     const y = r * cellH + cellH / 2 + jitterY;
 
@@ -1032,75 +1041,56 @@
                     const scale = 0.75 + Math.random() * 0.5;
                     const fontSize = 28 + Math.random() * 16;
 
-                    // Position via left/top (más fácil de mover con el dedo)
                     item.style.left = (x - fontSize / 2) + 'px';
                     item.style.top = (y - fontSize / 2) + 'px';
                     item.style.setProperty('--rot', rot + 'deg');
                     item.style.transform = `rotate(${rot}deg) scale(${scale})`;
                     item.style.fontSize = fontSize + 'px';
                     item.innerText = '🌻';
-
-                    // Animación de vaivén suave
                     item.style.animation = `emojiSway ${3 + Math.random() * 2}s ease-in-out infinite`;
                     item.style.animationDelay = (Math.random() * 2) + 's';
 
-                    // Datos para la lógica de arrastre
                     item._currentX = x - fontSize / 2;
                     item._currentY = y - fontSize / 2;
                     item._size = fontSize;
 
-                    field.appendChild(item);
+                    fragment.appendChild(item);
                     sunflowerElements.push(item);
                     placed++;
                 }
             }
-
+            sunflowerField.appendChild(fragment);
             updateSunflowerCounter();
         }
 
         function updateSunflowerCounter() {
-            const counter = document.getElementById('sunflowerCounter');
-            const text = document.getElementById('sunflowerCounterText');
             if (sunflowersRemaining > 0) {
-                text.innerText = sunflowersRemaining === 1 ? '1 girasol' : `${sunflowersRemaining} girasoles`;
-                counter.classList.remove('hidden');
+                sunflowerCounterText.innerText = sunflowersRemaining === 1 ? '1 girasol' : `${sunflowersRemaining} girasoles`;
+                sunflowerCounter.classList.remove('hidden');
             } else {
-                counter.classList.add('hidden');
+                sunflowerCounter.classList.add('hidden');
             }
         }
 
         // ==========================================
-        //  DRAG INTERACTION — PUSH SUNFLOWERS WITH FINGER
+        //  DRAG INTERACTION
         // ==========================================
         function setupDragInteraction() {
-            const field = document.getElementById('sunflowerField');
-
             // Pointer events (unified touch/mouse)
-            field.addEventListener('pointerdown', onPointerDown, { passive: false });
-            field.addEventListener('pointermove', onPointerMove, { passive: false });
-            field.addEventListener('pointerup', onPointerUp, { passive: false });
-            field.addEventListener('pointercancel', onPointerUp, { passive: false });
-
-            // Fallback con touch events para navegadores viejos
-            if (!window.PointerEvent) {
-                field.addEventListener('touchstart', onTouchStart, { passive: false });
-                field.addEventListener('touchmove', onTouchMove, { passive: false });
-                field.addEventListener('touchend', onTouchEnd, { passive: false });
-                field.addEventListener('touchcancel', onTouchEnd, { passive: false });
-                field.addEventListener('mousedown', onMouseDown, { passive: false });
-                field.addEventListener('mousemove', onMouseMove, { passive: false });
-                field.addEventListener('mouseup', onMouseUp, { passive: false });
-            }
+            sunflowerField.addEventListener('pointerdown', onPointerDown, { passive: false });
+            sunflowerField.addEventListener('pointermove', onPointerMove, { passive: false });
+            sunflowerField.addEventListener('pointerup', onPointerUp, { passive: false });
+            sunflowerField.addEventListener('pointercancel', onPointerUp, { passive: false });
+            sunflowerField.addEventListener('lostpointercapture', onPointerUp, { passive: false });
         }
 
-        // ---- POINTER EVENTS ----
         function onPointerDown(e) {
             if (sunflowersRemaining <= 0) return;
             isDragging = true;
             activePointerId = e.pointerId;
             lastPointerX = e.clientX;
             lastPointerY = e.clientY;
-            field.setPointerCapture(e.pointerId);
+            sunflowerField.setPointerCapture(e.pointerId);
             e.preventDefault();
         }
 
@@ -1110,11 +1100,8 @@
             
             const x = e.clientX;
             const y = e.clientY;
-            
-            // Mover girasoles cercanos al dedo
             pushSunflowers(x, y);
             
-            // Crear trail visual
             const now = Date.now();
             if (now - lastTrailTime > 40) {
                 createFingerTrail(x, y);
@@ -1130,85 +1117,22 @@
             if (e.pointerId === activePointerId) {
                 isDragging = false;
                 activePointerId = null;
+                try {
+                    sunflowerField.releasePointerCapture(e.pointerId);
+                } catch (err) {}
             }
-        }
-
-        // ---- TOUCH EVENTS (fallback) ----
-        function onTouchStart(e) {
-            if (sunflowersRemaining <= 0) return;
-            if (e.touches.length > 0) {
-                isDragging = true;
-                lastPointerX = e.touches[0].clientX;
-                lastPointerY = e.touches[0].clientY;
-                e.preventDefault();
-            }
-        }
-
-        function onTouchMove(e) {
-            if (!isDragging || e.touches.length === 0) return;
-            if (sunflowersRemaining <= 0) return;
-            
-            const x = e.touches[0].clientX;
-            const y = e.touches[0].clientY;
-            
-            pushSunflowers(x, y);
-            
-            const now = Date.now();
-            if (now - lastTrailTime > 40) {
-                createFingerTrail(x, y);
-                lastTrailTime = now;
-            }
-            
-            lastPointerX = x;
-            lastPointerY = y;
-            e.preventDefault();
-        }
-
-        function onTouchEnd(e) {
-            isDragging = false;
-        }
-
-        // ---- MOUSE EVENTS (fallback desktop) ----
-        function onMouseDown(e) {
-            if (sunflowersRemaining <= 0) return;
-            isDragging = true;
-            lastPointerX = e.clientX;
-            lastPointerY = e.clientY;
-            e.preventDefault();
-        }
-
-        function onMouseMove(e) {
-            if (!isDragging) return;
-            if (sunflowersRemaining <= 0) return;
-            
-            const x = e.clientX;
-            const y = e.clientY;
-            
-            pushSunflowers(x, y);
-            
-            const now = Date.now();
-            if (now - lastTrailTime > 40) {
-                createFingerTrail(x, y);
-                lastTrailTime = now;
-            }
-            
-            e.preventDefault();
-        }
-
-        function onMouseUp(e) {
-            isDragging = false;
         }
 
         // ==========================================
-        //  PUSH SUNFLOWERS AWAY FROM FINGER
+        //  PUSH SUNFLOWERS
         // ==========================================
-        const PUSH_RADIUS = 90; // radio de influencia del dedo
-        const PUSH_FORCE = 18;  // fuerza de empuje
+        const PUSH_RADIUS = 90;
+        const PUSH_FORCE = 18;
+        const THROTTLE_MS = 16;
 
         function pushSunflowers(fingerX, fingerY) {
             const now = performance.now();
-            // Throttle para performance
-            if (now - lastPositionUpdate < 16) return;
+            if (now - lastPositionUpdate < THROTTLE_MS) return;
             lastPositionUpdate = now;
 
             const vw = window.innerWidth;
@@ -1223,10 +1147,10 @@
 
                 const dx = elX - fingerX;
                 const dy = elY - fingerY;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+                const distSq = dx * dx + dy * dy;
 
-                if (dist < PUSH_RADIUS && dist > 0.1) {
-                    // Empuje radial desde el dedo
+                if (distSq < PUSH_RADIUS * PUSH_RADIUS && distSq > 0.1) {
+                    const dist = Math.sqrt(distSq);
                     const force = (1 - dist / PUSH_RADIUS) * PUSH_FORCE;
                     const nx = dx / dist;
                     const ny = dy / dist;
@@ -1234,15 +1158,11 @@
                     let newX = el._currentX + nx * force;
                     let newY = el._currentY + ny * force;
 
-                    // Detectar si sale de los límites → eliminarlo
                     const centerX = newX + el._size / 2;
                     const centerY = newY + el._size / 2;
 
-                    if (centerX < -el._size * 0.5 || 
-                        centerX > vw + el._size * 0.5 ||
-                        centerY < -el._size * 0.5 || 
-                        centerY > vh + el._size * 0.5) {
-                        // Fuera de pantalla → eliminar
+                    if (centerX < -el._size * 0.5 || centerX > vw + el._size * 0.5 ||
+                        centerY < -el._size * 0.5 || centerY > vh + el._size * 0.5) {
                         removeSunflower(el);
                         continue;
                     }
@@ -1262,7 +1182,6 @@
             sunflowersRemaining--;
             updateSunflowerCounter();
 
-            // Pequeño sparkle
             const rect = el.getBoundingClientRect();
             spawnFloatingSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
@@ -1270,18 +1189,15 @@
                 try { navigator.vibrate(10); } catch(e) {}
             }
 
-            setTimeout(() => {
-                el.style.display = 'none';
-            }, 400);
+            setTimeout(() => { el.style.display = 'none'; }, 400);
 
-            // Si ya no quedan girasoles → revelar botón
             if (sunflowersRemaining <= 0) {
                 setTimeout(revealSunflowerButton, 700);
             }
         }
 
         // ==========================================
-        //  FINGER TRAIL VISUAL
+        //  FINGER TRAIL
         // ==========================================
         function createFingerTrail(x, y) {
             const trail = document.createElement('div');
@@ -1296,28 +1212,24 @@
         //  REVEAL
         // ==========================================
         function revealSunflowerButton() {
-            document.getElementById('shakeWelcome').classList.add('hidden');
-            document.getElementById('shakeIndicator').classList.add('hidden');
-            document.getElementById('sunflowerField').classList.add('cleared');
-            document.getElementById('revealBtnContainer').classList.add('show');
+            shakeWelcome.classList.add('hidden');
+            shakeIndicator.classList.add('hidden');
+            sunflowerField.classList.add('cleared');
+            revealBtnContainer.classList.add('show');
 
             if (navigator.vibrate) { try { navigator.vibrate([20, 60, 20]); } catch(e) {} }
         }
 
         function revealSunflower() {
-            const btnContainer = document.getElementById('revealBtnContainer');
-            const mainContent = document.getElementById('mainContent');
-            
-            const btn = document.getElementById('revealSunflowerBtn');
-            btn.style.transition = 'transform 0.5s cubic-bezier(0.5, -0.5, 0.5, 1.5), opacity 0.5s';
-            btn.style.transform = 'scale(1.8) rotate(180deg)';
-            btn.style.opacity = '0';
+            revealSunflowerBtn.style.transition = 'transform 0.5s cubic-bezier(0.5, -0.5, 0.5, 1.5), opacity 0.5s';
+            revealSunflowerBtn.style.transform = 'scale(1.8) rotate(180deg)';
+            revealSunflowerBtn.style.opacity = '0';
 
             if (navigator.vibrate) { try { navigator.vibrate([30, 40, 30, 40, 80]); } catch(e) {} }
 
             setTimeout(() => {
-                btnContainer.classList.remove('show');
-                btnContainer.style.display = 'none';
+                revealBtnContainer.classList.remove('show');
+                revealBtnContainer.style.display = 'none';
                 mainContent.classList.add('show');
                 launchCelebration();
             }, 500);
@@ -1327,8 +1239,9 @@
         //  PARTÍCULAS FLOTANTES
         // ==========================================
         function initParticles() {
-            const container = document.getElementById('particlesContainer');
+            const container = $('particlesContainer');
             const symbols = ['🌻', '🌼', '✨', '💛', '🌸', '🏵️', '✨'];
+            const fragment = document.createDocumentFragment();
             for (let i = 0; i < 18; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
@@ -1337,33 +1250,34 @@
                 p.style.fontSize = (Math.random() * 16 + 10) + 'px';
                 p.style.animationDuration = (Math.random() * 9 + 7) + 's';
                 p.style.animationDelay = (Math.random() * 8) + 's';
-                container.appendChild(p);
+                fragment.appendChild(p);
             }
+            container.appendChild(fragment);
         }
 
         // ==========================================
         //  PROGRESS DOTS
         // ==========================================
         function renderProgressDots() {
-            const dotsContainer = document.getElementById('progressDots');
-            dotsContainer.innerHTML = '';
+            progressDots.innerHTML = '';
+            const fragment = document.createDocumentFragment();
             for (let i = 0; i < totalPetals; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'progress-dot';
                 if (i < totalDiscovered) dot.classList.add('active');
-                dotsContainer.appendChild(dot);
+                fragment.appendChild(dot);
             }
+            progressDots.appendChild(fragment);
         }
 
         // ==========================================
-        //  PÉTALOS DEL GIRASOL PRINCIPAL
+        //  PÉTALOS
         // ==========================================
         function renderPetals() {
-            const ring = document.getElementById('petalsRing');
-            ring.innerHTML = '';
-
+            petalsRing.innerHTML = '';
             const TOTAL = totalPetals;
             const radius = 78;
+            const fragment = document.createDocumentFragment();
 
             for (let i = 0; i < TOTAL; i++) {
                 const angle = (i * 360) / TOTAL;
@@ -1394,17 +1308,18 @@
                     if (handled) return;
                     handled = true;
                     setTimeout(() => { handled = false; }, 400);
-                    pluckPetal(petal, angle, e);
+                    pluckPetal(petal, angle);
                 };
                 petal.addEventListener('click', handleTap);
                 petal.addEventListener('touchstart', handleTap, { passive: false });
 
-                ring.appendChild(petal);
+                fragment.appendChild(petal);
             }
+            petalsRing.appendChild(fragment);
         }
 
         // ==========================================
-        //  SPARKLES
+        //  SPARKLES / HEARTS
         // ==========================================
         function spawnFloatingSparkle(x, y) {
             const symbols = ['✨', '💛', '💖', '🌟', '💫', '🌸'];
@@ -1490,9 +1405,9 @@
         }
 
         // ==========================================
-        //  PLUCK PETAL (main flower)
+        //  PLUCK PETAL
         // ==========================================
-        function pluckPetal(petalElement, angle, event) {
+        function pluckPetal(petalElement, angle) {
             if (petalElement.classList.contains('plucking') || petalElement.style.display === 'none') return;
             if (flowerCompleted) return;
 
@@ -1502,28 +1417,23 @@
             const randomIndex = Math.floor(Math.random() * availableMessages.length);
             const msg = availableMessages.splice(randomIndex, 1)[0];
 
-            const box = document.getElementById('messageBox');
-            const emojiEl = document.getElementById('msgEmoji');
-            const titleEl = document.getElementById('msgTitle');
-            const textEl = document.getElementById('msgText');
-
-            box.style.transform = "scale(0.96)";
+            messageBox.style.transform = "scale(0.96)";
             setTimeout(() => {
-                emojiEl.innerText = msg.emoji;
-                titleEl.innerText = msg.title;
-                textEl.innerText = msg.text;
-                box.style.transform = "scale(1)";
-                titleEl.classList.remove('msg-pop');
-                textEl.classList.remove('msg-pop');
-                void titleEl.offsetWidth;
-                titleEl.classList.add('msg-pop');
-                textEl.classList.add('msg-pop');
+                msgEmoji.innerText = msg.emoji;
+                msgTitle.innerText = msg.title;
+                msgText.innerText = msg.text;
+                messageBox.style.transform = "scale(1)";
+                msgTitle.classList.remove('msg-pop');
+                msgText.classList.remove('msg-pop');
+                void msgTitle.offsetWidth;
+                msgTitle.classList.add('msg-pop');
+                msgText.classList.add('msg-pop');
             }, 130);
 
             totalDiscovered++;
-            document.getElementById('progressText').innerText = `${totalDiscovered} / ${totalPetals}`;
+            progressText.innerText = `${totalDiscovered} / ${totalPetals}`;
             const remaining = totalPetals - totalDiscovered;
-            document.getElementById('petalsRemainingCount').innerText = remaining === 1 ? '1 pétalo' : `${remaining} pétalos`;
+            petalsRemainingCount.innerText = remaining === 1 ? '1 pétalo' : `${remaining} pétalos`;
             renderProgressDots();
 
             const rect = petalElement.getBoundingClientRect();
@@ -1550,43 +1460,39 @@
         }
 
         function onFlowerComplete() {
-            const core = document.getElementById('sunflowerCore');
-            const coreIcon = document.getElementById('coreIcon');
-            core.classList.add('heart-mode');
+            sunflowerCore.classList.add('heart-mode');
             coreIcon.innerHTML = `
                 <span class="text-[30px]" style="filter: drop-shadow(0 0 12px rgba(255,255,255,0.9));">💖</span>
                 <span class="text-[8px] uppercase font-bold tracking-widest mt-0.5 opacity-95">Ailín</span>
             `;
 
-            document.getElementById('msgEmoji').innerText = "💖";
-            document.getElementById('msgTitle').innerText = "¡Ailín, has descubierto todo mi amor!";
-            document.getElementById('msgText').innerText = "Cada pétalo era un recuerdo, pero mi amor por ti es infinito. Feliz 21 de septiembre, mi Ailín Michelle. Te amo más allá de las flores. 🌻💛";
+            msgEmoji.innerText = "💖";
+            msgTitle.innerText = "¡Ailín, has descubierto todo mi amor!";
+            msgText.innerText = "Cada pétalo era un recuerdo, pero mi amor por ti es infinito. Feliz 21 de septiembre, mi Ailín Michelle. Te amo más allá de las flores. 🌻💛";
 
             launchCelebration();
 
             setTimeout(() => {
-                document.getElementById('finalLetter').classList.add('show');
+                finalLetter.classList.add('show');
                 if (navigator.vibrate) { try { navigator.vibrate([50, 100, 50]); } catch(e) {} }
             }, 3000);
         }
 
-        function closeLetter(event) {
-            if (event) event.stopPropagation();
-            document.getElementById('finalLetter').classList.remove('show');
+        function closeLetter() {
+            finalLetter.classList.remove('show');
         }
 
         function tapCore() {
             if (flowerCompleted) {
-                document.getElementById('finalLetter').classList.add('show');
+                finalLetter.classList.add('show');
                 return;
             }
-            const box = document.getElementById('messageBox');
-            box.style.transform = "scale(1.03)";
-            setTimeout(() => { box.style.transform = "scale(1)"; }, 200);
+            messageBox.style.transform = "scale(1.03)";
+            setTimeout(() => { messageBox.style.transform = "scale(1)"; }, 200);
             
-            document.getElementById('msgEmoji').innerText = "🌻";
-            document.getElementById('msgTitle').innerText = "¡Feliz 21 de Septiembre, Ailín!";
-            document.getElementById('msgText').innerText = "Toca cada uno de los pétalos alrededor para descubrir todos nuestros recuerdos, mi amor. 💛";
+            msgEmoji.innerText = "🌻";
+            msgTitle.innerText = "¡Feliz 21 de Septiembre, Ailín!";
+            msgText.innerText = "Toca cada uno de los pétalos alrededor para descubrir todos nuestros recuerdos, mi amor. 💛";
 
             if (navigator.vibrate) { try { navigator.vibrate(20); } catch(e) {} }
         }
@@ -1598,42 +1504,39 @@
             totalDiscovered = 0;
             flowerCompleted = false;
             availableMessages = [...messagesData];
-            document.getElementById('progressText').innerText = `0 / ${totalPetals}`;
-            document.getElementById('petalsRemainingCount').innerText = `${totalPetals} pétalos`;
-            document.getElementById('msgEmoji').innerText = "💛";
-            document.getElementById('msgTitle').innerText = "Para ti, Ailín Michelle";
-            document.getElementById('msgText').innerText = "Toca cualquier pétalo del girasol para revelar un recuerdo nuestro.";
+            progressText.innerText = `0 / ${totalPetals}`;
+            petalsRemainingCount.innerText = `${totalPetals} pétalos`;
+            msgEmoji.innerText = "💛";
+            msgTitle.innerText = "Para ti, Ailín Michelle";
+            msgText.innerText = "Toca cualquier pétalo del girasol para revelar un recuerdo nuestro.";
             renderPetals();
             renderProgressDots();
 
-            const core = document.getElementById('sunflowerCore');
-            const coreIcon = document.getElementById('coreIcon');
-            core.classList.remove('heart-mode');
+            sunflowerCore.classList.remove('heart-mode');
             coreIcon.innerHTML = `
                 <span class="text-[26px] drop-shadow-md" style="filter: drop-shadow(0 0 6px rgba(251,191,36,0.8));">🌻</span>
                 <span class="text-[8px] uppercase font-bold tracking-widest mt-0.5 opacity-95">Tócame</span>
             `;
 
-            document.getElementById('sunflowerField').classList.remove('cleared');
-            document.getElementById('shakeWelcome').classList.remove('hidden');
-            document.getElementById('shakeIndicator').classList.remove('hidden');
-            document.getElementById('revealBtnContainer').classList.remove('show');
-            document.getElementById('revealBtnContainer').style.display = 'flex';
-            document.getElementById('mainContent').classList.remove('show');
-            document.getElementById('sunflowerCounter').classList.remove('hidden');
+            sunflowerField.classList.remove('cleared');
+            shakeWelcome.classList.remove('hidden');
+            shakeIndicator.classList.remove('hidden');
+            revealBtnContainer.classList.remove('show');
+            revealBtnContainer.style.display = 'flex';
+            mainContent.classList.remove('show');
+            sunflowerCounter.classList.remove('hidden');
             
-            const btn = document.getElementById('revealSunflowerBtn');
-            btn.style.transition = '';
-            btn.style.transform = '';
-            btn.style.opacity = '';
+            revealSunflowerBtn.style.transition = '';
+            revealSunflowerBtn.style.transform = '';
+            revealSunflowerBtn.style.opacity = '';
 
             isDragging = false;
             activePointerId = null;
 
             initSunflowerField();
 
-            core.style.transform = 'scale(1.1)';
-            setTimeout(() => { core.style.transform = ''; }, 250);
+            sunflowerCore.style.transform = 'scale(1.1)';
+            setTimeout(() => { sunflowerCore.style.transform = ''; }, 250);
 
             if (navigator.vibrate) { try { navigator.vibrate([10, 30, 10]); } catch(e) {} }
         }
@@ -1641,45 +1544,42 @@
         // ==========================================
         //  MÚSICA
         // ==========================================
-        let musicPlaying = false;
         function toggleMusic() {
-            const bgMusic = document.getElementById('bgMusic');
-            const btn = document.getElementById('musicBtn');
-            const icon = document.getElementById('musicIcon');
             bgMusic.volume = 0.35;
-            
             if (musicPlaying) {
                 bgMusic.pause();
                 musicPlaying = false;
-                btn.classList.remove('playing');
-                icon.className = 'fas fa-music';
-                icon.style.opacity = '0.7';
+                musicBtn.classList.remove('playing');
+                musicIcon.className = 'fas fa-music';
             } else {
                 const playPromise = bgMusic.play();
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
                         musicPlaying = true;
-                        btn.classList.add('playing');
-                        icon.className = 'fas fa-pause';
-                        icon.style.opacity = '1';
-                    }).catch(err => {
-                        icon.className = 'fas fa-volume-xmark';
-                        setTimeout(() => { icon.className = 'fas fa-music'; }, 1500);
+                        musicBtn.classList.add('playing');
+                        musicIcon.className = 'fas fa-pause';
+                    }).catch(() => {
+                        musicIcon.className = 'fas fa-volume-xmark';
+                        setTimeout(() => { musicIcon.className = 'fas fa-music'; }, 1500);
                     });
                 }
             }
         }
 
         // ==========================================
-        //  INIT
+        //  EVENT LISTENERS
         // ==========================================
-        window.addEventListener('load', () => {
-            initParticles();
-            renderPetals();
-            renderProgressDots();
+        $('startBtn').addEventListener('click', startExperience);
+        musicBtn.addEventListener('click', toggleMusic);
+        revealSunflowerBtn.addEventListener('click', revealSunflower);
+        sunflowerCore.addEventListener('click', tapCore);
+        $('resetBtn').addEventListener('click', resetSunflower);
+        $('closeLetterBtn').addEventListener('click', closeLetter);
+        finalLetter.addEventListener('click', (e) => {
+            if (e.target === finalLetter) closeLetter();
         });
 
-        // Prevenir scroll / gestos no deseados
+        // Prevenir gestos no deseados
         document.body.addEventListener('touchmove', (e) => {
             const target = e.target;
             if (target.closest('button') || 
@@ -1703,6 +1603,13 @@
         document.addEventListener('gesturechange', (e) => e.preventDefault());
         document.addEventListener('gestureend', (e) => e.preventDefault());
         document.addEventListener('dragstart', (e) => e.preventDefault());
+
+        // ==========================================
+        //  INIT
+        // ==========================================
+        initParticles();
+        renderPetals();
+        renderProgressDots();
     </script>
 </body>
 </html>
