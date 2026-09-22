@@ -8,21 +8,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Para Ailín 🌻">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="x5-orientation" content="portrait">
-    <meta name="screen-orientation" content="portrait">
-    <meta name="x5-fullscreen" content="true">
-    <meta name="full-screen" content="yes">
-    <meta name="browsermode" content="application">
-    <meta name="x5-page-mode" content="app">
     <title>🌻 Para Ailín Michelle · 21 de Septiembre</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ============================================
-           RESET Y BASE - Compatible iOS + Android
-           ============================================ */
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -31,7 +21,6 @@
         }
         html {
             -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
             text-size-adjust: 100%;
             height: -webkit-fill-available;
         }
@@ -39,7 +28,7 @@
             overscroll-behavior: none;
             -webkit-overflow-scrolling: touch;
             width: 100%;
-            overflow-x: hidden;
+            overflow: hidden;
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -59,10 +48,7 @@
             position: relative;
             padding-bottom: env(safe-area-inset-bottom);
             padding-top: env(safe-area-inset-top);
-            padding-left: env(safe-area-inset-left);
-            padding-right: env(safe-area-inset-right);
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         .serif-font { font-family: 'Playfair Display', Georgia, serif; }
@@ -72,15 +58,11 @@
             content: '';
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            width: 100%; height: 100%;
             background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
             pointer-events: none;
             z-index: 1;
         }
 
-        /* ============================================
-           BOTONES / TAP - Mejoras móviles
-           ============================================ */
         button {
             -webkit-appearance: none;
             appearance: none;
@@ -93,19 +75,88 @@
             user-select: none;
         }
         button:focus { outline: none; }
-        button:active { -webkit-tap-highlight-color: rgba(0,0,0,0); }
 
-        .no-select {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
+        /* ===== START SCREEN ===== */
+        #startScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 24px;
+            background: 
+                radial-gradient(ellipse at 50% 30%, #3d2f12 0%, transparent 60%),
+                linear-gradient(180deg, #1a1307 0%, #0a0803 100%);
+            text-align: center;
+            transition: opacity 0.6s ease;
+        }
+        #startScreen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #startScreen .start-icon {
+            font-size: 90px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 30px rgba(251, 191, 36, 0.7));
+            animation: startIconPulse 2s ease-in-out infinite;
+        }
+        @keyframes startIconPulse {
+            0%, 100% { transform: scale(1) rotate(-5deg); }
+            50% { transform: scale(1.08) rotate(5deg); }
+        }
+        #startScreen h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 38px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #fbbf24, #fef3c7, #fbbf24);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+        #startScreen p {
+            font-size: 14px;
+            color: #fde68a;
+            margin-bottom: 8px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+        #startScreen .info {
+            font-size: 12px;
+            color: #fbbf24;
+            opacity: 0.75;
+            margin-bottom: 30px;
+            max-width: 300px;
+            line-height: 1.5;
+        }
+        #startBtn {
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #451a03;
+            font-weight: 800;
+            font-size: 16px;
+            padding: 18px 44px;
+            border-radius: 999px;
+            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.5), 0 0 0 3px rgba(254, 243, 199, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            animation: startBtnPulse 2s ease-in-out infinite;
+            transition: transform 0.15s ease;
+        }
+        #startBtn:active { transform: scale(0.95); }
+        @keyframes startBtnPulse {
+            0%, 100% { box-shadow: 0 15px 40px rgba(251, 191, 36, 0.5), 0 0 0 3px rgba(254, 243, 199, 0.3); }
+            50% { box-shadow: 0 15px 50px rgba(251, 191, 36, 0.9), 0 0 0 6px rgba(254, 243, 199, 0.15); }
         }
 
-        /* ============================================
-           FLOATING PARTICLES
-           ============================================ */
+        /* ===== FLOATING PARTICLES ===== */
         @keyframes floatParticle {
             0% { transform: translate3d(0, 110vh, 0) scale(0.6) rotate(0deg); opacity: 0; }
             10% { opacity: 0.85; }
@@ -118,71 +169,43 @@
             pointer-events: none;
             animation: floatParticle linear infinite;
             will-change: transform, opacity;
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
             filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
-            -webkit-filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
             opacity: 0;
         }
 
-        /* ============================================
-           PETAL PLUCK (main flower petals)
-           ============================================ */
+        /* ===== PETAL PLUCK ===== */
         @keyframes pluckPetalFloat {
-            0% { 
-                transform: translate3d(0, 0, 0) rotate(0deg) scale(1); 
-                -webkit-transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-                opacity: 1; 
-            }
+            0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 1; }
             30% { opacity: 1; }
-            100% { 
-                transform: translate3d(var(--end-x), -120vh, 0) rotate(720deg) scale(0.1); 
-                -webkit-transform: translate3d(var(--end-x), -120vh, 0) rotate(720deg) scale(0.1);
-                opacity: 0; 
-            }
+            100% { transform: translate3d(var(--end-x), -120vh, 0) rotate(720deg) scale(0.1); opacity: 0; }
         }
         .plucking {
             animation: pluckPetalFloat 2.2s cubic-bezier(0.35, 0.85, 0.4, 1) forwards;
-            -webkit-animation: pluckPetalFloat 2.2s cubic-bezier(0.35, 0.85, 0.4, 1) forwards;
             pointer-events: none;
         }
 
-        /* ============================================
-           CENTER PULSE
-           ============================================ */
+        /* ===== CENTER PULSE ===== */
         @keyframes centerPulse {
             0%, 100% { 
                 transform: scale(1); 
-                -webkit-transform: scale(1);
                 box-shadow: 0 0 25px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.2), inset 0 0 25px rgba(0,0,0,0.6);
             }
             50% { 
                 transform: scale(1.04); 
-                -webkit-transform: scale(1.04);
                 box-shadow: 0 0 45px rgba(251, 191, 36, 0.9), 0 0 90px rgba(251, 191, 36, 0.4), inset 0 0 30px rgba(0,0,0,0.7);
             }
         }
         .sunflower-core {
             animation: centerPulse 3.5s infinite ease-in-out;
-            -webkit-animation: centerPulse 3.5s infinite ease-in-out;
             will-change: transform, box-shadow;
             transition: transform 0.15s ease;
         }
-        .sunflower-core:active { 
-            transform: scale(0.92) !important; 
-            -webkit-transform: scale(0.92) !important;
-        }
+        .sunflower-core:active { transform: scale(0.92) !important; }
 
-        /* ============================================
-           MESSAGE CARD
-           ============================================ */
         .message-card {
             transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            -webkit-transition: -webkit-transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(251, 191, 36, 0.25) inset, 0 0 60px rgba(251, 191, 36, 0.08);
             will-change: transform;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
 
         @keyframes shimmer {
@@ -203,38 +226,33 @@
             60% { transform: scale(1.03); opacity: 1; }
             100% { transform: scale(1); opacity: 1; }
         }
-        .msg-pop { 
-            animation: msgPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); 
-            -webkit-animation: msgPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
+        .msg-pop { animation: msgPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
         @keyframes glowPulse {
             0%, 100% { opacity: 0.4; transform: scale(1); }
             50% { opacity: 0.75; transform: scale(1.12); }
         }
-        .sunflower-glow { 
-            animation: glowPulse 4.5s ease-in-out infinite; 
-            -webkit-animation: glowPulse 4.5s ease-in-out infinite;
-        }
+        .sunflower-glow { animation: glowPulse 4.5s ease-in-out infinite; }
 
         .progress-dot {
             width: 6px; height: 6px; border-radius: 50%;
             background: rgba(251, 191, 36, 0.25);
             transition: all 0.4s ease;
-            -webkit-transition: all 0.4s ease;
         }
         .progress-dot.active {
             background: #fbbf24;
             box-shadow: 0 0 8px #fbbf24, 0 0 16px rgba(251, 191, 36, 0.6);
             transform: scale(1.35);
-            -webkit-transform: scale(1.35);
         }
 
+        .no-select {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
         .footer-safe { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
 
-        /* ============================================
-           SUNFLOWER PETALS (main flower)
-           ============================================ */
+        /* ===== SUNFLOWER PETALS ===== */
         .sf-petal {
             position: absolute;
             left: 50%;
@@ -248,15 +266,9 @@
             box-shadow: inset 0 -12px 18px rgba(120, 53, 15, 0.55), inset 0 8px 14px rgba(255, 251, 235, 0.55), 0 4px 12px rgba(0, 0, 0, 0.35);
             cursor: pointer;
             transform-origin: center center;
-            -webkit-transform-origin: center center;
             will-change: transform, filter;
             transition: filter 0.2s ease;
-            -webkit-transition: -webkit-filter 0.2s ease;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            touch-action: manipulation;
             filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.35));
-            -webkit-filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.35));
         }
         .sf-petal::before {
             content: '';
@@ -278,21 +290,9 @@
             background: radial-gradient(circle, rgba(255,255,255,0.85) 0%, transparent 70%);
             pointer-events: none;
         }
-        @media (hover: hover) {
-            .sf-petal:hover { 
-                filter: drop-shadow(0 0 14px #fcd34d) brightness(1.1); 
-                -webkit-filter: drop-shadow(0 0 14px #fcd34d) brightness(1.1);
-                z-index: 5; 
-            }
-        }
-        .sf-petal:active { 
-            filter: drop-shadow(0 0 20px #fcd34d) brightness(1.2); 
-            -webkit-filter: drop-shadow(0 0 20px #fcd34d) brightness(1.2);
-        }
+        .sf-petal:active { filter: drop-shadow(0 0 20px #fcd34d) brightness(1.2); }
 
-        /* ============================================
-           SUNFLOWER CENTER
-           ============================================ */
+        /* ===== SUNFLOWER CENTER ===== */
         .sf-center {
             position: relative;
             width: 108px; height: 108px;
@@ -307,17 +307,10 @@
             justify-content: center;
             cursor: pointer;
             animation: centerPulse 3.5s infinite ease-in-out;
-            -webkit-animation: centerPulse 3.5s infinite ease-in-out;
             will-change: transform, box-shadow;
             transition: transform 0.15s ease;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            touch-action: manipulation;
         }
-        .sf-center:active { 
-            transform: scale(0.92) !important; 
-            -webkit-transform: scale(0.92) !important;
-        }
+        .sf-center:active { transform: scale(0.92) !important; }
         .sf-center::before {
             content: '';
             position: absolute; top: 6px; right: 6px; bottom: 6px; left: 6px;
@@ -353,10 +346,8 @@
             pointer-events: none;
             transition: opacity 0.4s, transform 0.4s;
         }
-
         .sf-center.heart-mode {
             animation: heartPulse 1.8s infinite ease-in-out;
-            -webkit-animation: heartPulse 1.8s infinite ease-in-out;
             background: radial-gradient(circle at 35% 30%, #f43f5e 0%, #be123c 55%, #7f1d1d 100%);
             border-color: rgba(251, 113, 133, 0.9);
             box-shadow: 0 0 0 3px rgba(190, 24, 93, 0.6), 0 0 40px rgba(244, 63, 94, 0.8), 0 0 90px rgba(244, 63, 94, 0.4), inset 0 0 40px rgba(0,0,0,0.8);
@@ -366,96 +357,49 @@
                 radial-gradient(circle at 50% 50%, #7f1d1d 1px, transparent 2px),
                 radial-gradient(circle at 50% 50%, #450a0a 1px, transparent 2px);
         }
-        .sf-center.heart-mode::after {
-            background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.4) 0%, transparent 65%);
-        }
         @keyframes heartPulse {
-            0%, 100% { transform: scale(1); -webkit-transform: scale(1); }
-            50% { transform: scale(1.1); -webkit-transform: scale(1.1); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        /* ============================================
-           SPARKLES
-           ============================================ */
+        /* ===== SPARKLES / HEARTS / CONFETTI / FIREWORKS ===== */
         @keyframes sparkleRise {
             0% { transform: translate3d(0, 0, 0) scale(0.4); opacity: 0; }
             15% { opacity: 1; }
             100% { transform: translate3d(var(--sx), var(--sy), 0) scale(1.4); opacity: 0; }
         }
         .sparkle-up {
-            position: fixed;
-            pointer-events: none;
-            font-size: 18px;
-            z-index: 100;
+            position: fixed; pointer-events: none; font-size: 18px; z-index: 100;
             animation: sparkleRise 2s ease-out forwards;
-            -webkit-animation: sparkleRise 2s ease-out forwards;
-            will-change: transform, opacity;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
-
-        /* ============================================
-           FLOATING HEARTS
-           ============================================ */
         @keyframes heartFloat {
             0% { transform: translate3d(0, 0, 0) scale(0.6) rotate(0deg); opacity: 0; }
             20% { opacity: 1; }
             100% { transform: translate3d(0, -60vh, 0) scale(1.2) rotate(20deg); opacity: 0; }
         }
         .floating-heart {
-            position: fixed;
-            pointer-events: none;
-            font-size: 20px;
-            z-index: 100;
+            position: fixed; pointer-events: none; font-size: 20px; z-index: 100;
             animation: heartFloat 2.5s ease-out forwards;
-            -webkit-animation: heartFloat 2.5s ease-out forwards;
-            will-change: transform, opacity;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
-
-        /* ============================================
-           CONFETTI
-           ============================================ */
         @keyframes confettiFall {
             0% { transform: translate3d(0, -10vh, 0) rotate(0deg) scale(1); opacity: 1; }
             100% { transform: translate3d(0, 110vh, 0) rotate(720deg) scale(0.6); opacity: 0.2; }
         }
         .confetti-piece {
-            position: fixed;
-            width: 10px; height: 14px;
-            top: -5vh;
-            pointer-events: none;
-            z-index: 200;
+            position: fixed; width: 10px; height: 14px; top: -5vh;
+            pointer-events: none; z-index: 200;
             animation: confettiFall linear forwards;
-            -webkit-animation: confettiFall linear forwards;
-            will-change: transform, opacity;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
-
-        /* ============================================
-           FIREWORK
-           ============================================ */
         @keyframes fireworkBurst {
             0% { transform: translate3d(0, 0, 0) scale(0.2); opacity: 1; }
             100% { transform: translate3d(var(--fx), var(--fy), 0) scale(1.2); opacity: 0; }
         }
         .firework-star {
-            position: fixed;
-            pointer-events: none;
-            font-size: 14px;
-            z-index: 250;
+            position: fixed; pointer-events: none; font-size: 14px; z-index: 250;
             animation: fireworkBurst 1.4s ease-out forwards;
-            -webkit-animation: fireworkBurst 1.4s ease-out forwards;
-            will-change: transform, opacity;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
 
-        /* ============================================
-           MUSIC BUTTON
-           ============================================ */
+        /* ===== MUSIC BUTTON ===== */
         .music-btn {
             position: fixed;
             top: calc(env(safe-area-inset-top) + 70px);
@@ -472,57 +416,38 @@
             color: #451a03;
             font-size: 15px;
             transition: all 0.3s ease;
-            -webkit-transition: all 0.3s ease;
             cursor: pointer;
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
-            touch-action: manipulation;
         }
-        .music-btn:active { 
-            transform: scale(0.9); 
-            -webkit-transform: scale(0.9); 
-        }
-        .music-btn.playing { 
-            animation: musicPulse 1.5s ease-in-out infinite; 
-            -webkit-animation: musicPulse 1.5s ease-in-out infinite;
-        }
+        .music-btn:active { transform: scale(0.9); }
+        .music-btn.playing { animation: musicPulse 1.5s ease-in-out infinite; }
         @keyframes musicPulse {
             0%, 100% { box-shadow: 0 4px 20px rgba(251, 191, 36, 0.5); }
             50% { box-shadow: 0 4px 30px rgba(251, 191, 36, 0.9), 0 0 40px rgba(251, 191, 36, 0.5); }
         }
 
-        /* ============================================
-           FINAL LETTER
-           ============================================ */
+        /* ===== FINAL LETTER ===== */
         .final-letter-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: 300;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: fixed; inset: 0; z-index: 300;
+            display: flex; align-items: center; justify-content: center;
             padding: 20px;
             background: rgba(10, 8, 3, 0.92);
             -webkit-backdrop-filter: blur(12px);
             backdrop-filter: blur(12px);
-            opacity: 0;
-            pointer-events: none;
+            opacity: 0; pointer-events: none;
             transition: opacity 0.8s ease;
-            -webkit-transition: opacity 0.8s ease;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
         .final-letter-overlay.show { opacity: 1; pointer-events: auto; }
-
         @keyframes letterReveal {
             0% { transform: scale(0.7) translateY(40px); opacity: 0; }
             100% { transform: scale(1) translateY(0); opacity: 1; }
         }
         .letter-content {
-            width: 100%;
-            max-width: 380px;
-            max-height: 85vh;
-            max-height: 85dvh;
+            width: 100%; max-width: 380px;
+            max-height: 85vh; max-height: 85dvh;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             background: linear-gradient(160deg, #2b210e 0%, #1a1307 100%);
@@ -532,30 +457,20 @@
             text-align: center;
             box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 80px rgba(251, 191, 36, 0.3), inset 0 0 40px rgba(251, 191, 36, 0.05);
             animation: letterReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            -webkit-animation: letterReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
-        .letter-content::-webkit-scrollbar { width: 4px; }
-        .letter-content::-webkit-scrollbar-thumb { background: rgba(251, 191, 36, 0.4); border-radius: 4px; }
         .letter-content::before {
             content: '';
-            position: absolute;
-            top: -2px; left: 50%;
+            position: absolute; top: -2px; left: 50%;
             transform: translateX(-50%);
-            -webkit-transform: translateX(-50%);
             width: 60%; height: 3px;
             background: linear-gradient(90deg, transparent, #fbbf24, transparent);
             border-radius: 3px;
         }
-
         .heart-icon-big {
             font-size: 60px;
             filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.8));
-            -webkit-filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.8));
             animation: heartPulse 1.8s infinite ease-in-out;
-            -webkit-animation: heartPulse 1.8s infinite ease-in-out;
         }
         .letter-title {
             font-family: 'Dancing Script', cursive;
@@ -588,19 +503,18 @@
             padding-top: 2px;
         }
 
-        /* ============================================
-           SUNFLOWER EMOJI FIELD
-           ============================================ */
+        /* ============================================================
+           🌻 SUNFLOWER EMOJI FIELD — draggable with finger
+           ============================================================ */
         #sunflowerField {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            width: 100%; height: 100%;
-            z-index: 60;
+            position: fixed; inset: 0; z-index: 60;
             overflow: hidden;
             background: linear-gradient(180deg, #1a1307 0%, #0a0803 100%);
             transition: opacity 0.8s ease;
-            -webkit-transition: opacity 0.8s ease;
+            touch-action: none;
+            cursor: grab;
         }
+        #sunflowerField:active { cursor: grabbing; }
         #sunflowerField.cleared {
             opacity: 0;
             pointer-events: none;
@@ -611,95 +525,79 @@
             pointer-events: none;
             user-select: none;
             -webkit-user-select: none;
-            will-change: transform, opacity;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
+            will-change: transform, opacity, left, top;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-            -webkit-filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
             font-size: 32px;
             line-height: 1;
+            transition: opacity 0.3s ease;
         }
 
+        /* Idle sway animation */
         @keyframes emojiSway {
-            0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)); -webkit-transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)); }
-            50% { transform: translate3d(0, -4px, 0) rotate(calc(var(--rot, 0deg) + 6deg)); -webkit-transform: translate3d(0, -4px, 0) rotate(calc(var(--rot, 0deg) + 6deg)); }
+            0%, 100% { transform: rotate(var(--rot, 0deg)); }
+            50% { transform: rotate(calc(var(--rot, 0deg) + 5deg)); }
         }
 
-        @keyframes emojiFlyOff {
-            0% {
-                transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)) scale(1);
-                -webkit-transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)) scale(1);
-                opacity: 1;
-            }
-            30% {
-                transform: translate3d(calc(var(--fly-x, 0) * 0.3), calc(var(--fly-y, 0) * 0.3), 0) rotate(calc(var(--rot, 0deg) + 180deg)) scale(1.1);
-                -webkit-transform: translate3d(calc(var(--fly-x, 0) * 0.3), calc(var(--fly-y, 0) * 0.3), 0) rotate(calc(var(--rot, 0deg) + 180deg)) scale(1.1);
-                opacity: 1;
-            }
-            100% {
-                transform: translate3d(var(--fly-x, 0), var(--fly-y, 0), 0) rotate(calc(var(--rot, 0deg) + 720deg)) scale(0.4);
-                -webkit-transform: translate3d(var(--fly-x, 0), var(--fly-y, 0), 0) rotate(calc(var(--rot, 0deg) + 720deg)) scale(0.4);
-                opacity: 0;
-            }
+        /* Fade out when pushed off screen */
+        @keyframes fadeOff {
+            0% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); }
+            100% { opacity: 0; transform: scale(0.3) rotate(calc(var(--rot, 0deg) + 180deg)); }
         }
-        .sunflower-emoji-item.flying {
-            animation: emojiFlyOff 1.4s cubic-bezier(0.4, 0.6, 0.6, 1) forwards;
-            -webkit-animation: emojiFlyOff 1.4s cubic-bezier(0.4, 0.6, 0.6, 1) forwards;
+        .sunflower-emoji-item.fading {
+            animation: fadeOff 0.4s ease-out forwards;
+        }
+
+        /* ===== FINGER TRAIL ===== */
+        .finger-trail {
+            position: fixed;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.5) 0%, rgba(251, 191, 36, 0.15) 40%, transparent 70%);
             pointer-events: none;
+            z-index: 55;
+            transform: translate(-50%, -50%);
+            animation: trailFade 0.5s ease-out forwards;
+        }
+        @keyframes trailFade {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8); }
         }
 
-        /* ============================================
-           SHAKE INDICATOR + COUNTER + WELCOME
-           ============================================ */
+        /* ===== SHAKE UI ===== */
         #shakeIndicator {
             position: fixed;
             top: calc(env(safe-area-inset-top) + 60px);
             left: 50%;
             transform: translateX(-50%);
-            -webkit-transform: translateX(-50%);
             z-index: 70;
-            background: rgba(20, 12, 4, 0.85);
+            background: rgba(20, 12, 4, 0.9);
             border: 1.5px solid rgba(251, 191, 36, 0.6);
             border-radius: 999px;
             padding: 10px 20px;
             font-size: 12px;
             color: #fde68a;
             font-weight: 600;
-            letter-spacing: 0.03em;
             display: flex;
             align-items: center;
             gap: 8px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 25px rgba(251, 191, 36, 0.3);
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            -webkit-transition: opacity 0.5s ease, -webkit-transform 0.5s ease;
             animation: indicatorPulse 2s ease-in-out infinite;
-            -webkit-animation: indicatorPulse 2s ease-in-out infinite;
             white-space: nowrap;
             max-width: 90vw;
         }
         @keyframes indicatorPulse {
-            0%, 100% { transform: translateX(-50%) scale(1); -webkit-transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.05); -webkit-transform: translateX(-50%) scale(1.05); }
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
         }
-        #shakeIndicator.hidden {
-            opacity: 0;
-            transform: translateX(-50%) translateY(-20px);
-            -webkit-transform: translateX(-50%) translateY(-20px);
-            pointer-events: none;
+        #shakeIndicator.hidden { opacity: 0; pointer-events: none; }
+        #shakeIndicator i { 
+            animation: swipeHand 1.5s ease-in-out infinite;
         }
-        #shakeIndicator i {
-            animation: phoneShake 1.5s ease-in-out infinite;
-            -webkit-animation: phoneShake 1.5s ease-in-out infinite;
-        }
-        @keyframes phoneShake {
-            0%, 100% { transform: rotate(-15deg); -webkit-transform: rotate(-15deg); }
-            25% { transform: rotate(15deg); -webkit-transform: rotate(15deg); }
-            50% { transform: rotate(-15deg); -webkit-transform: rotate(-15deg); }
-            75% { transform: rotate(15deg); -webkit-transform: rotate(15deg); }
+        @keyframes swipeHand {
+            0%, 100% { transform: translateX(-4px) rotate(-15deg); }
+            50% { transform: translateX(4px) rotate(15deg); }
         }
 
         #sunflowerCounter {
@@ -707,7 +605,6 @@
             top: calc(env(safe-area-inset-top) + 12px);
             left: 50%;
             transform: translateX(-50%);
-            -webkit-transform: translateX(-50%);
             z-index: 70;
             background: linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(217, 119, 6, 0.95));
             border: 1.5px solid rgba(254, 243, 199, 0.6);
@@ -716,15 +613,10 @@
             font-size: 11px;
             color: #451a03;
             font-weight: 800;
-            letter-spacing: 0.05em;
             display: flex;
             align-items: center;
             gap: 6px;
             box-shadow: 0 6px 25px rgba(0,0,0,0.6), 0 0 20px rgba(251, 191, 36, 0.5);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            transition: opacity 0.4s ease;
-            -webkit-transition: opacity 0.4s ease;
             white-space: nowrap;
         }
         #sunflowerCounter.hidden { opacity: 0; pointer-events: none; }
@@ -734,19 +626,16 @@
             top: calc(env(safe-area-inset-top) + 100px);
             left: 50%;
             transform: translateX(-50%);
-            -webkit-transform: translateX(-50%);
             z-index: 70;
             text-align: center;
             padding: 0 24px;
             max-width: 92vw;
-            transition: opacity 0.5s ease;
-            -webkit-transition: opacity 0.5s ease;
             pointer-events: none;
         }
         #shakeWelcome.hidden { opacity: 0; }
         #shakeWelcome h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 700;
             background: linear-gradient(90deg, #fbbf24, #fef3c7, #fbbf24);
             background-size: 200% auto;
@@ -755,46 +644,30 @@
             -webkit-text-fill-color: transparent;
             animation: shimmer 3s linear infinite;
             line-height: 1.15;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.5));
-            -webkit-filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.5));
         }
         #shakeWelcome p {
-            font-size: 13px;
+            font-size: 12px;
             color: #fde68a;
             font-weight: 500;
-            letter-spacing: 0.02em;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
         }
 
-        /* ============================================
-           REVEAL BUTTON
-           ============================================ */
+        /* ===== REVEAL BUTTON ===== */
         #revealBtnContainer {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: 65;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            opacity: 0;
+            position: fixed; inset: 0; z-index: 65;
+            display: flex; align-items: center; justify-content: center;
+            pointer-events: none; opacity: 0;
             transition: opacity 0.8s ease;
-            -webkit-transition: opacity 0.8s ease;
         }
-        #revealBtnContainer.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
+        #revealBtnContainer.show { opacity: 1; pointer-events: auto; }
         @keyframes revealSunflower {
-            0% { transform: scale(0.3) rotate(-180deg); -webkit-transform: scale(0.3) rotate(-180deg); opacity: 0; }
-            60% { transform: scale(1.15) rotate(10deg); -webkit-transform: scale(1.15) rotate(10deg); opacity: 1; }
-            100% { transform: scale(1) rotate(0deg); -webkit-transform: scale(1) rotate(0deg); opacity: 1; }
+            0% { transform: scale(0.3) rotate(-180deg); opacity: 0; }
+            60% { transform: scale(1.15) rotate(10deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
         .reveal-sunflower-btn {
-            width: 180px;
-            height: 180px;
+            width: 180px; height: 180px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 30%, #78350f 0%, #451a03 55%, #1c0a02 100%);
             border: 3px solid rgba(251, 191, 36, 0.9);
@@ -803,24 +676,17 @@
                 0 0 60px rgba(251, 191, 36, 0.8),
                 0 0 120px rgba(251, 191, 36, 0.4),
                 inset 0 0 40px rgba(0,0,0,0.85);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
             cursor: pointer;
             animation: revealSunflower 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, centerPulse 3s 1s infinite ease-in-out;
-            -webkit-animation: revealSunflower 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, centerPulse 3s 1s infinite ease-in-out;
             position: relative;
             overflow: hidden;
             padding: 0;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            touch-action: manipulation;
         }
         .reveal-sunflower-btn::before {
             content: '';
-            position: absolute;
-            top: 8px; right: 8px; bottom: 8px; left: 8px;
+            position: absolute; top: 8px; right: 8px; bottom: 8px; left: 8px;
             border-radius: 50%;
             background-image: 
                 radial-gradient(circle at 50% 50%, #292524 1.2px, transparent 2px),
@@ -831,26 +697,19 @@
             -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 78%);
             mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 78%);
         }
-        .reveal-sunflower-btn:active { 
-            transform: scale(0.94) !important; 
-            -webkit-transform: scale(0.94) !important;
-        }
+        .reveal-sunflower-btn:active { transform: scale(0.94) !important; }
         .reveal-sunflower-btn .sunflower-emoji {
             font-size: 62px;
             filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.9));
-            -webkit-filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.9));
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
             animation: emojiSwayBtn 3s ease-in-out infinite;
-            -webkit-animation: emojiSwayBtn 3s ease-in-out infinite;
         }
         @keyframes emojiSwayBtn {
-            0%, 100% { transform: rotate(-5deg) scale(1); -webkit-transform: rotate(-5deg) scale(1); }
-            50% { transform: rotate(5deg) scale(1.08); -webkit-transform: rotate(5deg) scale(1.08); }
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.08); }
         }
         .reveal-sunflower-btn .sunflower-label {
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
             font-size: 11px;
             font-weight: 800;
             letter-spacing: 0.15em;
@@ -859,35 +718,27 @@
             text-transform: uppercase;
             margin-top: 6px;
             animation: labelPulse 2s ease-in-out infinite;
-            -webkit-animation: labelPulse 2s ease-in-out infinite;
         }
         @keyframes labelPulse {
             0%, 100% { opacity: 0.85; }
             50% { opacity: 1; }
         }
-
         @keyframes ringRotate {
-            0% { transform: rotate(0deg); -webkit-transform: rotate(0deg); }
-            100% { transform: rotate(360deg); -webkit-transform: rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .reveal-ring {
-            position: absolute;
-            top: -20px; right: -20px; bottom: -20px; left: -20px;
+            position: absolute; top: -20px; right: -20px; bottom: -20px; left: -20px;
             border-radius: 50%;
             border: 2px dashed rgba(251, 191, 36, 0.4);
             animation: ringRotate 20s linear infinite;
-            -webkit-animation: ringRotate 20s linear infinite;
             pointer-events: none;
         }
 
-        /* ============================================
-           MAIN CONTENT HIDDEN
-           ============================================ */
         #mainContent {
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.8s ease;
-            -webkit-transition: opacity 0.8s ease;
         }
         #mainContent.show {
             opacity: 1;
@@ -895,108 +746,7 @@
         }
 
         /* ============================================
-           SCREEN SHAKE
-           ============================================ */
-        @keyframes screenShake {
-            0%, 100% { transform: translate3d(0, 0, 0); -webkit-transform: translate3d(0, 0, 0); }
-            20% { transform: translate3d(-3px, 2px, 0); -webkit-transform: translate3d(-3px, 2px, 0); }
-            40% { transform: translate3d(3px, -2px, 0); -webkit-transform: translate3d(3px, -2px, 0); }
-            60% { transform: translate3d(-2px, -3px, 0); -webkit-transform: translate3d(-2px, -3px, 0); }
-            80% { transform: translate3d(2px, 3px, 0); -webkit-transform: translate3d(2px, 3px, 0); }
-        }
-        .shaking {
-            animation: screenShake 0.3s ease-in-out;
-            -webkit-animation: screenShake 0.3s ease-in-out;
-        }
-
-        /* ============================================
-           SHAKE POWER METER
-           ============================================ */
-        #shakePower {
-            position: fixed;
-            bottom: calc(env(safe-area-inset-bottom) + 90px);
-            left: 50%;
-            transform: translateX(-50%);
-            -webkit-transform: translateX(-50%);
-            z-index: 70;
-            width: 200px;
-            height: 6px;
-            background: rgba(251, 191, 36, 0.15);
-            border-radius: 3px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            transition: opacity 0.4s ease;
-            -webkit-transition: opacity 0.4s ease;
-        }
-        #shakePower.hidden { opacity: 0; }
-        #shakePowerFill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
-            border-radius: 3px;
-            box-shadow: 0 0 12px rgba(251, 191, 36, 0.9);
-            transition: width 0.1s ease;
-            -webkit-transition: width 0.1s ease;
-        }
-
-        /* ============================================
-           BOTÓN DE EMERGENCIA (para navegadores sin motion)
-           ============================================ */
-        #emergencyBtn {
-            position: fixed;
-            bottom: calc(env(safe-area-inset-bottom) + 24px);
-            left: 50%;
-            transform: translateX(-50%);
-            -webkit-transform: translateX(-50%);
-            z-index: 80;
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(217, 119, 6, 0.95));
-            color: #451a03;
-            font-weight: 700;
-            font-size: 12px;
-            padding: 12px 24px;
-            border-radius: 999px;
-            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.6), 0 0 0 2px rgba(254, 243, 199, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            -webkit-transition: all 0.3s ease;
-            cursor: pointer;
-            touch-action: manipulation;
-            animation: emergencyPulse 2s ease-in-out infinite;
-            -webkit-animation: emergencyPulse 2s ease-in-out infinite;
-        }
-        @keyframes emergencyPulse {
-            0%, 100% { transform: translateX(-50%) scale(1); -webkit-transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.05); -webkit-transform: translateX(-50%) scale(1.05); }
-        }
-        #emergencyBtn:active {
-            transform: translateX(-50%) scale(0.95);
-            -webkit-transform: translateX(-50%) scale(0.95);
-        }
-        #emergencyBtn.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* ============================================
-           iOS-specific fixes
-           ============================================ */
-        @supports (-webkit-touch-callout: none) {
-            .message-card,
-            .sf-petal,
-            .sf-center,
-            .reveal-sunflower-btn,
-            .letter-content {
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-            }
-        }
-
-        /* ============================================
-           Small screens (iPhone SE, etc)
+           RESPONSIVE
            ============================================ */
         @media (max-width: 360px) {
             .sf-petal {
@@ -1005,92 +755,27 @@
                 margin-left: -18px !important;
                 margin-top: -40px !important;
             }
-            .reveal-sunflower-btn {
-                width: 150px;
-                height: 150px;
-            }
-            .reveal-sunflower-btn .sunflower-emoji {
-                font-size: 52px;
-            }
-            #shakeWelcome h1 {
-                font-size: 28px;
-            }
-            .letter-title {
-                font-size: 28px;
-            }
+            .reveal-sunflower-btn { width: 150px; height: 150px; }
+            .reveal-sunflower-btn .sunflower-emoji { font-size: 52px; }
+            #shakeWelcome h1 { font-size: 26px; }
+            #startScreen h1 { font-size: 30px; }
+            #startScreen .start-icon { font-size: 70px; }
+            .letter-title { font-size: 28px; }
         }
-
         @media (max-height: 700px) {
-            .letter-content {
-                max-height: 90vh;
-                max-height: 90dvh;
-            }
-            #shakeWelcome {
-                top: calc(env(safe-area-inset-top) + 80px);
-            }
+            .letter-content { max-height: 90vh; max-height: 90dvh; }
+            #shakeWelcome { top: calc(env(safe-area-inset-top) + 80px); }
         }
-
-        /* ============================================
-           Large screens
-           ============================================ */
-        @media (min-width: 500px) {
-            .sf-center {
-                width: 120px;
-                height: 120px;
-            }
-            .sf-petal {
-                width: 48px !important;
-                height: 105px !important;
-                margin-left: -24px !important;
-                margin-top: -52.5px !important;
-            }
-        }
-
-        /* ============================================
-           Landscape orientation adjustment
-           ============================================ */
         @media (orientation: landscape) and (max-height: 500px) {
-            #shakeWelcome {
-                top: calc(env(safe-area-inset-top) + 20px);
-            }
-            #shakeWelcome h1 {
-                font-size: 22px;
-                margin-bottom: 2px;
-            }
-            #shakeWelcome p {
-                font-size: 11px;
-            }
-            #shakeIndicator {
-                top: calc(env(safe-area-inset-top) + 85px);
-                font-size: 10px;
-                padding: 6px 14px;
-            }
-            .reveal-sunflower-btn {
-                width: 130px;
-                height: 130px;
-            }
-            .reveal-sunflower-btn .sunflower-emoji {
-                font-size: 42px;
-            }
+            #shakeWelcome { top: calc(env(safe-area-inset-top) + 20px); }
+            #shakeWelcome h1 { font-size: 22px; }
+            #shakeWelcome p { font-size: 11px; }
+            #shakeIndicator { top: calc(env(safe-area-inset-top) + 85px); font-size: 10px; padding: 6px 14px; }
+            .reveal-sunflower-btn { width: 130px; height: 130px; }
+            .reveal-sunflower-btn .sunflower-emoji { font-size: 42px; }
         }
-
-        /* ============================================
-           Android-specific fixes
-           ============================================ */
-        @supports not (-webkit-touch-callout: none) {
-            .sf-petal,
-            .sunflower-core,
-            .reveal-sunflower-btn {
-                -webkit-user-select: none;
-                user-select: none;
-            }
-        }
-
-        /* Reduce motion for accessibility */
         @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
+            *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
@@ -1100,15 +785,25 @@
 </head>
 <body class="no-select">
 
+    <!-- START SCREEN -->
+    <div id="startScreen">
+        <div class="start-icon">🌻</div>
+        <h1>Para ti, Ailín</h1>
+        <p>Tengo una sorpresa especial para ti en este 21 de septiembre 💛</p>
+        <p class="info">Desliza tu dedo por la pantalla para limpiar los girasoles</p>
+        <button id="startBtn" onclick="startExperience()" type="button">
+            <i class="fas fa-play"></i>
+            <span>Comenzar</span>
+        </button>
+    </div>
+
     <div id="particlesContainer" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
 
     <button id="musicBtn" class="music-btn" onclick="toggleMusic()" aria-label="Reproducir música" type="button">
         <i id="musicIcon" class="fas fa-music"></i>
     </button>
 
-    <!-- =========================================================
-         SUNFLOWER EMOJI FIELD
-         ========================================================= -->
+    <!-- SUNFLOWER EMOJI FIELD -->
     <div id="sunflowerField"></div>
 
     <div id="sunflowerCounter">
@@ -1118,27 +813,15 @@
 
     <div id="shakeWelcome">
         <h1>Para ti, Ailín Michelle</h1>
-        <p>¡Sacude el celular para limpiar la pantalla! 🌻</p>
+        <p>Desliza tu dedo por la pantalla ✨</p>
     </div>
 
     <div id="shakeIndicator">
-        <i class="fas fa-mobile-alt"></i>
-        <span>Sacude tu celular</span>
-    </div>
-
-    <div id="shakePower" class="hidden">
-        <div id="shakePowerFill"></div>
-    </div>
-
-    <!-- Botón de emergencia (si no funciona el acelerómetro) -->
-    <button id="emergencyBtn" class="hidden" onclick="emergencyClear()" type="button">
         <i class="fas fa-hand-pointer"></i>
-        <span>Limpiar con un toque</span>
-    </button>
+        <span>Desliza el dedo</span>
+    </div>
 
-    <!-- =========================================================
-         REVEAL BUTTON
-         ========================================================= -->
+    <!-- REVEAL BUTTON -->
     <div id="revealBtnContainer">
         <button id="revealSunflowerBtn" class="reveal-sunflower-btn" onclick="revealSunflower()" type="button">
             <div class="reveal-ring"></div>
@@ -1147,9 +830,7 @@
         </button>
     </div>
 
-    <!-- =========================================================
-         MAIN CONTENT
-         ========================================================= -->
+    <!-- MAIN CONTENT -->
     <div id="mainContent" style="display:flex; flex-direction:column; min-height:100dvh;">
 
         <header class="relative w-full px-4 py-3 z-30 flex items-center justify-between bg-gradient-to-b from-[#1a1307]/95 to-[#1a1307]/70 backdrop-blur-xl border-b border-yellow-700/30">
@@ -1223,7 +904,7 @@
         </footer>
     </div>
 
-    <!-- Final Letter -->
+    <!-- FINAL LETTER -->
     <div id="finalLetter" class="final-letter-overlay" onclick="closeLetter(event)">
         <div class="letter-content" onclick="event.stopPropagation()">
             <div class="heart-icon-big">💖</div>
@@ -1249,14 +930,7 @@
 
     <script>
         // ==========================================
-        //  DETECCIÓN DE PLATAFORMA
-        // ==========================================
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        const isAndroid = /Android/.test(navigator.userAgent);
-        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-        // ==========================================
-        //  MENSAJES PARA AILÍN MICHELLE
+        //  DATOS
         // ==========================================
         const messagesData = [
             { emoji: "🌻", title: "El día que conocí a Ailín", text: "Ese momento en que nuestros ojos se cruzaron por primera vez, supe que algo especial comenzaba. Mi corazón latió diferente desde entonces. Fue el inicio de todo lo bonito, mi Ailín." },
@@ -1277,12 +951,58 @@
         let flowerCompleted = false;
 
         // ==========================================
-        //  SUNFLOWER EMOJI FIELD
+        //  VARIABLES DE ESTADO
         // ==========================================
         let TOTAL_SUNFLOWERS = 60;
         let sunflowersRemaining = TOTAL_SUNFLOWERS;
         let sunflowerElements = [];
+        let isDragging = false;
+        let lastPointerX = 0;
+        let lastPointerY = 0;
+        let lastTrailTime = 0;
+        let activePointerId = null;
+        let lastPositionUpdate = 0;
 
+        // ==========================================
+        //  INICIO DE LA EXPERIENCIA
+        // ==========================================
+        function startExperience() {
+            const startScreen = document.getElementById('startScreen');
+            tryPlayMusic();
+
+            setTimeout(() => {
+                startScreen.classList.add('hide');
+                setTimeout(() => {
+                    startScreen.style.display = 'none';
+                    initSunflowerField();
+                    setupDragInteraction();
+                }, 400);
+            }, 200);
+        }
+
+        function tryPlayMusic() {
+            const bgMusic = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicBtn');
+            const icon = document.getElementById('musicIcon');
+            bgMusic.volume = 0.35;
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    musicPlaying = true;
+                    btn.classList.add('playing');
+                    icon.className = 'fas fa-pause';
+                    icon.style.opacity = '1';
+                }).catch(() => {
+                    musicPlaying = false;
+                    btn.classList.remove('playing');
+                    icon.className = 'fas fa-music';
+                });
+            }
+        }
+
+        // ==========================================
+        //  CAMPO DE GIRASOLES
+        // ==========================================
         function initSunflowerField() {
             const field = document.getElementById('sunflowerField');
             field.innerHTML = '';
@@ -1291,14 +1011,14 @@
             const vw = window.innerWidth;
             const vh = window.innerHeight;
 
-            // En pantallas pequeñas menos girasoles
-            if (vw < 360) TOTAL_SUNFLOWERS = 45;
-            else if (vw < 400) TOTAL_SUNFLOWERS = 55;
-            else TOTAL_SUNFLOWERS = 70;
+            // Ajustar cantidad según tamaño
+            if (vw < 360) TOTAL_SUNFLOWERS = 50;
+            else if (vw < 400) TOTAL_SUNFLOWERS = 60;
+            else TOTAL_SUNFLOWERS = 75;
             
             sunflowersRemaining = TOTAL_SUNFLOWERS;
 
-            const cols = Math.max(6, Math.floor(vw / 48));
+            const cols = Math.max(6, Math.floor(vw / 46));
             const rows = Math.ceil(TOTAL_SUNFLOWERS / cols);
             const cellW = vw / cols;
             const cellH = vh / rows;
@@ -1315,15 +1035,25 @@
                     const item = document.createElement('div');
                     item.className = 'sunflower-emoji-item';
                     const rot = Math.random() * 60 - 30;
-                    const scale = 0.7 + Math.random() * 0.6;
-                    item.style.left = (x - 20) + 'px';
-                    item.style.top = (y - 20) + 'px';
+                    const scale = 0.75 + Math.random() * 0.5;
+                    const fontSize = 28 + Math.random() * 16;
+
+                    // Position via left/top (más fácil de mover con el dedo)
+                    item.style.left = (x - fontSize / 2) + 'px';
+                    item.style.top = (y - fontSize / 2) + 'px';
                     item.style.setProperty('--rot', rot + 'deg');
                     item.style.transform = `rotate(${rot}deg) scale(${scale})`;
-                    item.style.animation = `emojiSway ${2.5 + Math.random() * 2}s ease-in-out infinite`;
-                    item.style.animationDelay = (Math.random() * 2) + 's';
-                    item.style.fontSize = (26 + Math.random() * 18) + 'px';
+                    item.style.fontSize = fontSize + 'px';
                     item.innerText = '🌻';
+
+                    // Animación de vaivén suave
+                    item.style.animation = `emojiSway ${3 + Math.random() * 2}s ease-in-out infinite`;
+                    item.style.animationDelay = (Math.random() * 2) + 's';
+
+                    // Datos para la lógica de arrastre
+                    item._currentX = x - fontSize / 2;
+                    item._currentY = y - fontSize / 2;
+                    item._size = fontSize;
 
                     field.appendChild(item);
                     sunflowerElements.push(item);
@@ -1345,213 +1075,241 @@
             }
         }
 
-        function shakeOffSunflowers(intensity = 3) {
-            const toRemove = Math.min(Math.floor(intensity) + 1, sunflowersRemaining);
-            for (let i = 0; i < toRemove; i++) {
-                const available = sunflowerElements.filter(el => !el.classList.contains('flying') && el.style.display !== 'none');
-                if (available.length === 0) break;
-                
-                const el = available[Math.floor(Math.random() * available.length)];
-                flyOffSunflower(el);
-            }
-            updateSunflowerCounter();
+        // ==========================================
+        //  DRAG INTERACTION — PUSH SUNFLOWERS WITH FINGER
+        // ==========================================
+        function setupDragInteraction() {
+            const field = document.getElementById('sunflowerField');
 
-            if (sunflowersRemaining <= 0) {
-                setTimeout(revealSunflowerButton, 900);
+            // Pointer events (unified touch/mouse)
+            field.addEventListener('pointerdown', onPointerDown, { passive: false });
+            field.addEventListener('pointermove', onPointerMove, { passive: false });
+            field.addEventListener('pointerup', onPointerUp, { passive: false });
+            field.addEventListener('pointercancel', onPointerUp, { passive: false });
+
+            // Fallback con touch events para navegadores viejos
+            if (!window.PointerEvent) {
+                field.addEventListener('touchstart', onTouchStart, { passive: false });
+                field.addEventListener('touchmove', onTouchMove, { passive: false });
+                field.addEventListener('touchend', onTouchEnd, { passive: false });
+                field.addEventListener('touchcancel', onTouchEnd, { passive: false });
+                field.addEventListener('mousedown', onMouseDown, { passive: false });
+                field.addEventListener('mousemove', onMouseMove, { passive: false });
+                field.addEventListener('mouseup', onMouseUp, { passive: false });
             }
         }
 
-        function flyOffSunflower(el) {
-            if (el.classList.contains('flying')) return;
+        // ---- POINTER EVENTS ----
+        function onPointerDown(e) {
+            if (sunflowersRemaining <= 0) return;
+            isDragging = true;
+            activePointerId = e.pointerId;
+            lastPointerX = e.clientX;
+            lastPointerY = e.clientY;
+            field.setPointerCapture(e.pointerId);
+            e.preventDefault();
+        }
+
+        function onPointerMove(e) {
+            if (!isDragging || e.pointerId !== activePointerId) return;
+            if (sunflowersRemaining <= 0) return;
             
-            const angle = Math.random() * 360;
-            const distance = 300 + Math.random() * 500;
-            const rad = angle * Math.PI / 180;
-            const flyX = Math.cos(rad) * distance;
-            const flyY = Math.sin(rad) * distance + 200;
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            // Mover girasoles cercanos al dedo
+            pushSunflowers(x, y);
+            
+            // Crear trail visual
+            const now = Date.now();
+            if (now - lastTrailTime > 40) {
+                createFingerTrail(x, y);
+                lastTrailTime = now;
+            }
+            
+            lastPointerX = x;
+            lastPointerY = y;
+            e.preventDefault();
+        }
 
-            el.style.setProperty('--fly-x', flyX + 'px');
-            el.style.setProperty('--fly-y', flyY + 'px');
-            el.style.animation = 'none';
-            void el.offsetWidth;
-            el.classList.add('flying');
+        function onPointerUp(e) {
+            if (e.pointerId === activePointerId) {
+                isDragging = false;
+                activePointerId = null;
+            }
+        }
 
+        // ---- TOUCH EVENTS (fallback) ----
+        function onTouchStart(e) {
+            if (sunflowersRemaining <= 0) return;
+            if (e.touches.length > 0) {
+                isDragging = true;
+                lastPointerX = e.touches[0].clientX;
+                lastPointerY = e.touches[0].clientY;
+                e.preventDefault();
+            }
+        }
+
+        function onTouchMove(e) {
+            if (!isDragging || e.touches.length === 0) return;
+            if (sunflowersRemaining <= 0) return;
+            
+            const x = e.touches[0].clientX;
+            const y = e.touches[0].clientY;
+            
+            pushSunflowers(x, y);
+            
+            const now = Date.now();
+            if (now - lastTrailTime > 40) {
+                createFingerTrail(x, y);
+                lastTrailTime = now;
+            }
+            
+            lastPointerX = x;
+            lastPointerY = y;
+            e.preventDefault();
+        }
+
+        function onTouchEnd(e) {
+            isDragging = false;
+        }
+
+        // ---- MOUSE EVENTS (fallback desktop) ----
+        function onMouseDown(e) {
+            if (sunflowersRemaining <= 0) return;
+            isDragging = true;
+            lastPointerX = e.clientX;
+            lastPointerY = e.clientY;
+            e.preventDefault();
+        }
+
+        function onMouseMove(e) {
+            if (!isDragging) return;
+            if (sunflowersRemaining <= 0) return;
+            
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            pushSunflowers(x, y);
+            
+            const now = Date.now();
+            if (now - lastTrailTime > 40) {
+                createFingerTrail(x, y);
+                lastTrailTime = now;
+            }
+            
+            e.preventDefault();
+        }
+
+        function onMouseUp(e) {
+            isDragging = false;
+        }
+
+        // ==========================================
+        //  PUSH SUNFLOWERS AWAY FROM FINGER
+        // ==========================================
+        const PUSH_RADIUS = 90; // radio de influencia del dedo
+        const PUSH_FORCE = 18;  // fuerza de empuje
+
+        function pushSunflowers(fingerX, fingerY) {
+            const now = performance.now();
+            // Throttle para performance
+            if (now - lastPositionUpdate < 16) return;
+            lastPositionUpdate = now;
+
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+
+            for (let i = 0; i < sunflowerElements.length; i++) {
+                const el = sunflowerElements[i];
+                if (el.classList.contains('fading') || el.style.display === 'none') continue;
+
+                const elX = el._currentX + el._size / 2;
+                const elY = el._currentY + el._size / 2;
+
+                const dx = elX - fingerX;
+                const dy = elY - fingerY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < PUSH_RADIUS && dist > 0.1) {
+                    // Empuje radial desde el dedo
+                    const force = (1 - dist / PUSH_RADIUS) * PUSH_FORCE;
+                    const nx = dx / dist;
+                    const ny = dy / dist;
+
+                    let newX = el._currentX + nx * force;
+                    let newY = el._currentY + ny * force;
+
+                    // Detectar si sale de los límites → eliminarlo
+                    const centerX = newX + el._size / 2;
+                    const centerY = newY + el._size / 2;
+
+                    if (centerX < -el._size * 0.5 || 
+                        centerX > vw + el._size * 0.5 ||
+                        centerY < -el._size * 0.5 || 
+                        centerY > vh + el._size * 0.5) {
+                        // Fuera de pantalla → eliminar
+                        removeSunflower(el);
+                        continue;
+                    }
+
+                    el._currentX = newX;
+                    el._currentY = newY;
+                    el.style.left = newX + 'px';
+                    el.style.top = newY + 'px';
+                }
+            }
+        }
+
+        function removeSunflower(el) {
+            if (el.classList.contains('fading')) return;
+            el.classList.add('fading');
+            el.style.pointerEvents = 'none';
             sunflowersRemaining--;
+            updateSunflowerCounter();
+
+            // Pequeño sparkle
+            const rect = el.getBoundingClientRect();
+            spawnFloatingSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+            if (navigator.vibrate) {
+                try { navigator.vibrate(10); } catch(e) {}
+            }
 
             setTimeout(() => {
                 el.style.display = 'none';
-            }, 1500);
+            }, 400);
+
+            // Si ya no quedan girasoles → revelar botón
+            if (sunflowersRemaining <= 0) {
+                setTimeout(revealSunflowerButton, 700);
+            }
         }
 
+        // ==========================================
+        //  FINGER TRAIL VISUAL
+        // ==========================================
+        function createFingerTrail(x, y) {
+            const trail = document.createElement('div');
+            trail.className = 'finger-trail';
+            trail.style.left = x + 'px';
+            trail.style.top = y + 'px';
+            document.body.appendChild(trail);
+            setTimeout(() => trail.remove(), 500);
+        }
+
+        // ==========================================
+        //  REVEAL
+        // ==========================================
         function revealSunflowerButton() {
             document.getElementById('shakeWelcome').classList.add('hidden');
             document.getElementById('shakeIndicator').classList.add('hidden');
-            document.getElementById('shakePower').classList.add('hidden');
-            document.getElementById('emergencyBtn').classList.add('hidden');
             document.getElementById('sunflowerField').classList.add('cleared');
             document.getElementById('revealBtnContainer').classList.add('show');
 
-            if (navigator.vibrate) navigator.vibrate([20, 60, 20]);
+            if (navigator.vibrate) { try { navigator.vibrate([20, 60, 20]); } catch(e) {} }
         }
 
-        // ==========================================
-        //  SHAKE DETECTION
-        // ==========================================
-        let lastShakeTime = 0;
-        let shakeThreshold = 15;
-        let shakeCooldown = 350;
-        let shakePowerLevel = 0;
-        let shakeDecayTimer = null;
-        let motionEnabled = false;
-
-        function handleMotion(event) {
-            const acc = event.accelerationIncludingGravity || event.acceleration;
-            if (!acc) return;
-
-            const x = acc.x || 0;
-            const y = acc.y || 0;
-            const z = acc.z || 0;
-            
-            const magnitude = Math.sqrt(x * x + y * y + z * z);
-            const delta = Math.abs(magnitude - 9.8);
-
-            const now = Date.now();
-            if (delta > shakeThreshold && (now - lastShakeTime) > shakeCooldown) {
-                lastShakeTime = now;
-                
-                const intensity = Math.min(delta / 15, 4);
-                shakeOffSunflowers(intensity);
-                
-                document.body.classList.add('shaking');
-                setTimeout(() => document.body.classList.remove('shaking'), 300);
-
-                if (navigator.vibrate) navigator.vibrate(25);
-
-                shakePowerLevel = Math.min(shakePowerLevel + intensity * 15, 100);
-                updateShakePower();
-            }
-        }
-
-        function updateShakePower() {
-            const powerEl = document.getElementById('shakePower');
-            const fill = document.getElementById('shakePowerFill');
-            
-            if (sunflowersRemaining <= 0) {
-                powerEl.classList.add('hidden');
-                return;
-            }
-
-            powerEl.classList.remove('hidden');
-            fill.style.width = shakePowerLevel + '%';
-
-            clearTimeout(shakeDecayTimer);
-            shakeDecayTimer = setTimeout(() => {
-                shakePowerLevel = Math.max(0, shakePowerLevel - 15);
-                fill.style.width = shakePowerLevel + '%';
-                if (shakePowerLevel > 0) updateShakePower();
-            }, 400);
-        }
-
-        function requestMotionPermission() {
-            // iOS 13+ requiere permiso explícito
-            if (typeof DeviceMotionEvent !== 'undefined' && 
-                typeof DeviceMotionEvent.requestPermission === 'function') {
-                DeviceMotionEvent.requestPermission()
-                    .then(response => {
-                        if (response === 'granted') {
-                            window.addEventListener('devicemotion', handleMotion);
-                            motionEnabled = true;
-                            showMotionGranted();
-                        } else {
-                            enableFallbackShake('Permiso denegado');
-                        }
-                    })
-                    .catch(err => {
-                        enableFallbackShake('Error de permiso');
-                    });
-            } else if (window.DeviceMotionEvent) {
-                // Android / navegadores compatibles
-                window.addEventListener('devicemotion', handleMotion);
-                motionEnabled = true;
-                
-                // Verificar si realmente funciona después de 2 segundos
-                setTimeout(() => {
-                    if (!motionEnabled) enableFallbackShake();
-                }, 2000);
-            } else {
-                // Navegador sin soporte
-                enableFallbackShake('Sin soporte');
-            }
-        }
-
-        function showMotionGranted() {
-            const indicator = document.getElementById('shakeIndicator');
-            indicator.innerHTML = '<i class="fas fa-check-circle" style="animation:none;color:#4ade80"></i><span>¡Sacude fuerte tu celular!</span>';
-            setTimeout(() => {
-                if (sunflowersRemaining > 0) {
-                    indicator.innerHTML = '<i class="fas fa-mobile-alt"></i><span>Sacude tu celular</span>';
-                }
-            }, 2000);
-        }
-
-        function enableFallbackShake(reason) {
-            motionEnabled = false;
-            const indicator = document.getElementById('shakeIndicator');
-            indicator.innerHTML = '<i class="fas fa-hand-pointer" style="animation:none"></i><span>Usa el botón de abajo 👇</span>';
-            
-            // Mostrar botón de emergencia
-            document.getElementById('emergencyBtn').classList.remove('hidden');
-            
-            // Detectar toques en los girasoles para volarlos individualmente
-            document.getElementById('sunflowerField').addEventListener('touchstart', handleFieldTap, { passive: false });
-            document.getElementById('sunflowerField').addEventListener('click', handleFieldTap, { passive: false });
-        }
-
-        function handleFieldTap(e) {
-            if (sunflowersRemaining <= 0) return;
-            if (e.type === 'touchstart') e.preventDefault();
-            
-            const target = e.target;
-            if (!target.classList || !target.classList.contains('sunflower-emoji-item')) return;
-            if (target.classList.contains('flying') || target.style.display === 'none') return;
-
-            // Volamos este girasol y algunos cercanos
-            const rect = target.getBoundingClientRect();
-            const tapX = rect.left + rect.width / 2;
-            const tapY = rect.top + rect.height / 2;
-            
-            const nearby = sunflowerElements.filter(el => {
-                if (el.classList.contains('flying') || el.style.display === 'none') return false;
-                const r = el.getBoundingClientRect();
-                const dx = (r.left + r.width/2) - tapX;
-                const dy = (r.top + r.height/2) - tapY;
-                return Math.sqrt(dx*dx + dy*dy) < 100;
-            });
-            
-            nearby.slice(0, 5).forEach(el => flyOffSunflower(el));
-            updateSunflowerCounter();
-            
-            if (navigator.vibrate) navigator.vibrate(15);
-            
-            if (sunflowersRemaining <= 0) {
-                setTimeout(revealSunflowerButton, 900);
-            }
-        }
-
-        function emergencyClear() {
-            // Elimina todos los girasoles de golpe
-            sunflowerElements.forEach(el => {
-                if (!el.classList.contains('flying') && el.style.display !== 'none') {
-                    flyOffSunflower(el);
-                }
-            });
-            updateSunflowerCounter();
-            if (navigator.vibrate) navigator.vibrate([20, 30, 20, 30, 50]);
-        }
-
-        // ==========================================
-        //  REVEAL SUNFLOWER
-        // ==========================================
         function revealSunflower() {
             const btnContainer = document.getElementById('revealBtnContainer');
             const mainContent = document.getElementById('mainContent');
@@ -1561,7 +1319,7 @@
             btn.style.transform = 'scale(1.8) rotate(180deg)';
             btn.style.opacity = '0';
 
-            if (navigator.vibrate) navigator.vibrate([30, 40, 30, 40, 80]);
+            if (navigator.vibrate) { try { navigator.vibrate([30, 40, 30, 40, 80]); } catch(e) {} }
 
             setTimeout(() => {
                 btnContainer.classList.remove('show');
@@ -1572,13 +1330,12 @@
         }
 
         // ==========================================
-        //  FLOATING PARTICLES
+        //  PARTÍCULAS FLOTANTES
         // ==========================================
         function initParticles() {
             const container = document.getElementById('particlesContainer');
             const symbols = ['🌻', '🌼', '✨', '💛', '🌸', '🏵️', '✨'];
-            const count = isIOS ? 18 : 22;
-            for (let i = 0; i < count; i++) {
+            for (let i = 0; i < 18; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
                 p.innerText = symbols[Math.floor(Math.random() * symbols.length)];
@@ -1605,7 +1362,7 @@
         }
 
         // ==========================================
-        //  SUNFLOWER PETALS
+        //  PÉTALOS DEL GIRASOL PRINCIPAL
         // ==========================================
         function renderPetals() {
             const ring = document.getElementById('petalsRing');
@@ -1664,8 +1421,8 @@
             sparkle.style.left = (x - 10) + 'px';
             sparkle.style.top = (y - 10) + 'px';
             sparkle.style.setProperty('--sx', (Math.random() * 80 - 40) + 'px');
-            sparkle.style.setProperty('--sy', (-200 - Math.random() * 200) + 'px');
-            sparkle.style.fontSize = (16 + Math.random() * 12) + 'px';
+            sparkle.style.setProperty('--sy', (-100 - Math.random() * 120) + 'px');
+            sparkle.style.fontSize = (14 + Math.random() * 12) + 'px';
             sparkle.style.filter = 'drop-shadow(0 0 10px rgba(251, 191, 36, 0.9))';
             document.body.appendChild(sparkle);
             setTimeout(() => sparkle.remove(), 2200);
@@ -1683,12 +1440,11 @@
         }
 
         // ==========================================
-        //  CELEBRATION
+        //  CELEBRACIÓN
         // ==========================================
         function launchCelebration() {
             const colors = ['#fbbf24', '#fcd34d', '#f59e0b', '#fef3c7', '#fde68a', '#f97316'];
-            const confettiCount = isIOS ? 60 : 80;
-            for (let i = 0; i < confettiCount; i++) {
+            for (let i = 0; i < 70; i++) {
                 setTimeout(() => {
                     const piece = document.createElement('div');
                     piece.className = 'confetti-piece';
@@ -1740,7 +1496,7 @@
         }
 
         // ==========================================
-        //  PLUCK SUNFLOWER PETAL
+        //  PLUCK PETAL (main flower)
         // ==========================================
         function pluckPetal(petalElement, angle, event) {
             if (petalElement.classList.contains('plucking') || petalElement.style.display === 'none') return;
@@ -1791,7 +1547,7 @@
                 setTimeout(() => spawnFloatingHeart(), 300);
             }
 
-            if (navigator.vibrate) navigator.vibrate(15);
+            if (navigator.vibrate) { try { navigator.vibrate(15); } catch(e) {} }
 
             if (totalDiscovered === totalPetals) {
                 flowerCompleted = true;
@@ -1799,9 +1555,6 @@
             }
         }
 
-        // ==========================================
-        //  FLOWER COMPLETE
-        // ==========================================
         function onFlowerComplete() {
             const core = document.getElementById('sunflowerCore');
             const coreIcon = document.getElementById('coreIcon');
@@ -1819,7 +1572,7 @@
 
             setTimeout(() => {
                 document.getElementById('finalLetter').classList.add('show');
-                if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
+                if (navigator.vibrate) { try { navigator.vibrate([50, 100, 50]); } catch(e) {} }
             }, 3000);
         }
 
@@ -1841,7 +1594,7 @@
             document.getElementById('msgTitle').innerText = "¡Feliz 21 de Septiembre, Ailín!";
             document.getElementById('msgText').innerText = "Toca cada uno de los pétalos alrededor para descubrir todos nuestros recuerdos, mi amor. 💛";
 
-            if (navigator.vibrate) navigator.vibrate(20);
+            if (navigator.vibrate) { try { navigator.vibrate(20); } catch(e) {} }
         }
 
         // ==========================================
@@ -1874,42 +1627,32 @@
             document.getElementById('revealBtnContainer').style.display = 'flex';
             document.getElementById('mainContent').classList.remove('show');
             document.getElementById('sunflowerCounter').classList.remove('hidden');
-            document.getElementById('emergencyBtn').classList.add('hidden');
             
             const btn = document.getElementById('revealSunflowerBtn');
             btn.style.transition = '';
             btn.style.transform = '';
             btn.style.opacity = '';
 
-            shakePowerLevel = 0;
-            document.getElementById('shakePowerFill').style.width = '0%';
-
-            // Re-detectar motion
-            if (motionEnabled) {
-                document.getElementById('shakeIndicator').innerHTML = '<i class="fas fa-mobile-alt"></i><span>Sacude tu celular</span>';
-            } else {
-                document.getElementById('shakeIndicator').innerHTML = '<i class="fas fa-hand-pointer" style="animation:none"></i><span>Usa el botón de abajo 👇</span>';
-                document.getElementById('emergencyBtn').classList.remove('hidden');
-            }
+            isDragging = false;
+            activePointerId = null;
 
             initSunflowerField();
 
             core.style.transform = 'scale(1.1)';
             setTimeout(() => { core.style.transform = ''; }, 250);
 
-            if (navigator.vibrate) navigator.vibrate([10, 30, 10]);
+            if (navigator.vibrate) { try { navigator.vibrate([10, 30, 10]); } catch(e) {} }
         }
 
         // ==========================================
-        //  MUSIC
+        //  MÚSICA
         // ==========================================
         let musicPlaying = false;
-        const bgMusic = document.getElementById('bgMusic');
-        bgMusic.volume = 0.35;
-
         function toggleMusic() {
+            const bgMusic = document.getElementById('bgMusic');
             const btn = document.getElementById('musicBtn');
             const icon = document.getElementById('musicIcon');
+            bgMusic.volume = 0.35;
             
             if (musicPlaying) {
                 bgMusic.pause();
@@ -1938,57 +1681,33 @@
         // ==========================================
         window.addEventListener('load', () => {
             initParticles();
-            initSunflowerField();
             renderPetals();
             renderProgressDots();
-
-            const box = document.getElementById('messageBox');
-            box.style.transform = 'scale(0.96)';
-            setTimeout(() => { box.style.transform = 'scale(1)'; }, 250);
-
-            // Detectar permiso de movimiento después de un momento
-            setTimeout(requestMotionPermission, 800);
-
-            // Fallback: si después de 3s no hay motion y el usuario no ha tocado nada
-            setTimeout(() => {
-                if (!motionEnabled && sunflowersRemaining === TOTAL_SUNFLOWERS) {
-                    enableFallbackShake('Timeout');
-                }
-            }, 3000);
         });
 
-        // Prevenir scroll bounce en iOS y Android
+        // Prevenir scroll / gestos no deseados
         document.body.addEventListener('touchmove', (e) => {
             const target = e.target;
             if (target.closest('button') || 
                 target.closest('.sf-petal') || 
                 target.closest('.letter-content') ||
-                target.closest('.sunflower-emoji-item') ||
                 target.closest('#finalLetter')) {
                 return;
             }
             e.preventDefault();
         }, { passive: false });
 
-        // Prevenir double-tap zoom
         let lastTouchEnd = 0;
         document.addEventListener('touchend', (e) => {
             const now = Date.now();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
-            }
+            if (now - lastTouchEnd <= 300) e.preventDefault();
             lastTouchEnd = now;
         }, { passive: false });
 
-        // Prevenir menú contextual
         document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-        // Prevenir gestos iOS (pinch zoom, etc)
         document.addEventListener('gesturestart', (e) => e.preventDefault());
         document.addEventListener('gesturechange', (e) => e.preventDefault());
         document.addEventListener('gestureend', (e) => e.preventDefault());
-
-        // Prevenir arrastre de imágenes
         document.addEventListener('dragstart', (e) => e.preventDefault());
     </script>
 </body>
