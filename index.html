@@ -8,7 +8,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Para Ailín 🌻">
-    <title>🌻 Para Ailín Michelle · 21 de Septiembre 🌻</title>
+    <title>🌻 Para Ailín Michelle · 21 de Septiembre</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -504,7 +504,7 @@
         }
 
         /* ============================================================
-           🌻 SUNFLOWER EMOJI FIELD — draggable with finger
+           🌻 SUNFLOWER EMOJI FIELD — 1000 girasoles arrastrables
            ============================================================ */
         #sunflowerField {
             position: fixed; inset: 0; z-index: 60;
@@ -513,6 +513,8 @@
             transition: opacity 0.8s ease;
             touch-action: none;
             cursor: grab;
+            will-change: transform;
+            contain: strict;
         }
         #sunflowerField:active { cursor: grabbing; }
         #sunflowerField.cleared {
@@ -525,105 +527,46 @@
             pointer-events: none;
             user-select: none;
             -webkit-user-select: none;
-            will-change: transform, opacity, left, top;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-            font-size: 32px;
+            will-change: transform, opacity;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
             line-height: 1;
             transition: opacity 0.3s ease;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
-        /* Idle sway animation */
-        @keyframes emojiSway {
-            0%, 100% { transform: rotate(var(--rot, 0deg)); }
-            50% { transform: rotate(calc(var(--rot, 0deg) + 5deg)); }
-        }
-
-        /* Fade out when pushed off screen */
+        /* Fade out when pushed off */
         @keyframes fadeOff {
-            0% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); }
-            100% { opacity: 0; transform: scale(0.3) rotate(calc(var(--rot, 0deg) + 180deg)); }
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.2); }
         }
         .sunflower-emoji-item.fading {
-            animation: fadeOff 0.4s ease-out forwards;
+            animation: fadeOff 0.35s ease-out forwards;
         }
 
         /* ===== FINGER TRAIL ===== */
         .finger-trail {
             position: fixed;
-            width: 60px; height: 60px;
+            width: 70px; height: 70px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.5) 0%, rgba(251, 191, 36, 0.15) 40%, transparent 70%);
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.55) 0%, rgba(251, 191, 36, 0.2) 35%, transparent 70%);
             pointer-events: none;
             z-index: 55;
             transform: translate(-50%, -50%);
-            animation: trailFade 0.5s ease-out forwards;
+            animation: trailFade 0.45s ease-out forwards;
+            will-change: transform, opacity;
         }
         @keyframes trailFade {
-            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8); }
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
         }
 
-        /* ===== SHAKE UI ===== */
-        #shakeIndicator {
-            position: fixed;
-            top: calc(env(safe-area-inset-top) + 60px);
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 70;
-            background: rgba(20, 12, 4, 0.9);
-            border: 1.5px solid rgba(251, 191, 36, 0.6);
-            border-radius: 999px;
-            padding: 10px 20px;
-            font-size: 12px;
-            color: #fde68a;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 25px rgba(251, 191, 36, 0.3);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            animation: indicatorPulse 2s ease-in-out infinite;
-            white-space: nowrap;
-            max-width: 90vw;
-        }
-        @keyframes indicatorPulse {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.05); }
-        }
-        #shakeIndicator.hidden { opacity: 0; pointer-events: none; }
-        #shakeIndicator i { 
-            animation: swipeHand 1.5s ease-in-out infinite;
-        }
-        @keyframes swipeHand {
-            0%, 100% { transform: translateX(-4px) rotate(-15deg); }
-            50% { transform: translateX(4px) rotate(15deg); }
-        }
-
-        #sunflowerCounter {
-            position: fixed;
-            top: calc(env(safe-area-inset-top) + 12px);
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 70;
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(217, 119, 6, 0.95));
-            border: 1.5px solid rgba(254, 243, 199, 0.6);
-            border-radius: 999px;
-            padding: 7px 16px;
-            font-size: 11px;
-            color: #451a03;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.6), 0 0 20px rgba(251, 191, 36, 0.5);
-            white-space: nowrap;
-        }
-        #sunflowerCounter.hidden { opacity: 0; pointer-events: none; }
-
+        /* ===== WELCOME + REVEAL ===== */
         #shakeWelcome {
             position: fixed;
-            top: calc(env(safe-area-inset-top) + 100px);
+            top: calc(env(safe-area-inset-top) + 30px);
             left: 50%;
             transform: translateX(-50%);
             z-index: 70;
@@ -631,6 +574,7 @@
             padding: 0 24px;
             max-width: 92vw;
             pointer-events: none;
+            transition: opacity 0.5s ease;
         }
         #shakeWelcome.hidden { opacity: 0; }
         #shakeWelcome h1 {
@@ -647,13 +591,7 @@
             margin-bottom: 6px;
             filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.5));
         }
-        #shakeWelcome p {
-            font-size: 12px;
-            color: #fde68a;
-            font-weight: 500;
-        }
 
-        /* ===== REVEAL BUTTON ===== */
         #revealBtnContainer {
             position: fixed; inset: 0; z-index: 65;
             display: flex; align-items: center; justify-content: center;
@@ -764,15 +702,6 @@
         }
         @media (max-height: 700px) {
             .letter-content { max-height: 90vh; max-height: 90dvh; }
-            #shakeWelcome { top: calc(env(safe-area-inset-top) + 80px); }
-        }
-        @media (orientation: landscape) and (max-height: 500px) {
-            #shakeWelcome { top: calc(env(safe-area-inset-top) + 20px); }
-            #shakeWelcome h1 { font-size: 22px; }
-            #shakeWelcome p { font-size: 11px; }
-            #shakeIndicator { top: calc(env(safe-area-inset-top) + 85px); font-size: 10px; padding: 6px 14px; }
-            .reveal-sunflower-btn { width: 130px; height: 130px; }
-            .reveal-sunflower-btn .sunflower-emoji { font-size: 42px; }
         }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
@@ -790,7 +719,7 @@
         <div class="start-icon">🌻</div>
         <h1>Para ti, Ailín</h1>
         <p>Tengo una sorpresa especial para ti en este 21 de septiembre 💛</p>
-        <p class="info">Desliza tu dedo por la pantalla para limpiar los girasoles</p>
+        <p class="info">Desliza tu dedo por la pantalla</p>
         <button id="startBtn" onclick="startExperience()" type="button">
             <i class="fas fa-play"></i>
             <span>Comenzar</span>
@@ -806,19 +735,8 @@
     <!-- SUNFLOWER EMOJI FIELD -->
     <div id="sunflowerField"></div>
 
-    <div id="sunflowerCounter">
-        <span>🌻</span>
-        <span id="sunflowerCounterText">60 girasoles</span>
-    </div>
-
     <div id="shakeWelcome">
         <h1>Para ti, Ailín Michelle</h1>
-        <p>Desliza tu dedo por la pantalla ✨</p>
-    </div>
-
-    <div id="shakeIndicator">
-        <i class="fas fa-hand-pointer"></i>
-        <span>Desliza el dedo</span>
     </div>
 
     <!-- REVEAL BUTTON -->
@@ -953,7 +871,7 @@
         // ==========================================
         //  VARIABLES DE ESTADO
         // ==========================================
-        let TOTAL_SUNFLOWERS = 60;
+        let TOTAL_SUNFLOWERS = 1000;
         let sunflowersRemaining = TOTAL_SUNFLOWERS;
         let sunflowerElements = [];
         let isDragging = false;
@@ -964,7 +882,7 @@
         let lastPositionUpdate = 0;
 
         // ==========================================
-        //  INICIO DE LA EXPERIENCIA
+        //  INICIO
         // ==========================================
         function startExperience() {
             const startScreen = document.getElementById('startScreen');
@@ -1001,7 +919,10 @@
         }
 
         // ==========================================
-        //  CAMPO DE GIRASOLES
+        //  CAMPO DE 1000 GIRASOLES
+        //  Estrategia: fondo estático + copia dibujada en canvas para performance
+        //  Pero para permitir el empuje individual, usamos emojis ligeros con
+        //  tamaños pequeños y animaciones desactivadas para ahorrar recursos.
         // ==========================================
         function initSunflowerField() {
             const field = document.getElementById('sunflowerField');
@@ -1011,83 +932,77 @@
             const vw = window.innerWidth;
             const vh = window.innerHeight;
 
-            // Ajustar cantidad según tamaño
-            if (vw < 360) TOTAL_SUNFLOWERS = 50;
-            else if (vw < 400) TOTAL_SUNFLOWERS = 60;
-            else TOTAL_SUNFLOWERS = 75;
-            
+            // Ajustar cantidad según dispositivo
+            // 1000 en pantallas normales, menos en pantallas muy pequeñas para evitar lag
+            if (vw < 360) TOTAL_SUNFLOWERS = 800;
+            else if (vw < 400) TOTAL_SUNFLOWERS = 1000;
+            else TOTAL_SUNFLOWERS = 1000;
+
             sunflowersRemaining = TOTAL_SUNFLOWERS;
 
-            const cols = Math.max(6, Math.floor(vw / 46));
+            // Distribuir 1000 girasoles en grid densa
+            // Tamaño pequeño (14-22px) para cubrir bien la pantalla
+            const minSize = 14;
+            const maxSize = 22;
+            const avgSize = (minSize + maxSize) / 2;
+
+            // Calcular columnas y filas para distribuir uniformemente
+            const cols = Math.ceil(Math.sqrt(TOTAL_SUNFLOWERS * (vw / vh)));
             const rows = Math.ceil(TOTAL_SUNFLOWERS / cols);
+
             const cellW = vw / cols;
             const cellH = vh / rows;
+
+            // Usar DocumentFragment para inserción masiva rápida
+            const fragment = document.createDocumentFragment();
 
             let placed = 0;
             for (let r = 0; r < rows && placed < TOTAL_SUNFLOWERS; r++) {
                 for (let c = 0; c < cols && placed < TOTAL_SUNFLOWERS; c++) {
-                    const jitterX = (Math.random() - 0.5) * cellW * 0.5;
-                    const jitterY = (Math.random() - 0.5) * cellH * 0.5;
+                    const jitterX = (Math.random() - 0.5) * cellW * 0.9;
+                    const jitterY = (Math.random() - 0.5) * cellH * 0.9;
 
                     const x = c * cellW + cellW / 2 + jitterX;
                     const y = r * cellH + cellH / 2 + jitterY;
 
                     const item = document.createElement('div');
                     item.className = 'sunflower-emoji-item';
-                    const rot = Math.random() * 60 - 30;
-                    const scale = 0.75 + Math.random() * 0.5;
-                    const fontSize = 28 + Math.random() * 16;
-
-                    // Position via left/top (más fácil de mover con el dedo)
-                    item.style.left = (x - fontSize / 2) + 'px';
-                    item.style.top = (y - fontSize / 2) + 'px';
-                    item.style.setProperty('--rot', rot + 'deg');
-                    item.style.transform = `rotate(${rot}deg) scale(${scale})`;
-                    item.style.fontSize = fontSize + 'px';
+                    const size = minSize + Math.random() * (maxSize - minSize);
+                    
+                    // Posición inicial
+                    item.style.left = (x - size / 2) + 'px';
+                    item.style.top = (y - size / 2) + 'px';
+                    item.style.fontSize = size + 'px';
                     item.innerText = '🌻';
-
-                    // Animación de vaivén suave
-                    item.style.animation = `emojiSway ${3 + Math.random() * 2}s ease-in-out infinite`;
-                    item.style.animationDelay = (Math.random() * 2) + 's';
+                    
+                    // SIN animaciones individuales para performance
+                    // (1000 animaciones serían un desastre)
 
                     // Datos para la lógica de arrastre
-                    item._currentX = x - fontSize / 2;
-                    item._currentY = y - fontSize / 2;
-                    item._size = fontSize;
+                    item._currentX = x - size / 2;
+                    item._currentY = y - size / 2;
+                    item._size = size;
 
-                    field.appendChild(item);
+                    fragment.appendChild(item);
                     sunflowerElements.push(item);
                     placed++;
                 }
             }
 
-            updateSunflowerCounter();
-        }
-
-        function updateSunflowerCounter() {
-            const counter = document.getElementById('sunflowerCounter');
-            const text = document.getElementById('sunflowerCounterText');
-            if (sunflowersRemaining > 0) {
-                text.innerText = sunflowersRemaining === 1 ? '1 girasol' : `${sunflowersRemaining} girasoles`;
-                counter.classList.remove('hidden');
-            } else {
-                counter.classList.add('hidden');
-            }
+            field.appendChild(fragment);
         }
 
         // ==========================================
-        //  DRAG INTERACTION — PUSH SUNFLOWERS WITH FINGER
+        //  DRAG INTERACTION
         // ==========================================
         function setupDragInteraction() {
             const field = document.getElementById('sunflowerField');
 
-            // Pointer events (unified touch/mouse)
             field.addEventListener('pointerdown', onPointerDown, { passive: false });
             field.addEventListener('pointermove', onPointerMove, { passive: false });
             field.addEventListener('pointerup', onPointerUp, { passive: false });
             field.addEventListener('pointercancel', onPointerUp, { passive: false });
 
-            // Fallback con touch events para navegadores viejos
             if (!window.PointerEvent) {
                 field.addEventListener('touchstart', onTouchStart, { passive: false });
                 field.addEventListener('touchmove', onTouchMove, { passive: false });
@@ -1106,7 +1021,7 @@
             activePointerId = e.pointerId;
             lastPointerX = e.clientX;
             lastPointerY = e.clientY;
-            field.setPointerCapture(e.pointerId);
+            try { e.target.setPointerCapture(e.pointerId); } catch(err) {}
             e.preventDefault();
         }
 
@@ -1117,12 +1032,10 @@
             const x = e.clientX;
             const y = e.clientY;
             
-            // Mover girasoles cercanos al dedo
             pushSunflowers(x, y);
             
-            // Crear trail visual
             const now = Date.now();
-            if (now - lastTrailTime > 40) {
+            if (now - lastTrailTime > 50) {
                 createFingerTrail(x, y);
                 lastTrailTime = now;
             }
@@ -1139,7 +1052,7 @@
             }
         }
 
-        // ---- TOUCH EVENTS (fallback) ----
+        // ---- TOUCH FALLBACK ----
         function onTouchStart(e) {
             if (sunflowersRemaining <= 0) return;
             if (e.touches.length > 0) {
@@ -1160,7 +1073,7 @@
             pushSunflowers(x, y);
             
             const now = Date.now();
-            if (now - lastTrailTime > 40) {
+            if (now - lastTrailTime > 50) {
                 createFingerTrail(x, y);
                 lastTrailTime = now;
             }
@@ -1170,11 +1083,11 @@
             e.preventDefault();
         }
 
-        function onTouchEnd(e) {
+        function onTouchEnd() {
             isDragging = false;
         }
 
-        // ---- MOUSE EVENTS (fallback desktop) ----
+        // ---- MOUSE FALLBACK ----
         function onMouseDown(e) {
             if (sunflowersRemaining <= 0) return;
             isDragging = true;
@@ -1187,52 +1100,51 @@
             if (!isDragging) return;
             if (sunflowersRemaining <= 0) return;
             
-            const x = e.clientX;
-            const y = e.clientY;
-            
-            pushSunflowers(x, y);
+            pushSunflowers(e.clientX, e.clientY);
             
             const now = Date.now();
-            if (now - lastTrailTime > 40) {
-                createFingerTrail(x, y);
+            if (now - lastTrailTime > 50) {
+                createFingerTrail(e.clientX, e.clientY);
                 lastTrailTime = now;
             }
             
             e.preventDefault();
         }
 
-        function onMouseUp(e) {
+        function onMouseUp() {
             isDragging = false;
         }
 
         // ==========================================
-        //  PUSH SUNFLOWERS AWAY FROM FINGER
+        //  PUSH LOGIC — Optimizado para 1000 elementos
         // ==========================================
-        const PUSH_RADIUS = 90; // radio de influencia del dedo
-        const PUSH_FORCE = 18;  // fuerza de empuje
+        const PUSH_RADIUS = 55;
+        const PUSH_FORCE = 12;
 
         function pushSunflowers(fingerX, fingerY) {
             const now = performance.now();
-            // Throttle para performance
             if (now - lastPositionUpdate < 16) return;
             lastPositionUpdate = now;
 
             const vw = window.innerWidth;
             const vh = window.innerHeight;
 
+            // Cache de valores para evitar lecturas repetidas
+            const radiusSq = PUSH_RADIUS * PUSH_RADIUS;
+
             for (let i = 0; i < sunflowerElements.length; i++) {
                 const el = sunflowerElements[i];
                 if (el.classList.contains('fading') || el.style.display === 'none') continue;
 
-                const elX = el._currentX + el._size / 2;
-                const elY = el._currentY + el._size / 2;
+                const elCenterX = el._currentX + el._size / 2;
+                const elCenterY = el._currentY + el._size / 2;
 
-                const dx = elX - fingerX;
-                const dy = elY - fingerY;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+                const dx = elCenterX - fingerX;
+                const dy = elCenterY - fingerY;
+                const distSq = dx * dx + dy * dy;
 
-                if (dist < PUSH_RADIUS && dist > 0.1) {
-                    // Empuje radial desde el dedo
+                if (distSq < radiusSq && distSq > 0.5) {
+                    const dist = Math.sqrt(distSq);
                     const force = (1 - dist / PUSH_RADIUS) * PUSH_FORCE;
                     const nx = dx / dist;
                     const ny = dy / dist;
@@ -1240,15 +1152,14 @@
                     let newX = el._currentX + nx * force;
                     let newY = el._currentY + ny * force;
 
-                    // Detectar si sale de los límites → eliminarlo
                     const centerX = newX + el._size / 2;
                     const centerY = newY + el._size / 2;
 
-                    if (centerX < -el._size * 0.5 || 
-                        centerX > vw + el._size * 0.5 ||
-                        centerY < -el._size * 0.5 || 
-                        centerY > vh + el._size * 0.5) {
-                        // Fuera de pantalla → eliminar
+                    // Fuera de pantalla → eliminar
+                    if (centerX < -el._size || 
+                        centerX > vw + el._size ||
+                        centerY < -el._size || 
+                        centerY > vh + el._size) {
                         removeSunflower(el);
                         continue;
                     }
@@ -1266,28 +1177,18 @@
             el.classList.add('fading');
             el.style.pointerEvents = 'none';
             sunflowersRemaining--;
-            updateSunflowerCounter();
-
-            // Pequeño sparkle
-            const rect = el.getBoundingClientRect();
-            spawnFloatingSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
-
-            if (navigator.vibrate) {
-                try { navigator.vibrate(10); } catch(e) {}
-            }
 
             setTimeout(() => {
                 el.style.display = 'none';
-            }, 400);
+            }, 350);
 
-            // Si ya no quedan girasoles → revelar botón
             if (sunflowersRemaining <= 0) {
                 setTimeout(revealSunflowerButton, 700);
             }
         }
 
         // ==========================================
-        //  FINGER TRAIL VISUAL
+        //  FINGER TRAIL
         // ==========================================
         function createFingerTrail(x, y) {
             const trail = document.createElement('div');
@@ -1295,7 +1196,7 @@
             trail.style.left = x + 'px';
             trail.style.top = y + 'px';
             document.body.appendChild(trail);
-            setTimeout(() => trail.remove(), 500);
+            setTimeout(() => trail.remove(), 450);
         }
 
         // ==========================================
@@ -1303,7 +1204,6 @@
         // ==========================================
         function revealSunflowerButton() {
             document.getElementById('shakeWelcome').classList.add('hidden');
-            document.getElementById('shakeIndicator').classList.add('hidden');
             document.getElementById('sunflowerField').classList.add('cleared');
             document.getElementById('revealBtnContainer').classList.add('show');
 
@@ -1330,7 +1230,7 @@
         }
 
         // ==========================================
-        //  PARTÍCULAS FLOTANTES
+        //  PARTÍCULAS
         // ==========================================
         function initParticles() {
             const container = document.getElementById('particlesContainer');
@@ -1362,7 +1262,7 @@
         }
 
         // ==========================================
-        //  PÉTALOS DEL GIRASOL PRINCIPAL
+        //  PÉTALOS
         // ==========================================
         function renderPetals() {
             const ring = document.getElementById('petalsRing');
@@ -1421,8 +1321,8 @@
             sparkle.style.left = (x - 10) + 'px';
             sparkle.style.top = (y - 10) + 'px';
             sparkle.style.setProperty('--sx', (Math.random() * 80 - 40) + 'px');
-            sparkle.style.setProperty('--sy', (-100 - Math.random() * 120) + 'px');
-            sparkle.style.fontSize = (14 + Math.random() * 12) + 'px';
+            sparkle.style.setProperty('--sy', (-200 - Math.random() * 200) + 'px');
+            sparkle.style.fontSize = (16 + Math.random() * 12) + 'px';
             sparkle.style.filter = 'drop-shadow(0 0 10px rgba(251, 191, 36, 0.9))';
             document.body.appendChild(sparkle);
             setTimeout(() => sparkle.remove(), 2200);
@@ -1496,7 +1396,7 @@
         }
 
         // ==========================================
-        //  PLUCK PETAL (main flower)
+        //  PLUCK PETAL
         // ==========================================
         function pluckPetal(petalElement, angle, event) {
             if (petalElement.classList.contains('plucking') || petalElement.style.display === 'none') return;
@@ -1622,11 +1522,9 @@
 
             document.getElementById('sunflowerField').classList.remove('cleared');
             document.getElementById('shakeWelcome').classList.remove('hidden');
-            document.getElementById('shakeIndicator').classList.remove('hidden');
             document.getElementById('revealBtnContainer').classList.remove('show');
             document.getElementById('revealBtnContainer').style.display = 'flex';
             document.getElementById('mainContent').classList.remove('show');
-            document.getElementById('sunflowerCounter').classList.remove('hidden');
             
             const btn = document.getElementById('revealSunflowerBtn');
             btn.style.transition = '';
@@ -1685,7 +1583,7 @@
             renderProgressDots();
         });
 
-        // Prevenir scroll / gestos no deseados
+        // Prevenir scroll
         document.body.addEventListener('touchmove', (e) => {
             const target = e.target;
             if (target.closest('button') || 
